@@ -23,16 +23,52 @@ if($_POST)
     $_SERVER["REMOTE_ADDR"], $captcha1, $captcha2);
 
   $errors = array();
-  if($captcha_response->is_valid && $udb->valid_login($login,$hash,$cookie))
+  
+  if(!$captcha_response->is_valid)
   {
-    $_SESSION['login']=$login;
-    redirect($LINK_PREFIX);
+    array_push($errors,"The verification CAPTCHA was not repeated correctly.\n");
   }
   else
   {
-    array_push($errors,"The login data you entered are not valid.\n");
+    $valid = $udb->valid_login($login,$hash,$cookie);
+    if($valid)
+    {
+      if(!$udb->user_confirmed($login))
+	array_push($errors,"Your account has not been confirmed yet. Please 
+		    check your e-mail, visit your confirmation link and 
+		    try again.\n");
+    }
+    else
+    {
+      array_push($errors,"The login data you entered are not valid.\n");
+    }
   }
+
+  if(count($errors)<=0)
+  {
+    $udb->do_login($login);
+    $tpl->replace("ERROR_MESSAGE",'');
+    redirect($LINK_PREFIX);
+  }
+  else
+  if(count($errors)==1)
+  {
+    $error_html=array_pop($errors);
+  }
+  else
+  {
+    print count($errors);
+    $error_html="The login failed due to the following reasons: <ul>";
+    foreach($errors as $reason)
+    {
+      $error_html.='<li>'.$reason.'</li>';
+    }
+    $error_html.="</ul>";
+  }
+  $tpl->replace("ERROR_MESSAGE",'<p>'.$error_html.'</p>');
 }
+else
+  $tpl->replace("ERROR_MESSAGE",'');
 
 if(isset($captcha_response) && !$captcha_response->is_valid)
 {

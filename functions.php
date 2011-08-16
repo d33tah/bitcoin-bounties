@@ -21,6 +21,8 @@ function assume_database()
 		require_once(ROOT.'/classes/database.php');
 		global $db;
 		$db = new Database();
+                mysql_query("DELETE FROM `users` WHERE `mode`='1' AND `created`<".(time()-60*60*24));
+                print mysql_error();
 	}
 }
 

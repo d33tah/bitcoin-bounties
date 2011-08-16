@@ -47,7 +47,7 @@ please just remove this e-mail and ignore it. Otherwise, please click the below
 or copy it to your browser's address bar to confirm that your e-mail address 
 is valid:
 
-${LINK_PREFIX}/confirm/${hash2}
+${LINK_PREFIX}/confirm/hash=${hash2}
 
 The following link will expire within 24 hours.
 
@@ -62,22 +62,38 @@ HEREDOC;
 			  $mail->Subject = "Cofirm your registration at ${domain}";
 			  $mail->AddAddress($email,$login);
   
-			  //$result = $mail->Send();
+			  $result = $mail->Send();
 			  $mail->ClearAddresses();
 			  $mail->ClearAttachments();
 	        }
 
-if(count($errors)==0)
+if(count($errors)<=0)
 {
-$_SESSION['message']="We sent you a confirmation link.";
-redirect($LINK_PREFIX."/message/ ");
+  $_SESSION['message']="We sent you a confirmation link.";
+  $tpl->replace("ERROR_MESSAGE",'');
+  redirect($LINK_PREFIX."/message/ ");
 }
 else
 {
-print_r($errors);
+  if(count($errors)==1)
+  {
+    $error_html=array_pop($errors);
+  }
+  else
+  {
+    $error_html="The registration failed due to the following reasons: <ul>";
+    foreach($errors as $reason)
+    {
+      $error_html.='<li>'.$reason.'</li>';
+    }
+    $error_html.="</ul>";
+  }
+  $tpl->replace("ERROR_MESSAGE",'<p>'.$error_html.'</p>');
 }
 
 }
+
+$tpl->replace("ERROR_MESSAGE",'');
 
 if(isset($captcha_response) && !$captcha_response->is_valid)
 {

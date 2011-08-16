@@ -1,5 +1,5 @@
 <?php
-$tpl->replace("BOUNTYDESC","Przykladowy tytul");
+$tpl->replace("BOUNTYDESC","Sample title");
 $tpl->replace("BOUNTYID","1");
 $tpl->replace("DONATED","0.00 BTC");
 $tpl->replace("SUBMISSIONS","2");

@@ -25,12 +25,18 @@ public function valid_login($login,$hash,$cookie=false)
               $row=mysql_fetch_assoc($res);
               if($row["password"]==$hash)
               {
-                if($cookie)
-                  setcookie('hash',$row["hash"],time()+60*60*24*365*10,'/');
                 return true;
               }
 	}
         return false;
+}
+
+public function do_login($login)
+{
+	if($cookie)
+	  setcookie('hash',$row["hash"],time()+60*60*24*365*10,'/');
+        $_SESSION['login']=$login;
+	return true;
 }
 
 public function try_from_cookie()
@@ -58,6 +64,7 @@ public function register($login,$hash1,$hash2,$email)
 	//we assume that user_exists was already called
 	#TODO: fix magic numbers
 	#TODO: hash2 could be more random?
+        assume_database();
 	$login_safe=mysql_real_escape_string($login);
 	$email_safe=mysql_real_escape_string($email);
 	$sql='INSERT INTO `users` (`id`, `login`, `password`, `mail`, 
@@ -71,4 +78,30 @@ public function register($login,$hash1,$hash2,$email)
 	mysql_query($sql);
         echo mysql_error();
 }
+
+public function try_confirm($hash)
+{
+      assume_database();
+      $hash_safe=mysql_real_escape_string($hash);
+      $sql='UPDATE `users` SET mode="2" WHERE `hash`="'.$hash_safe.'" AND mode="1"
+            AND created>'.(time()-60*60*24);
+      $res = mysql_query($sql);
+      return mysql_affected_rows()==1;
+}
+
+public function user_confirmed($login)
+{
+      assume_database();
+      $login_safe=mysql_real_escape_string($login);
+      $sql="SELECT * FROM `users` WHERE `login`='".$login_safe."'";
+      $res = mysql_query($sql);
+      if($res)
+      {
+	    $row=mysql_fetch_assoc($res);
+	    if ($row["mode"]!=1)
+              return true;
+      }
+      return false;
+}
+
 }

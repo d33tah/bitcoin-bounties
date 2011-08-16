@@ -15,11 +15,14 @@
 	%HEADER%
 	<br />%HOMELINK%
 	
+        %ERROR_MESSAGE%
+
 	<h1>%DOMAIN% - log in</h1>
 	<form method="post" action="%LINK_PREFIX%/login/">
 		Login: <input type="text" name="login" /> <br />
 		Password: <input type="password" name="password" /> <br />
                 <input type="checkbox" name="remember"> Remember me <br />
+                Verification CAPTCHA (please repeat the text below):
 		<script type="text/javascript">
 		var RecaptchaOptions = {
 		    theme : 'clean'
