@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteBase /bounty/
+RewriteRule ^(.+)/(.*)$ index.php?$2&view=$1 [L]

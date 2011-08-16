@@ -16,7 +16,7 @@
 	<br />%HOMELINK%
 	
 	<h1>%DOMAIN% - add a new bounty</h1>
-	<form method="post" action="/newbounty/">
+	<form method="post" action="%LINK_PREFIX%/newbounty/">
 		Title: <input type="text" name="title" /> <br />
 		Description: <br />
 		<textarea name="desc"></textarea><br />

@@ -16,9 +16,10 @@
 	<br />%HOMELINK%
 	
 	<h1>%DOMAIN% - log in</h1>
-	<form method="post" action="/login/">
+	<form method="post" action="%LINK_PREFIX%/login/">
 		Login: <input type="text" name="login" /> <br />
 		Password: <input type="password" name="password" /> <br />
+                <input type="checkbox" name="remember"> Remember me <br />
 		<input type="submit" value="Submit" />
 	</form>
 	

@@ -16,7 +16,7 @@
 	<br />%HOMELINK%
 	
 	<h1>%DOMAIN% - password recovery</h1>
-	<form method="post" action="/login/mode=resetpassword">
+	<form method="post" action="%LINK_PREFIX%/login/mode=resetpassword">
 		Login: <input type="text" name="login" /> <br />
 		E-mail address: <input type="text" name="e-mail" /> <br />
 		<input type="submit" value="Submit" />

@@ -1,4 +1,12 @@
 <?php
+/*
+
+basically: preparation stuff.
+
+It's supposed to check for the view to load and load it.
+
+*/
+
 ob_start();
 session_start();
 define('ROOT',dirname($_SERVER['SCRIPT_FILENAME']).'/');
@@ -15,33 +23,20 @@ if(array_key_exists("view",$_GET))
 	validate_view_name($view);
 }
 else
-{
 	$view="listbounties";
-}
-//index controller
-$header_html=<<<HEADER_HTML
-<a href="%LINK_PREFIX%/login/">Login</a> <a href="%LINK_PREFIX%/signup/">Sign up</a>
-HEADER_HTML;
 
-$homelink='<a href="%LINK_PREFIX%/">Back to the homepage</a>';
 
-$css=<<<CSS
-<style>
-	a { text-decoration:none; }
-	table { border-collapse: collapse; }
-	td { border: 1px solid; }
-	.donate_address { text-align: center; }
-</style>
-CSS;
+require_once(ROOT.viewfile("header"));
 
 $body=@file_get_contents(viewfile($view)) or do_404();
 $tpl=new Template($body);
+
 $tpl->replace("ENCODING","");
 $tpl->replace("HEADER",$header_html);
 $tpl->replace("CSS",$css);
 $tpl->replace("HOMELINK",$homelink);
 $tpl->replace("DOMAIN",$domain			);
-$tpl->replace("LINK_PREFIX",LINK_PREFIX);
+$tpl->replace("LINK_PREFIX",$LINK_PREFIX);
 
 require_once(ROOT.modelfile($view));
 

@@ -4,7 +4,7 @@ $registered_message=<<<HEREDOC
 		You are about to donate a bounty as a <strong>registered</strong> user.
 		This gives you the rights to vote on whether you accept or not
 		particular solutions to the bounty you chose. You can read about the 
-		rules <a href="%LINK_PREFIX%/about/">here</a>. Please send the donation to the
+		rules <a href="${LINK_PREFIX}/about/">here</a>. Please send the donation to the
 		following bitcoin address:
 	</p>
 	
@@ -26,7 +26,7 @@ $unregistered_message=<<<HEREDOC
 	<p>
 		You are about to donate a bounty as an <strong>unregistered</strong> 
 		user. This gives you no rights to vote on bounty submissions; you can 
-		read about the rules <a href="%LINK_PREFIX%/about/">here</a>. Please send the 
+		read about the rules <a href="${LINK_PREFIX}/about/">here</a>. Please send the 
 		donation to the following bitcoin address:
 	</p>
 	
@@ -42,18 +42,18 @@ $unregistered_message=<<<HEREDOC
 		it, sign in below:
 	</p>
 	
-	<form method="post" action="/login/redirect=/donate/%BOUNTY_ID%">
+	<form method="post" action="${LINK_PREFIX}/login/redirect=/donate/%BOUNTY_ID%">
 		Login: <input type="text" name="login" /> <br />
 		Password: <input type="password" name="password" /> <br />
 		<input type="submit" value="Submit" />
 	</form>
 	
 	<p>
-		<a href="%LINK_PREFIX%/resetpassword/">Forgot the password?</a>
+		<a href="${LINK_PREFIX}/resetpassword/">Forgot the password?</a>
 	</p>
 	
 	<p>
-		<a href="%LINK_PREFIX%/signup">Don't have an account yet? Click here to sign up.</a>
+		<a href="${LINK_PREFIX}/signup">Don't have an account yet? Click here to sign up.</a>
 	</p>
 	
 HEREDOC;

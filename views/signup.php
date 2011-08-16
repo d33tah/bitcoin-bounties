@@ -16,7 +16,7 @@
 	<br />%HOMELINK%
 	
 	<h1>%DOMAIN% - Sign up</h1>
-	<form method="post" action="/signup/">
+	<form method="post" action="%LINK_PREFIX%/signup/">
 		Login: <input type="text" name="login" /> <br />
 		Password: <input type="password" name="password" /> <br />
 		Repeat password: <input type="password" name="password2" /> <br />

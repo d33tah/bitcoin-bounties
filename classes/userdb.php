@@ -19,17 +19,12 @@ public function valid_login($login,$hash)
         $login_safe=mysql_real_escape_string($login);
         $hash_safe=mysql_real_escape_string($hash);
         $sql='SELECT * FROM `users` WHERE `login`="'.$login_safe.'"';
-        print $sql;
-        print mysql_error();
 	$res=mysql_query($sql);
 	if($res)
 	{
               $row=mysql_fetch_assoc($res);
-              print $hash;
-              print_r($row);
               return $row["password"]==$hash;
 	}
-        print "nothing";
         return false;
 }
 
@@ -41,13 +36,13 @@ public function register($login,$hash1,$hash2,$email)
 	$login_safe=mysql_real_escape_string($login);
 	$email_safe=mysql_real_escape_string($email);
 	$sql='INSERT INTO `users` (`id`, `login`, `password`, `mail`, 
-	`mode`, `hash`, `created`) VALUES (NULL, 
-	"'.$login_safe.'", 
-	"'.$hash1.'", 
-	"'.$email_safe.'", 
-	"1", 
-	"'.$hash2.'",
-	"'.time().'");';
+	  `mode`, `hash`, `created`) VALUES (NULL, 
+	  "'.$login_safe.'", 
+	  "'.$hash1.'", 
+	  "'.$email_safe.'", 
+	  "1", 
+	  "'.$hash2.'",
+	  "'.time().'");';
 	mysql_query($sql);
         echo mysql_error();
 }

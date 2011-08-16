@@ -8,6 +8,12 @@ function assume_index()
 		throw new Exception("assume_index(): $basename");
 }
 
+function assume_loggedin()
+{
+  if($_SESSION['login'])
+    return true;
+}
+
 function assume_database()
 {
 	if(!defined('DB_CONNECTED'))

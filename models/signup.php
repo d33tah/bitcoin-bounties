@@ -28,8 +28,8 @@ if($_POST)
                 {
 
 		  validate_login($login) || array_push($errors,"The login you entered is not valid.");
-		  $hash1=crypt($password);
-		  $hash2=crypt(rand());
+		  $hash1=crypt($password,SALT);
+		  $hash2=crypt(rand(),SALT);
 		  $udb->register($login,$hash1,$hash2,$email);
 		  
 		  $mail->Body = <<<HEREDOC
@@ -41,7 +41,7 @@ please just remove this e-mail and ignore it. Otherwise, please click the below
 or copy it to your browser's address bar to confirm that your e-mail address 
 is valid:
 
-http://${domain}${server_directory}confirm/${hash2}
+${LINK_PREFIX}/confirm/${hash2}
 
 The following link will expire within 24 hours.
 
@@ -56,7 +56,7 @@ HEREDOC;
 			  $mail->Subject = "Cofirm your registration at ${domain}";
 			  $mail->AddAddress($email,$login);
   
-			  $result = $mail->Send();
+			  //$result = $mail->Send();
 			  $mail->ClearAddresses();
 			  $mail->ClearAttachments();
 	        }
@@ -64,7 +64,11 @@ HEREDOC;
 if(count($errors)==0)
 {
 $_SESSION['message']="We sent you a confirmation link.";
-#redirect("/message/ ");
+redirect($LINK_PREFIX."/message/ ");
+}
+else
+{
+print_r($errors);
 }
 
 }
