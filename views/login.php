@@ -20,6 +20,12 @@
 		Login: <input type="text" name="login" /> <br />
 		Password: <input type="password" name="password" /> <br />
                 <input type="checkbox" name="remember"> Remember me <br />
+		<script type="text/javascript">
+		var RecaptchaOptions = {
+		    theme : 'clean'
+		};
+		</script>
+                %RECAPTCHA%
 		<input type="submit" value="Submit" />
 	</form>
 	

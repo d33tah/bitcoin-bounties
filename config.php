@@ -23,3 +23,5 @@ $mail->Password = "";
 $mail->SMTPAuth = true;
 $mail->SetLanguage("en", "phpmailer/language/");
 
+$recaptcha_publickey="";
+$recaptcha_privatekey="";

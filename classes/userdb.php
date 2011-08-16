@@ -13,7 +13,7 @@ public function user_exists($login)
 	return false;
 }
 
-public function valid_login($login,$hash)
+public function valid_login($login,$hash,$cookie=false)
 {
         assume_database();
         $login_safe=mysql_real_escape_string($login);
@@ -23,9 +23,34 @@ public function valid_login($login,$hash)
 	if($res)
 	{
               $row=mysql_fetch_assoc($res);
-              return $row["password"]==$hash;
+              if($row["password"]==$hash)
+              {
+                if($cookie)
+                  setcookie('hash',$row["hash"],time()+60*60*24*365*10,'/');
+                return true;
+              }
 	}
         return false;
+}
+
+public function try_from_cookie()
+{
+        if(!array_key_exists('login',$_SESSION) && array_key_exists('hash',$_COOKIE ))
+        {
+	  assume_database();
+	  $hash_safe=mysql_real_escape_string($_COOKIE['hash']);
+	  $sql='SELECT * FROM `users` WHERE `hash`="'.$hash_safe.'"';
+	  $res=mysql_query($sql);
+	  if($res)
+	  {
+		$row=mysql_fetch_assoc($res);
+		$_SESSION['login']=$row['login'];
+                return;
+	  }
+        setcookie('hash','',time()-3600,'/');
+        unset($_COOKIE['hash2']); 
+	}
+
 }
 
 public function register($login,$hash1,$hash2,$email)

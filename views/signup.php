@@ -21,6 +21,12 @@
 		Password: <input type="password" name="password" /> <br />
 		Repeat password: <input type="password" name="password2" /> <br />
 		E-mail address: <input type="text" name="email" /> <br />
+		<script type="text/javascript">
+		var RecaptchaOptions = {
+		    theme : 'clean'
+		};
+		</script>
+                %RECAPTCHA%
 		<input type="submit" value="Submit" />
 	</form>
 </body>

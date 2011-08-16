@@ -13,7 +13,7 @@ define('ROOT',dirname($_SERVER['SCRIPT_FILENAME']).'/');
 require_once("functions.php");
 require_once("classes/templates.php");
 require_once(ROOT.'classes/phpmailer/class.phpmailer.php');
-require_once("../config.php");
+require_once("../config.php"); //put it here so I don't push it accidentally
 
 function validate_view_name() { return validate_stub(); }
 
@@ -25,7 +25,10 @@ if(array_key_exists("view",$_GET))
 else
 	$view="listbounties";
 
+require_once(ROOT.'/classes/userdb.php');
+$udb = new UserDB();
 
+$udb->try_from_cookie();
 require_once(ROOT.viewfile("header"));
 
 $body=@file_get_contents(viewfile($view)) or do_404();

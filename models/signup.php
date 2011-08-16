@@ -1,7 +1,7 @@
 <?php
 assume_index();
+require_once(ROOT.'classes/recaptchalib.php');
 $errors = array();
-require_once(ROOT.'/classes/userdb.php');
 if($_POST)
 {
 	function validate_login() { return validate_stub(); }
@@ -20,8 +20,14 @@ if($_POST)
 		validate_password($password,$password2) || array_push($errors,"The passwords you entered are not valid.");
 		validate_email($email) || array_push($errors,"The e-mail address you entered is not valid.");
 		
-		$udb = new UserDB();
 		$udb->user_exists($login) && array_push($errors,"The login you entered already belongs to another user.");
+
+		$captcha1=$_POST["recaptcha_challenge_field"];
+		$captcha2=$_POST["recaptcha_response_field"];
+		$captcha_response = recaptcha_check_answer ($recaptcha_privatekey,
+		  $_SERVER["REMOTE_ADDR"], $captcha1, $captcha2);
+		
+          	$captcha_response->is_valid || array_push($errors,"The verification CAPTCHA was not repeated correctly.");
 
                 if(count($errors)==0)
 
@@ -72,6 +78,11 @@ print_r($errors);
 }
 
 }
-else
+
+if(isset($captcha_response) && !$captcha_response->is_valid)
 {
+  $error = $captcha_response->error;
+  $tpl->replace("RECAPTCHA",recaptcha_get_html($recaptcha_publickey, $error));
 }
+else
+  $tpl->replace("RECAPTCHA",recaptcha_get_html($recaptcha_publickey,""));

@@ -1,6 +1,6 @@
 <?php
 //index controller
-if($_SESSION['login'])
+if(array_key_exists('login',$_SESSION))
 
 $header_html=<<<HEADER_HTML
 Logged in as {$_SESSION['login']} <a href="%LINK_PREFIX%/login/mode=logout">[Log out]</a>
