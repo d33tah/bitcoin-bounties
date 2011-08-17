@@ -1,6 +1,14 @@
 <?php
 function validate_stub() { return true; }
 
+function hashdata($data,$salt)
+{
+$ret = crypt($data,$salt);
+$ret = substr($ret,strrpos($ret,'$')+1,strlen($ret));
+$ret = str_replace('/','',$ret);
+return $ret;
+}
+
 function assume_index()
 {
 	$basename=basename($_SERVER['PHP_SELF']);
@@ -56,7 +64,8 @@ function do_404()
 //taken from http://www.justin-cook.com/wp/2006/03/31/php-parse-a-string-between-two-strings/
 function get_string_between($string, $start, $end){
 	$ini = strpos($string,$start);
-	if ($ini == 0) throw new Exception("get_string_between: $start not found");
+	if ($ini == 0) 
+          throw new Exception("get_string_between: $start not found");
 	$ini += strlen($start);
 	$len = strpos($string,$end,$ini) - $ini;
 	return substr($string,$ini,$len);

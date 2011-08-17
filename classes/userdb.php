@@ -85,7 +85,7 @@ public function try_confirm($hash)
       $hash_safe=mysql_real_escape_string($hash);
       $sql='UPDATE `users` SET mode="2" WHERE `hash`="'.$hash_safe.'" AND mode="1"
             AND created>'.(time()-60*60*24);
-      $res = mysql_query($sql);
+      mysql_query($sql);
       return mysql_affected_rows()==1;
 }
 
@@ -102,6 +102,72 @@ public function user_confirmed($login)
               return true;
       }
       return false;
+}
+
+public function password_too_short($password)
+{
+  return strlen($password)<9;
+}
+
+public function password_too_long($password)
+{
+  return strlen($password)>199;
+}
+
+public function get_by_hash($hash)
+{
+  assume_database();
+  $hash_safe=mysql_real_escape_string($hash);
+  $sql="SELECT * FROM `users` WHERE `hash`='".$hash_safe."'";
+  $res = mysql_query($sql);
+  if($res)
+  {
+    $row=mysql_fetch_assoc($res);
+    return $row['login'];
+  }
+  return NULL;
+}
+
+public function get_by_email($email)
+{
+  assume_database();
+  $email_safe=mysql_real_escape_string($email);
+  $sql="SELECT * FROM `users` WHERE `mail`='".$email_safe."'";
+  $res = mysql_query($sql);
+  if($res)
+  {
+    $row=mysql_fetch_assoc($res);
+    return $row['login'];
+  }
+  return NULL;
+}
+
+public function change_password($login,$password)
+{
+  assume_database();
+  $login_safe=mysql_real_escape_string($login);
+  $hash1=hashdata($password,SALT);
+  $hash2=hashdata(rand(),SALT);
+  $sql="UPDATE `users` SET `password`='".$hash1."',`hash`='".$hash2."' 
+    WHERE `login`='".$login_safe."'";
+  mysql_query($sql);
+  echo mysql_error();
+  return mysql_affected_rows()==1;
+}
+
+public function get_hash($login)
+{
+  assume_database();
+  $login_safe=mysql_real_escape_string($login);
+  $sql="SELECT * FROM `users` WHERE `login`='".$login_safe."'";
+  $res = mysql_query($sql);
+  if($res)
+  {
+    $row=mysql_fetch_assoc($res);
+    return $row['hash'];
+  }
+  return NULL;
+
 }
 
 }

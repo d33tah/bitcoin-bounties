@@ -14,11 +14,12 @@
 
 	%HEADER%
 	<br />%HOMELINK%
+
+        %ERROR_MESSAGE%
 	
-	<h1>%DOMAIN% - password recovery</h1>
-	<form method="post" action="%LINK_PREFIX%/login/mode=resetpassword">
-		Login: <input type="text" name="login" /> <br />
-		E-mail address: <input type="text" name="e-mail" /> <br />
+	<h1>%DOMAIN% - %TITLE%</h1>
+	<form method="post" action="%LINK_PREFIX%/resetpassword/%HASH%">
+                %INPUTS%
 		<input type="submit" value="Submit" />
 	</form>
 </body>

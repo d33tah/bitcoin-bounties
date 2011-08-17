@@ -34,8 +34,8 @@ if($_POST)
                 {
 
 		  validate_login($login) || array_push($errors,"The login you entered is not valid.");
-		  $hash1=crypt($password,SALT);
-		  $hash2=crypt(rand(),SALT);
+		  $hash1=hashdata($password,SALT);
+		  $hash2=hashdata(rand(),SALT);
 		  $udb->register($login,$hash1,$hash2,$email);
 		  
 		  $mail->Body = <<<HEREDOC

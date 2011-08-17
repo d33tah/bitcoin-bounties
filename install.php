@@ -6,11 +6,11 @@ mysql_select_db($db_name);
 
 mysql_query('CREATE TABLE `users` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`login` TEXT NOT NULL,
+`login` VARCHAR(30) NOT NULL UNIQUE,
 `password` TEXT NOT NULL ,
-`mail` TEXT NOT NULL ,
+`mail` VARCHAR(1024) NOT NULL UNIQUE ,
 `mode` INT NOT NULL ,
-`hash` TEXT NOT NULL ,
+`hash` VARCHAR(512) NOT NULL UNIQUE,
 `created` INT NOT NULL 
 )');
 ?>

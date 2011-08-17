@@ -1,4 +1,5 @@
 <?php
+
 require_once(ROOT.'classes/recaptchalib.php');
 if(array_key_exists('mode',$_GET) && $_GET['mode']=='logout')
 {
@@ -15,7 +16,7 @@ if($_POST)
   $login=$_POST['login'];
   $password=$_POST['password'];
   $cookie=isset($_POST['remember']) && $_POST['remember']=="on";
-  $hash=crypt($password,SALT);
+  $hash=hashdata($password,SALT);
 
   $captcha1=$_POST["recaptcha_challenge_field"];
   $captcha2=$_POST["recaptcha_response_field"];
@@ -34,9 +35,14 @@ if($_POST)
     if($valid)
     {
       if(!$udb->user_confirmed($login))
-	array_push($errors,"Your account has not been confirmed yet. Please 
-		    check your e-mail, visit your confirmation link and 
-		    try again.\n");
+            array_push($errors,"Your account is not confirmed yet. Please
+              confirm your account by clicking the confirmation link we
+              sent you to your e-mail address and then try again. 
+              If you can't find it, check your SPAM folder. To rule out a 
+              mistake, you can retry signing up again with another username
+              or wait 24 hours for the confirmation link to expire. If you 
+              still haven't received the e-mail, please contact the site 
+              administrator.");
     }
     else
     {
@@ -57,7 +63,6 @@ if($_POST)
   }
   else
   {
-    print count($errors);
     $error_html="The login failed due to the following reasons: <ul>";
     foreach($errors as $reason)
     {
