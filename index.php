@@ -43,5 +43,5 @@ $tpl->replace("LINK_PREFIX",$LINK_PREFIX);
 
 require_once(ROOT.modelfile($view));
 
-$tpl->print_body();
+print $tpl->get_body();
 ?>

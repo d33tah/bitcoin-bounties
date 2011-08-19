@@ -59,7 +59,7 @@ public function try_from_cookie()
 
 }
 
-public function register($login,$hash1,$hash2,$email)
+public function do_register($login,$hash1,$hash2,$email)
 {
 	//we assume that user_exists was already called
 	#TODO: fix magic numbers
@@ -104,14 +104,40 @@ public function user_confirmed($login)
       return false;
 }
 
-public function password_too_short($password)
+public function check_login_too_short($login)
+{
+  return strlen($login)<4;
+}
+
+public function check_login_too_long($login)
+{
+  return strlen($login)>30;
+}
+
+public function check_login_regex($login)
+{
+return preg_match("/^[0-9A-Za-z]*$/",$login)==0;
+}
+
+public function check_pass_too_short($password)
 {
   return strlen($password)<9;
 }
 
-public function password_too_long($password)
+public function check_pass_too_long($password)
 {
   return strlen($password)>199;
+}
+
+public function check_pass_regex()
+{
+  return false;
+}
+
+public function check_email_regex($email) //TODO: up/lowercase? fixes?
+{ //the 22 in TLD length limit is because of XN--CLCHC0EA0B2G2A9GCD
+  return preg_match("/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,22}$/",
+    $email)==0;
 }
 
 public function get_by_hash($hash)

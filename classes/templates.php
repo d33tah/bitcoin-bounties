@@ -22,7 +22,7 @@ public function addentry($entry,$array)
 	array_push($this->blocks[$entry],$array);
 }
 
-public function print_body()
+public function get_body()
 {
 	foreach($this->tags as $tag=>$with)
 	{
@@ -54,7 +54,7 @@ public function print_body()
 	}
 	
 	$this->body=str_replace("%%","%",$this->body);
-	print $this->body;
+	return $this->body;
 }
 
 }

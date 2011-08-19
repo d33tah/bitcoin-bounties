@@ -1,75 +1,93 @@
 <?php
 assume_index();
 require_once(ROOT.'classes/recaptchalib.php');
+require_once(ROOT."constants.php");
+require_once(ROOT."languages/english.php");
 $errors = array();
 if($_POST)
 {
-	function validate_login() { return validate_stub(); }
-	function validate_password() { return validate_stub(); }
-	function validate_email() { return validate_stub(); }
 
 	$login=$_POST['login'];
 	$password=$_POST['password'];
+	$password2=$_POST['password'];
+	$email=$_POST['email'];
+
 	$referer=$_SERVER['HTTP_REFERER'];
 	$remoteip=$_SERVER['REMOTE_ADDR'];
 
-		$password2=$_POST['password'];
-		$email=$_POST['email'];
+/*
+$this->check_login_too_short($login) && $this->errors |= MSG_LOGIN_TOO_SHORT;
+$this->check_login_too_long($login) && $this->errors |= MSG_LOGIN_TOO_LONG;
+$this->check_login_regex($login) && $this->errors |= MSG_LOGIN_REGEX;
+$this->check_pass_too_short($password) && $this->errors |= MSG_PASS_TOO_SHORT;
+$this->check_pass_too_long($password) && $this->errors |= MSG_PASS_TOO_LONG;
+$this->check_email_regex($email) && $this->errors |= MSG_EMAIL_REGEX;
+$this->get_by_email($email) && $this->errors |= MSG_EMAIL_TAKEN;
+*/
+
+	$udb->check_login_too_short($login) && 
+          array_push($errors, $messages[MSG_LOGIN_TOO_SHORT]);
+	$udb->check_login_too_long($login) && 
+          array_push($errors, $messages[MSG_LOGIN_TOO_LONG]);
+	$udb->check_login_regex($login) && 
+          array_push($errors, $messages[MSG_LOGIN_REGEX]);
+	$udb->check_pass_too_short($password) && 
+          array_push($errors, $messages[MSG_PASS_TOO_SHORT]);
+	$udb->check_pass_too_long($password) && 
+          array_push($errors, $messages[MSG_PASS_TOO_LONG]);
+	$udb->check_email_regex($email) && 
+          array_push($errors, $messages[MSG_EMAIL_REGEX]);
+	$udb->get_by_email($email) && 
+          array_push($errors, $messages[MSG_EMAIL_TAKEN]);
+
+                if($password!=$password2) array_push($errors, 
+                  $messages[MSG_PASS_DONT_MATCH]);
 		
-                validate_login($login) || array_push($errors,"The login you entered is not valid.");
-		validate_password($password,$password2) || array_push($errors,"The passwords you entered are not valid.");
-		validate_email($email) || array_push($errors,"The e-mail address you entered is not valid.");
-		
-		$udb->user_exists($login) && array_push($errors,"The login you entered already belongs to another user.");
+		$udb->user_exists($login) && array_push($errors,
+                 $messages[MSG_LOGIN_TAKEN]);
 
 		$captcha1=$_POST["recaptcha_challenge_field"];
 		$captcha2=$_POST["recaptcha_response_field"];
-		$captcha_response = recaptcha_check_answer ($recaptcha_privatekey,
-		  $_SERVER["REMOTE_ADDR"], $captcha1, $captcha2);
+		$captcha_response = recaptcha_check_answer (
+                  $recaptcha_privatekey,$_SERVER["REMOTE_ADDR"], 
+                  $captcha1, $captcha2);
 		
-          	$captcha_response->is_valid || array_push($errors,"The verification CAPTCHA was not repeated correctly.");
+          	$captcha_response->is_valid || array_push($errors, 
+                  $messages[MSG_INVALID_CAPTCHA]);
 
                 if(count($errors)==0)
 
                 {
 
-		  validate_login($login) || array_push($errors,"The login you entered is not valid.");
 		  $hash1=hashdata($password,SALT);
 		  $hash2=hashdata(rand(),SALT);
-		  $udb->register($login,$hash1,$hash2,$email);
-		  
-		  $mail->Body = <<<HEREDOC
-Hello ${login},
+		  $udb->do_register($login,$hash1,$hash2,$email);
 
-Someone with the IP address ${remoteip} tried to register a username '${login}'
-and entered your e-mail address on the website ${domain}. If it wasn't you,
-please just remove this e-mail and ignore it. Otherwise, please click the below
-or copy it to your browser's address bar to confirm that your e-mail address 
-is valid:
 
-${LINK_PREFIX}/confirm/hash=${hash2}
+		$confirmation_email = new Template($messages[
+                  MSG_CONFIRMATION_EMAIL]);
 
-The following link will expire within 24 hours.
+		$confirmation_email->replace("LOGIN",$login);
+		$confirmation_email->replace("DOMAIN",$domain);
+		$confirmation_email->replace("LINK_PREFIX",$LINK_PREFIX);
+		$confirmation_email->replace("HASH2",$hash2);
+		$confirmation_email->replace("ADMINEMAIL",$adminemail);
+		$confirmation_email->replace("REMOTEIP",$remoteip);
 
-Please note this is an automatically generated message. Please do not reply to
-it. Should you have any questions, please contact the server admin at
-${adminemail}
-
-Yours sincerely,
-${domain} admin
-
-HEREDOC;
-			  $mail->Subject = "Cofirm your registration at ${domain}";
+		  $mail->Body = $confirmation_email->get_body();
+			  $mail->Subject = $messages[
+                            MSG_CONFIRMATION_EMAIL_TITLE].$domain;
 			  $mail->AddAddress($email,$login);
   
 			  $result = $mail->Send();
 			  $mail->ClearAddresses();
 			  $mail->ClearAttachments();
+
 	        }
 
 if(count($errors)<=0)
 {
-  $_SESSION['message']="We sent you a confirmation link.";
+  $_SESSION['message']=$messages[MSG_CONFIRMATION_EMAIL_SENT];
   $tpl->replace("ERROR_MESSAGE",'');
   redirect($LINK_PREFIX."/message/ ");
 }
@@ -81,7 +99,7 @@ else
   }
   else
   {
-    $error_html="The registration failed due to the following reasons: <ul>";
+    $error_html=$messages[MSG_REGISTRATION_FAILED_LIST].'<ul>';
     foreach($errors as $reason)
     {
       $error_html.='<li>'.$reason.'</li>';
@@ -92,7 +110,7 @@ else
 }
 
 }
-
+else
 $tpl->replace("ERROR_MESSAGE",'');
 
 if(isset($captcha_response) && !$captcha_response->is_valid)

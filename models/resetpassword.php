@@ -125,8 +125,8 @@ HEREDOC;
 	    if($_POST["pass1"]==$_POST["pass2"])
 	    {
 	      $newpass=$_POST["pass1"];
-	      if(!$udb->password_too_short($newpass))
-		if(!$udb->password_too_long($newpass))
+	      if(!$udb->check_pass_too_short($newpass))
+		if(!$udb->check_pass_too_long($newpass))
 		{
                   $udb->change_password($login,$newpass);
                     $_SESSION['message']="Your password has been changed.";
