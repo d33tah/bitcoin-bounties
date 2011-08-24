@@ -63,18 +63,53 @@ function do_404()
 
 //taken from http://www.justin-cook.com/wp/2006/03/31/php-parse-a-string-between-two-strings/
 function get_string_between($string, $start, $end){
-	$ini = strpos($string,$start);
-	if ($ini == 0) 
-          throw new Exception("get_string_between: $start not found");
-	$ini += strlen($start);
-	$len = strpos($string,$end,$ini) - $ini;
-	return substr($string,$ini,$len);
+  $ini = strpos($string,$start);
+  if ($ini == 0) 
+    throw new Exception("get_string_between: $start not found");
+  $ini += strlen($start);
+  $len = strpos($string,$end,$ini) - $ini;
+  return substr($string,$ini,$len);
 }
 
 function validate_oururl() { return validate_stub(); }
 
 function redirect($url)
 {
-	validate_oururl();
-	header("Location: $url");
+  validate_oururl();
+  header("Location: $url");
+}
+
+function message($msg)
+{
+  global $LINK_PREFIX;
+  $_SESSION['message']=$msg;
+  redirect($LINK_PREFIX."/message/ ");
+}
+
+//taken from: http://aidanlister.com/2004/04/human-readable-file-sizes/
+//TODO: ask for WTFPL or something
+function size_readable($size, $max = null, $system = 'si', 
+  $retstring = '%01.2f %s')
+{
+  // Pick units
+  $systems['si']['prefix'] = array('B', 'K', 'MB', 'GB', 'TB', 'PB');
+  $systems['si']['size']   = 1000;
+  $systems['bi']['prefix'] = array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB');
+  $systems['bi']['size']   = 1024;
+  $sys = isset($systems[$system]) ? $systems[$system] : $systems['si'];
+
+  // Max unit to display
+  $depth = count($sys['prefix']) - 1;
+  if ($max && false !== $d = array_search($max, $sys['prefix'])) {
+      $depth = $d;
+  }
+
+  // Loop
+  $i = 0;
+  while ($size >= $sys['size'] && $i < $depth) {
+      $size /= $sys['size'];
+      $i++;
+  }
+
+  return sprintf($retstring, $size, $sys['prefix'][$i]);
 }

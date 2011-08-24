@@ -10,10 +10,14 @@ It's supposed to check for the view to load and load it.
 ob_start();
 session_start();
 define('ROOT',dirname($_SERVER['SCRIPT_FILENAME']).'/');
-require_once("functions.php");
-require_once("classes/templates.php");
-require_once(ROOT.'classes/phpmailer/class.phpmailer.php');
 require_once("../config.php"); //put it here so I don't push it accidentally
+require_once("functions.php");
+require_once(ROOT."constants.php");
+require_once(ROOT."languages/english.php");
+
+require_once(ROOT.'classes/phpmailer/class.phpmailer.php');
+require_once("classes/templates.php");
+mail_setup();
 
 function validate_view_name() { return validate_stub(); }
 

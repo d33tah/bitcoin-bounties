@@ -2,9 +2,12 @@
 //handles the communication with the MySQL database - users table
 class UserDB {
 
+public function __construct() {
+	assume_database();
+}
+
 public function user_exists($login)
 {
-	assume_database();
 	$login_safe=mysql_real_escape_string($login);
 	$sql='SELECT * FROM `users` WHERE `login`="'.$login_safe.'"';
 	$res=mysql_query($sql);
@@ -15,7 +18,6 @@ public function user_exists($login)
 
 public function valid_login($login,$hash,$cookie=false)
 {
-        assume_database();
         $login_safe=mysql_real_escape_string($login);
         $hash_safe=mysql_real_escape_string($hash);
         $sql='SELECT * FROM `users` WHERE `login`="'.$login_safe.'"';
@@ -41,9 +43,9 @@ public function do_login($login)
 
 public function try_from_cookie()
 {
-        if(!array_key_exists('login',$_SESSION) && array_key_exists('hash',$_COOKIE ))
+        if(!array_key_exists('login',$_SESSION) && 
+          array_key_exists('hash',$_COOKIE ))
         {
-	  assume_database();
 	  $hash_safe=mysql_real_escape_string($_COOKIE['hash']);
 	  $sql='SELECT * FROM `users` WHERE `hash`="'.$hash_safe.'"';
 	  $res=mysql_query($sql);
@@ -64,7 +66,6 @@ public function do_register($login,$hash1,$hash2,$email)
 	//we assume that user_exists was already called
 	#TODO: fix magic numbers
 	#TODO: hash2 could be more random?
-        assume_database();
 	$login_safe=mysql_real_escape_string($login);
 	$email_safe=mysql_real_escape_string($email);
 	$sql='INSERT INTO `users` (`id`, `login`, `password`, `mail`, 
@@ -81,17 +82,15 @@ public function do_register($login,$hash1,$hash2,$email)
 
 public function try_confirm($hash)
 {
-      assume_database();
       $hash_safe=mysql_real_escape_string($hash);
-      $sql='UPDATE `users` SET mode="2" WHERE `hash`="'.$hash_safe.'" AND mode="1"
-            AND created>'.(time()-60*60*24);
+      $sql='UPDATE `users` SET mode="2" WHERE `hash`="'.$hash_safe
+            .'" AND mode="1" AND created>'.(time()-60*60*24);
       mysql_query($sql);
       return mysql_affected_rows()==1;
 }
 
 public function user_confirmed($login)
 {
-      assume_database();
       $login_safe=mysql_real_escape_string($login);
       $sql="SELECT * FROM `users` WHERE `login`='".$login_safe."'";
       $res = mysql_query($sql);
@@ -142,7 +141,6 @@ public function check_email_regex($email) //TODO: up/lowercase? fixes?
 
 public function get_by_hash($hash)
 {
-  assume_database();
   $hash_safe=mysql_real_escape_string($hash);
   $sql="SELECT * FROM `users` WHERE `hash`='".$hash_safe."'";
   $res = mysql_query($sql);
@@ -156,7 +154,6 @@ public function get_by_hash($hash)
 
 public function get_by_email($email)
 {
-  assume_database();
   $email_safe=mysql_real_escape_string($email);
   $sql="SELECT * FROM `users` WHERE `mail`='".$email_safe."'";
   $res = mysql_query($sql);
@@ -170,7 +167,6 @@ public function get_by_email($email)
 
 public function change_password($login,$password)
 {
-  assume_database();
   $login_safe=mysql_real_escape_string($login);
   $hash1=hashdata($password,SALT);
   $hash2=hashdata(rand(),SALT);
@@ -183,7 +179,6 @@ public function change_password($login,$password)
 
 public function get_hash($login)
 {
-  assume_database();
   $login_safe=mysql_real_escape_string($login);
   $sql="SELECT * FROM `users` WHERE `login`='".$login_safe."'";
   $res = mysql_query($sql);
@@ -194,6 +189,32 @@ public function get_hash($login)
   }
   return NULL;
 
+}
+
+public function get_by_login($login)
+{
+  $login_safe=mysql_real_escape_string($login);
+  $sql="SELECT * FROM `users` WHERE `login`='".$login_safe."'";
+  $res = mysql_query($sql);
+  if($res)
+  {
+    $row=mysql_fetch_assoc($res);
+    return $row;
+  }
+  return NULL;
+}
+
+public function get_by_id($id)
+{
+  $id_safe=mysql_real_escape_string($id);
+  $sql="SELECT * FROM `users` WHERE `id`='".$id_safe."'";
+  $res = mysql_query($sql);
+  if($res)
+  {
+    $row=mysql_fetch_assoc($res);
+    return $row;
+  }
+  return NULL;
 }
 
 }

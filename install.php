@@ -13,4 +13,21 @@ mysql_query('CREATE TABLE `users` (
 `hash` VARCHAR(512) NOT NULL UNIQUE,
 `created` INT NOT NULL 
 )');
+
+mysql_query('CREATE TABLE `bounties` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`title` TEXT NOT NULL ,
+`user_id` INT NOT NULL ,
+`description` TEXT NOT NULL ,
+`bitcoins` INT NOT NULL,
+`satoshi` INT NOT NULL
+)');
+
+mysql_query('CREATE TABLE `submissions` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`bounty_id` INT NOT NULL ,
+`user_id` INT NOT NULL ,
+`description` TEXT NOT NULL ,
+`filename` TEXT NOT NULL
+)');
 ?>

@@ -75,3 +75,7 @@ MESSAGE;
 $messages[MSG_REGISTRATION_FAILED_LIST]=<<<MESSAGE
 The registration failed due to the following reasons: 
 MESSAGE;
+
+$messages[MSG_BOUNTY_ADDED]=<<<MESSAGE
+Your bounty was successfully added. You can view it <a href=%BOUNTYLINK%>here</a>.
+MESSAGE;

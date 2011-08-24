@@ -23,7 +23,7 @@
 				Donations collected:
 			</td>
 			<td>
-				%DONATED% <a href="%LINK_PREFIX%/donate/%BOUNTYID%">[DONATE]</a>
+				%DONATED% <a href="%LINK_PREFIX%/donate/id=%BOUNTYID%">[DONATE]</a>
 			</td>
 		</tr>
 		
@@ -33,8 +33,8 @@
 			</td>
 			
 			<td>
-				%SUBMISSIONS% <a href="%LINK_PREFIX%/newcommit/%BOUNTYID%">[SUBMIT]</a>
-						<a href="%LINK_PREFIX%/commits/%BOUNTYID%">[VIEW]</a>
+				%SUBMISSIONS% <a href="%LINK_PREFIX%/newcommit/id=%BOUNTYID%">[SUBMIT]</a>
+						<a href="%LINK_PREFIX%/commits/id=%BOUNTYID%">[VIEW]</a>
 			</td>
 		</tr>
 		

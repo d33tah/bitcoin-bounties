@@ -21,9 +21,7 @@
 	<p>File name: %COMMIT_FILENAME%</p>
 	<p>File size: %COMMIT_SIZE%</p>
 	
-	<p>
-		%COMMIT_COMMENT%
-	</p>
+	<p>Description: %COMMIT_COMMENT%</p>
 	
 	
 </body>

@@ -1,8 +1,6 @@
 <?php
 assume_index();
 require_once(ROOT.'classes/recaptchalib.php');
-require_once(ROOT."constants.php");
-require_once(ROOT."languages/english.php");
 $errors = array();
 if($_POST)
 {
@@ -40,56 +38,55 @@ $this->get_by_email($email) && $this->errors |= MSG_EMAIL_TAKEN;
 	$udb->get_by_email($email) && 
           array_push($errors, $messages[MSG_EMAIL_TAKEN]);
 
-                if($password!=$password2) array_push($errors, 
-                  $messages[MSG_PASS_DONT_MATCH]);
-		
-		$udb->user_exists($login) && array_push($errors,
-                 $messages[MSG_LOGIN_TAKEN]);
+	  if($password!=$password2) array_push($errors, 
+	    $messages[MSG_PASS_DONT_MATCH]);
+	  
+	  $udb->user_exists($login) && array_push($errors,
+	    $messages[MSG_LOGIN_TAKEN]);
 
-		$captcha1=$_POST["recaptcha_challenge_field"];
-		$captcha2=$_POST["recaptcha_response_field"];
-		$captcha_response = recaptcha_check_answer (
-                  $recaptcha_privatekey,$_SERVER["REMOTE_ADDR"], 
-                  $captcha1, $captcha2);
-		
-          	$captcha_response->is_valid || array_push($errors, 
-                  $messages[MSG_INVALID_CAPTCHA]);
+	  $captcha1=$_POST["recaptcha_challenge_field"];
+	  $captcha2=$_POST["recaptcha_response_field"];
+	  $captcha_response = recaptcha_check_answer (
+	    $recaptcha_privatekey,$_SERVER["REMOTE_ADDR"], 
+	    $captcha1, $captcha2);
+	  
+	  $captcha_response->is_valid || array_push($errors, 
+	    $messages[MSG_INVALID_CAPTCHA]);
 
-                if(count($errors)==0)
+	  if(count($errors)==0)
 
-                {
+	  {
 
-		  $hash1=hashdata($password,SALT);
-		  $hash2=hashdata(rand(),SALT);
-		  $udb->do_register($login,$hash1,$hash2,$email);
+	    $hash1=hashdata($password,SALT);
+	    $hash2=hashdata(rand(),SALT);
+	    $udb->do_register($login,$hash1,$hash2,$email);
 
 
-		$confirmation_email = new Template($messages[
-                  MSG_CONFIRMATION_EMAIL]);
+	  $confirmation_email = new Template($messages[
+	    MSG_CONFIRMATION_EMAIL]);
 
-		$confirmation_email->replace("LOGIN",$login);
-		$confirmation_email->replace("DOMAIN",$domain);
-		$confirmation_email->replace("LINK_PREFIX",$LINK_PREFIX);
-		$confirmation_email->replace("HASH2",$hash2);
-		$confirmation_email->replace("ADMINEMAIL",$adminemail);
-		$confirmation_email->replace("REMOTEIP",$remoteip);
+	  $confirmation_email->replace("LOGIN",$login);
+	  $confirmation_email->replace("DOMAIN",$domain);
+	  $confirmation_email->replace("LINK_PREFIX",$LINK_PREFIX);
+	  $confirmation_email->replace("HASH2",$hash2);
+	  $confirmation_email->replace("ADMINEMAIL",$adminemail);
+	  $confirmation_email->replace("REMOTEIP",$remoteip);
 
-		  $mail->Body = $confirmation_email->get_body();
-			  $mail->Subject = $messages[
-                            MSG_CONFIRMATION_EMAIL_TITLE].$domain;
-			  $mail->AddAddress($email,$login);
-  
-			  $result = $mail->Send();
-			  $mail->ClearAddresses();
-			  $mail->ClearAttachments();
+	    $mail->Body = $confirmation_email->get_body();
+		    $mail->Subject = $messages[
+		      MSG_CONFIRMATION_EMAIL_TITLE].$domain;
+		    $mail->AddAddress($email,$login);
 
-	        }
+		    $result = $mail->Send();
+		    $mail->ClearAddresses();
+		    $mail->ClearAttachments();
+
+	  }
 
 if(count($errors)<=0)
 {
-  $_SESSION['message']=$messages[MSG_CONFIRMATION_EMAIL_SENT];
   $tpl->replace("ERROR_MESSAGE",'');
-  redirect($LINK_PREFIX."/message/ ");
+  message($messages[MSG_CONFIRMATION_EMAIL_SENT]);
 }
 else
 {

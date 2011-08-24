@@ -30,12 +30,12 @@
 		%_BLOCKSTART_SUBMITENTRY%
 		<tr>
 			<td>
-				<a href="%LINK_PREFIX%/viewcommit/%_BLOCK_COMMIT_ID%">%_BLOCK_AUTHOR%</a>
+				<a href="%LINK_PREFIX%/viewcommit/id=%_BLOCK_COMMIT_ID%">%_BLOCK_AUTHOR%</a>
 			</td>
 			
 			<td>
 				%_BLOCK_PERCENT% 
-					<a href="%LINK_PREFIX%/votecommit/%_BLOCK_COMMIT_ID%">[VOTE UP]</a>
+					<a href="%LINK_PREFIX%/votecommit/id=%_BLOCK_COMMIT_ID%">[VOTE UP]</a>
 			</td>
 		</tr>
 		%_BLOCKEND_SUBMITENTRY%
