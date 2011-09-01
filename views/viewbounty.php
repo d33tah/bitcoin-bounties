@@ -2,51 +2,52 @@
 
 <head>
 
-	%ENCODING%
-	<title>
-	%DOMAIN% - viewing '%BOUNTYDESC%'
-	</title>
+  %ENCODING%
+  <title>
+  %DOMAIN% - viewing '%BOUNTYDESC%'
+  </title>
 
-	%CSS%
+  %CSS%
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
-	
-	<h1>%DOMAIN% - view a bounty</h1>
-	<h2>%BOUNTYDESC%</h2>
-	<table>
-		<tr>
-			<td>
-				Donations collected:
-			</td>
-			<td>
-				%DONATED% <a href="%LINK_PREFIX%/donate/id=%BOUNTYID%">[DONATE]</a>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				Submissions to vote:
-			</td>
-			
-			<td>
-				%SUBMISSIONS% <a href="%LINK_PREFIX%/newcommit/id=%BOUNTYID%">[SUBMIT]</a>
-						<a href="%LINK_PREFIX%/commits/id=%BOUNTYID%">[VIEW]</a>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				Description:
-			</td>
-			
-			<td>
-				%DESCRIPTION%
-			</td>
-		</tr>
-	</table>
+  %HEADER%
+  <br />%HOMELINK%
+  
+  <h1>%DOMAIN% - view a bounty</h1>
+  <h2>%BOUNTYDESC%</h2>
+  <table>
+    <tr>
+      <td>
+	Donations collected:
+      </td>
+      <td>
+	%DONATED% <a href="%LINK_PREFIX%/donate/id=%BOUNTYID%">[DONATE]</a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+	Submissions to vote:
+      </td>
+      
+      <td>
+	%SUBMISSIONS% 
+        <a href="%LINK_PREFIX%/newcommit/id=%BOUNTYID%">[SUBMIT]</a>
+	<a href="%LINK_PREFIX%/commits/id=%BOUNTYID%">[VIEW]</a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+	      Description:
+      </td>
+      
+      <td>
+	      %DESCRIPTION%
+      </td>
+    </tr>
+  </table>
 </body>
 </html>

@@ -62,17 +62,10 @@ $this->get_by_email($email) && $this->errors |= MSG_EMAIL_TAKEN;
 	    $udb->do_register($login,$hash1,$hash2,$email);
 
 
-	  $confirmation_email = new Template($messages[
-	    MSG_CONFIRMATION_EMAIL]);
+	  $confirmation_email = sprintf($messages[MSG_CONFIRMATION_EMAIL],
+            $login,$hash2,$remoteip);
 
-	  $confirmation_email->replace("LOGIN",$login);
-	  $confirmation_email->replace("DOMAIN",$domain);
-	  $confirmation_email->replace("LINK_PREFIX",$LINK_PREFIX);
-	  $confirmation_email->replace("HASH2",$hash2);
-	  $confirmation_email->replace("ADMINEMAIL",$adminemail);
-	  $confirmation_email->replace("REMOTEIP",$remoteip);
-
-	    $mail->Body = $confirmation_email->get_body();
+	    $mail->Body = $confirmation_email;
 		    $mail->Subject = $messages[
 		      MSG_CONFIRMATION_EMAIL_TITLE].$domain;
 		    $mail->AddAddress($email,$login);

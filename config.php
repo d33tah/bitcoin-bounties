@@ -31,3 +31,9 @@ function mail_setup()
 
 $recaptcha_publickey="";
 $recaptcha_privatekey="";
+
+$bitcoin_login='rpcuser';
+$bitcoin_password='rpcpass';
+$bitcoin_host='127.0.0.1';
+$bitcoin_port='8332';
+$bitcoin_path='';

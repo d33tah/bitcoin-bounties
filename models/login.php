@@ -18,8 +18,8 @@ if($_POST)
   $cookie=isset($_POST['remember']) && $_POST['remember']=="on";
   $hash=hashdata($password,SALT);
 
-  $captcha1=$_POST["recaptcha_challenge_field"];
-  $captcha2=$_POST["recaptcha_response_field"];
+  $captcha1=@$_POST["recaptcha_challenge_field"];
+  $captcha2=@$_POST["recaptcha_response_field"];
   $captcha_response = recaptcha_check_answer ($recaptcha_privatekey,
     $_SERVER["REMOTE_ADDR"], $captcha1, $captcha2);
 
@@ -27,7 +27,7 @@ if($_POST)
   
   if(!$captcha_response->is_valid)
   {
-    array_push($errors,"The verification CAPTCHA was not repeated correctly.\n");
+    array_push($errors,$messages[MSG_CAPTCHA_INVALID]);
   }
   else
   {
@@ -35,18 +35,11 @@ if($_POST)
     if($valid)
     {
       if(!$udb->user_confirmed($login))
-            array_push($errors,"Your account is not confirmed yet. Please
-              confirm your account by clicking the confirmation link we
-              sent you to your e-mail address and then try again. 
-              If you can't find it, check your SPAM folder. To rule out a 
-              mistake, you can retry signing up again with another username
-              or wait 24 hours for the confirmation link to expire. If you 
-              still haven't received the e-mail, please contact the site 
-              administrator.");
+            array_push($errors,$messages[MSG_ACCOUNT_NOT_CONFIRMED_YET]);
     }
     else
     {
-      array_push($errors,"The login data you entered are not valid.\n");
+      array_push($errors,$messages[MSG_LOGIN_DATA_INVALID]);
     }
   }
 
@@ -54,7 +47,11 @@ if($_POST)
   {
     $udb->do_login($login);
     $tpl->replace("ERROR_MESSAGE",'');
-    redirect($LINK_PREFIX);
+    if(isset($_GET['redirect']))
+      redirect($_GET['redirect']);
+    else
+      redirect($LINK_PREFIX);
+    
   }
   else
   if(count($errors)==1)
@@ -63,7 +60,7 @@ if($_POST)
   }
   else
   {
-    $error_html="The login failed due to the following reasons: <ul>";
+    $error_html=$messages[MSG_LOGIN_FAILED_REASONS] "<ul>";
     foreach($errors as $reason)
     {
       $error_html.='<li>'.$reason.'</li>';

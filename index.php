@@ -14,9 +14,11 @@ require_once("../config.php"); //put it here so I don't push it accidentally
 require_once("functions.php");
 require_once(ROOT."constants.php");
 require_once(ROOT."languages/english.php");
-
 require_once(ROOT.'classes/phpmailer/class.phpmailer.php');
 require_once("classes/templates.php");
+require_once(ROOT.'/classes/accountdb.php');
+require_once(ROOT.'/classes/userdb.php');
+
 mail_setup();
 
 function validate_view_name() { return validate_stub(); }
@@ -29,8 +31,9 @@ if(array_key_exists("view",$_GET))
 else
 	$view="listbounties";
 
-require_once(ROOT.'/classes/userdb.php');
 $udb = new UserDB();
+$adb=new AccountDB($bitcoin_login,$bitcoin_password,
+  $bitcoin_host,$bitcoin_port,$bitcoin_path);
 
 $udb->try_from_cookie();
 require_once(ROOT.viewfile("header"));

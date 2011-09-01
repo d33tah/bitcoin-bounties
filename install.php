@@ -20,7 +20,9 @@ mysql_query('CREATE TABLE `bounties` (
 `user_id` INT NOT NULL ,
 `description` TEXT NOT NULL ,
 `bitcoins` INT NOT NULL,
-`satoshi` INT NOT NULL
+`satoshi` INT NOT NULL,
+`address` TEXT,
+`state` INT NOT NULL
 )');
 
 mysql_query('CREATE TABLE `submissions` (
@@ -30,4 +32,17 @@ mysql_query('CREATE TABLE `submissions` (
 `description` TEXT NOT NULL ,
 `filename` TEXT NOT NULL
 )');
-?>
+
+mysql_query('CREATE TABLE `accounts` (
+`bounty_id` INT NOT NULL ,
+`user_id` INT NOT NULL ,
+`address` TEXT 
+)');
+
+mysql_query('CREATE TABLE `votes` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+`commit_id` INT NOT NULL ,
+`user_id` INT NOT NULL ,
+`vote_time` INT NOT NULL
+) ');
+

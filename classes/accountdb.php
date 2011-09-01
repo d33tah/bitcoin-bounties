@@ -35,4 +35,10 @@ public function balance_address($address)
   return $this->conn->getbalance($address);
 }
 
+
+public function sendtoaddress($address,$amount)
+{
+  return $this->conn->sendtoaddress($address,$amount);
+}
+
 }

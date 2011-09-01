@@ -18,8 +18,9 @@ if($bounty = $bdb->get_by_id($_GET["id"]))
     foreach($submissions as $submission)
     {
       $user=$udb->get_by_id($submission["user_id"]);
+      $percent=$bdb->getvotes_commit($submission['id'],$adb);
       $tpl->addentry("SUBMITENTRY", array("AUTHOR"=>$user['login'],
-	"PERCENT"=>'29%', "COMMIT_ID"=>$submission['id']));
+	"PERCENT"=>$percent."%", "COMMIT_ID"=>$submission['id']));
     }
   }
 }

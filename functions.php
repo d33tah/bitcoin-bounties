@@ -3,17 +3,17 @@ function validate_stub() { return true; }
 
 function hashdata($data,$salt)
 {
-$ret = crypt($data,$salt);
-$ret = substr($ret,strrpos($ret,'$')+1,strlen($ret));
-$ret = str_replace('/','',$ret);
-return $ret;
+  $ret = crypt($data,$salt);
+  $ret = substr($ret,strrpos($ret,'$')+1,strlen($ret));
+  $ret = str_replace('/','',$ret);
+  return $ret;
 }
 
 function assume_index()
 {
-	$basename=basename($_SERVER['PHP_SELF']);
-	if($basename!='index.php')
-		throw new Exception("assume_index(): $basename");
+  $basename=basename($_SERVER['PHP_SELF']);
+  if($basename!='index.php')
+    throw new Exception("assume_index(): $basename");
 }
 
 function assume_loggedin()
@@ -24,36 +24,37 @@ function assume_loggedin()
 
 function assume_database()
 {
-	if(!defined('DB_CONNECTED'))
-	{
-		require_once(ROOT.'/classes/database.php');
-		global $db;
-		$db = new Database();
-                mysql_query("DELETE FROM `users` WHERE `mode`='1' AND `created`<".(time()-60*60*24));
-                print mysql_error();
-	}
+  if(!defined('DB_CONNECTED'))
+  {
+    require_once(ROOT.'/classes/database.php');
+    global $db;
+    $db = new Database();
+    mysql_query("DELETE FROM `users` WHERE `mode`='1' AND `created`<".
+      (time()-60*60*24));
+    print mysql_error();
+  }
 }
 
 function try_require($filename)
 {
-	if(file_exists($filename))
-	{
-		return require($filename);
-	}
-	
-	return false;
+  if(file_exists($filename))
+  {
+    return require($filename);
+  }
+  
+  return false;
 }
 
 function viewfile($viewname)
 {
-//we assume it's validated
-return "views/$viewname.php";
+  //we assume it's validated
+  return "views/$viewname.php";
 }
 
 function modelfile($modelname)
 {
-//we assume it's validated
-return "models/$modelname.php";
+  //we assume it's validated
+  return "models/$modelname.php";
 }
 
 function do_404()
@@ -61,7 +62,8 @@ function do_404()
 	require(viewfile(404));
 }
 
-//taken from http://www.justin-cook.com/wp/2006/03/31/php-parse-a-string-between-two-strings/
+//taken from http://www.justin-cook.com
+// /wp/2006/03/31/php-parse-a-string-between-two-strings/
 function get_string_between($string, $start, $end){
   $ini = strpos($string,$start);
   if ($ini == 0) 

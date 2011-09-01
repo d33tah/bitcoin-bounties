@@ -47,8 +47,8 @@ public function add_bounty($title,$desc,$uid,$accounts_db)
   $desc_safe=mysql_real_escape_string($desc);
   $uid_safe=mysql_real_escape_string($uid);
   $sql = "INSERT INTO `bounties` (`id`,`title`,`user_id`,`description`,
-    `bitcoins`,`satoshi`, `address`) VALUES ('','".$title_safe."','".$uid_safe.
-    "','".$desc_safe."','0','0','')";
+    `bitcoins`,`satoshi`, `address`, `state`) VALUES 
+      ('','".$title_safe."','".$uid_safe."','".$desc_safe."','0','0','','0')";
   mysql_query($sql);
   echo mysql_error();
   if(mysql_insert_id())
@@ -117,9 +117,9 @@ public function getvotes_commit($commit_id,$accounts_db)
   $total=$accounts_db->balance_prefix('bounty_'.$bounty['id']);
   $total_anonymous=$accounts_db->balance_address($bounty['address']);
   $total_by_registered=$total-$total_anonymous;
+  $total_voted=0;
   if($total_by_registered)
   {
-    $total_voted=0;
     $sql = "SELECT * FROM `votes` WHERE `commit_id`='".$commitid_safe."'";
     $res = mysql_query($sql);
     if($res)
@@ -136,7 +136,10 @@ public function getvotes_commit($commit_id,$accounts_db)
   print "total=$total, total_anonymous=$total_anonymous,
    total_by_registered=$total_by_registered, total_voted=$total_voted\n<br/>";
 
-  return $total_voted/$total_by_registered*100;
+  if ($total_voted)
+    return $total_voted/$total_by_registered*100;
+  else
+    return 0;
 }
 
 public function voteup_commit($commit_id,$accounts_db,$user_db,$user_id)
@@ -172,14 +175,10 @@ public function voteup_commit($commit_id,$accounts_db,$user_db,$user_id)
     $commit=$this->get_submission($commitid_safe);
     $receiving_user=$user_db->get_by_id($commit['user_id']);
 
-    $bounty_gathered_mail=new Template($messages[MSG_BOUNTY_GATHERED]);
-    $bounty_gathered_mail->replace('DOMAIN',$domain);
-    $bounty_gathered_mail->replace('USERNAME',$receiving_user['login']);
-    $bounty_gathered_mail->replace('BOUNTYID',$bounty['id']);
-    $bounty_gathered_mail->replace('VALUE',sprintf("%.8f",$total-$fee));
-    $bounty_gathered_mail->replace('LINK_PREFIX',$LINK_PREFIX);
-
-    $mail->Body = $bounty_gathered_mail->get_body();
+    $value = sprintf("%.8f",$total-$fee);
+    $bounty_gathered_mail=sprintf($messages[MSG_BOUNTY_GATHERED],
+      $receiving_user['login'],$bounty['id'],$value);
+    $mail->Body = $bounty_gathered_mail;
     $mail->Subject = $messages[MSG_BOUNTY_GATHERED_TITLE];
     $mail->AddAddress($receiving_user['mail'],$receiving_user['login']);
 
@@ -189,6 +188,12 @@ public function voteup_commit($commit_id,$accounts_db,$user_db,$user_id)
 
   }
   return true;
+}
+
+public function set_locked($bounty)
+{
+  $safe_id=mysql_real_escape_string($bounty['id']);
+  mysql_query("UPDATE `bounties` SET `state`='1' WHERE `id`='".$safe_id."'");
 }
 
 }

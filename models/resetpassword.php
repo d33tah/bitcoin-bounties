@@ -24,34 +24,30 @@ if($_POST)
               if($pass1!=$oldpass)
 	      {
 		$udb->change_password($login,$newpass);
-		  $_SESSION['message']="Your password has been changed.";
+		  $_SESSION['message']=$messages[MSG_PASSWORD_CHANGED];
 		  redirect($LINK_PREFIX."/message/ ");
 	      }
               else
               {
-		array_push($errors,'The password you entered as new is
-	         identical to the old one. Please choose another one.');
+		array_push($errors,$messages[MSG_NO_REAL_PASSWORD_CHANGE]);
               }
             }
 	    else
             {
-	      array_push($errors,'The new password you entered is too long.
-	       Please choose a shorter one.');
+	      array_push($errors,$messages[MSG_NEW_PASSWORD_TOO_LONG]);
             }
           }
           else
-            array_push($errors,'The new password you entered is too short.
-              Please choose a longer one.');
+            array_push($errors,$messages[MSG_NEW_PASSWORD_TOO_SHORT]);
 	}
         else
-	 array_push($errors,'The two "new password" fields do not 
-	  contain the same password.');
+	 array_push($errors,$messages[MSG_NEW_PASSWORDS_DIFFER]);
       }
       else
-          array_push($errors,'The old password you entered is not valid.'); 
+          array_push($errors,$messages[MSG_INVALID_OLD_PASSWORD]); 
     }
     else
-      array_push($errors,"Please fill all the required fields.");
+      array_push($errors,$messages[MSG_FILL_REQUIRED_FIELDS]);
   }
   else
   {
@@ -67,54 +63,28 @@ if($_POST)
 	  $hash2 = $udb->get_hash($login);
 	  $remoteip=$_SERVER['REMOTE_ADDR'];
     
-	  $mail->Body = <<<HEREDOC
-Hello ${login},
-
-Someone with the IP address ${remoteip} tried to recover your password
-on the website ${domain}. If it wasn't you, please just remove this e-mail and
-ignore it. Otherwise, please click the below or copy it to your browser's 
-address bar:
-
-${LINK_PREFIX}/resetpassword/hash=${hash2}
-
-The following link does not expire.
-
-Please note this is an automatically generated message. Please do not reply to
-it. Should you have any questions, please contact the server admin at
-${adminemail}
-
-Yours sincerely,
-${domain} admin
-
-HEREDOC;
-	  $mail->Subject = "Reset your password at ${domain}";
+	  $mail->Body = sprintf($messages[MSG_RESETPASSWORD_MAIL], 
+            $login, $remoteip, $hash2);
+	  $mail->Subject = $messages[MSG_RESETPASSWORD_MAIL_TITLE];
 	  $mail->AddAddress($email,$login);
       
 	  $result = $mail->Send();
 	  $mail->ClearAddresses();
 	  $mail->ClearAttachments();
       
-	  $_SESSION['message']="To reset your password, please visit the link in 
-	    the e-mail we have just sent you.";
+	  $_SESSION['message']=$messages[MSG_RESETPASSWORD_MAIL_SENT];
 	  redirect($LINK_PREFIX."/message/ ");
         }
         else
-	  array_push($errors,"Your account is not confirmed yet. Please
-	    confirm your account by clicking the confirmation link we
-	    sent you to your e-mail address. If you can't find it, check
-	    your SPAM folder. To rule out a mistake, you can retry signing
-	    up again with another username or wait 24 hours for the 
-	    confirmation link to expire. If you still haven't received
-	    the e-mail, please contact the site administrator at
-	    <a href=\"mailto:${adminemail}\">${adminemail}</a>.");
+	  array_push($errors,$messages[MSG_ACCOUNT_NOT_CONFIRMED_YET]);
 
       }
       else
-        array_push($errors,"Either the login or e-mail field is not valid.
-          Please make sure the account is registered and try again.");
+        array_push($errors,$messages[MSG_LOGIN_OR_EMAIL_INVALID]);
     }
     else
-      if(isset($_GET["hash"]) && isset($_POST["pass1"]) && isset($_POST["pass2"]))
+      if(isset($_GET["hash"]) && isset($_POST["pass1"]) && 
+        isset($_POST["pass2"]))
       {
 	$login = $udb->get_by_hash($_GET["hash"]);
 
@@ -129,36 +99,25 @@ HEREDOC;
 		if(!$udb->check_pass_too_long($newpass))
 		{
                   $udb->change_password($login,$newpass);
-                    $_SESSION['message']="Your password has been changed.";
+                    $_SESSION['message']=$messages[MSG_PASSWORD_CHANGED];
 		    redirect($LINK_PREFIX."/message/ ");
                 }
 		else
-		  array_push($errors,'The new password you entered is too long.
-		  Please choose a shorter one.');
+		  array_push($errors,$messages[MSG_NEW_PASSWORD_TOO_LONG]);
 	      else
-		array_push($errors,'The new password you entered is too short.
-		Please choose a longer one.');
+		array_push($errors,$messages[MSG_NEW_PASSWORD_TOO_SHORT]);
 	    }
 	    else
-	      array_push($errors,'The two "new password" fields do not 
-		contain the same password.');
+	      array_push($errors,$messages[MSG_NEW_PASSWORDS_DIFFER]);
           }
           else
-            array_push($errors,"Your account is not confirmed yet. Please
-              confirm your account by clicking the confirmation link we
-              sent you to your e-mail address. If you can't find it, check
-              your SPAM folder. To rule out a mistake, you can retry signing
-              up again with another username or wait 24 hours for the 
-              confirmation link to expire. If you still haven't received
-              the e-mail, please contact the site administrator at
-              <a href=\"mailto:${adminemail}\">${adminemail}</a>.");
+            array_push($errors,$messages[MSG_ACCOUNT_NOT_CONFIRMED_YET]);
         }
         else
-          array_push($errors,"The given hash is invalid. Please make sure the 
-            link you have clicked is not corrupt.");
+          array_push($errors,$messages[MSG_INVALID_HASH]);
       }
       else
-        array_push($errors,"Please fill all the required fields.");
+        array_push($errors,$messages[MSG_FILL_REQUIRED_FIELDS]);
   }
 }
 else
@@ -166,30 +125,20 @@ else
   if(isset($_GET["hash"]))
   {
       $tpl->replace("HASH","hash=".$_GET["hash"]);
-      $tpl->replace("TITLE","password recovery");
-      $tpl->replace("INPUTS",'
-	Choose a new password: <input type="password" name="pass1" /> <br />
-	Repeat new password: <input type="password" name="pass2" /> <br />
-	');
+      $tpl->replace("TITLE",$messages[MSG_PASSWORD_RECOVERY_TITLE]);
+      $tpl->replace("INPUTS",$messages[MSG_NEW_PASSWORD_INPUTS]);
   }
   else if(isset($_SESSION["login"]))
   {
     $tpl->replace("HASH",'');
-    $tpl->replace("TITLE","change password");
-    $tpl->replace("INPUTS",'
-      Old password: <input type="password" name="oldpass" /> <br />
-      Choose a new password: <input type="password" name="pass1" /> <br />
-      Repeat new password: <input type="password" name="pass2" /> <br />
-      ');
+    $tpl->replace("TITLE",$messages[MSG_CHANGE_PASSWORD_TITLE]);
+    $tpl->replace("INPUTS",$messages[MSG_OLD_NEW_PASSWORD_INPUTS]);
   }
   else
   {
     $tpl->replace("HASH",'');
-    $tpl->replace("TITLE","password recovery");
-    $tpl->replace("INPUTS",'
-      Login: <input type="text" name="login" /> <br />
-      E-mail address: <input type="text" name="email" /> <br />
-      ');
+    $tpl->replace("TITLE",$messages[MSG_PASSWORD_RECOVERY_TITLE]);
+    $tpl->replace("INPUTS",$messages[MSG_LOGIN_EMAIL_INPUTS]);
   }
 }
 
@@ -207,7 +156,7 @@ if(!isset($error_html))
   else
   {
     print count($errors);
-    $error_html="<p>The login failed due to the following reasons: <ul>";
+    $error_html="<p>".$messages[MSG_OPERATION_FAILED_REASONS]."<ul>";
     foreach($errors as $reason)
     {
       $error_html.='<li>'.$reason.'</li>';

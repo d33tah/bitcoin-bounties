@@ -7,7 +7,10 @@ if($bounties=$bdb->get_bounties())
   {
     $id=htmlentities($bounty["id"]);
     $title=htmlentities($bounty["title"]);
-    $collected=htmlentities($bounty["bitcoins"].'.'.sprintf('%08d',$bounty["satoshi"]).' BTC');
+    //$bitcoins = $bounty["bitcoins"];
+    //$satoshi = $bounty["satoshi"];
+    //$collected=htmlentities($bitcoins.'.'.sprintf('%08d',$satoshi).' BTC');
+    $collected=sprintf("%.8f BTC", $adb->balance_prefix('bounty_'.$id));
     $tpl->addentry("BOUNTYENTRY",
       array("DESC"=>
               '<a href="'.$LINK_PREFIX.'/viewbounty/id='.$id.'">'.$title.'</a>', 

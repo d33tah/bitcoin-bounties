@@ -6,8 +6,7 @@ if($bounty = $bdb->get_by_id($_GET["id"]))
   $id=htmlentities($bounty["id"]);
   $title=htmlentities($bounty["title"]);
   $description=htmlentities($bounty["description"]);
-  $collected=htmlentities($bounty["bitcoins"].'.'.
-    sprintf('%08d',$bounty["satoshi"]).' BTC');
+  $collected=sprintf("%.8f BTC", $adb->balance_prefix('bounty_'.$id));
   $submissions=count($bdb->get_submissions($bounty));
 
 $tpl->replace("BOUNTYDESC",$title);

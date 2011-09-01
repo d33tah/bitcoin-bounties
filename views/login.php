@@ -33,11 +33,14 @@
 	</form>
 	
 	<p>
-		<a href="%LINK_PREFIX%/resetpassword/">Forgot the password?</a>
+		<a href="%LINK_PREFIX%/resetpassword/">
+	                Forgot the password?
+		</a>
 	</p>
 	
 	<p>
-		<a href="%LINK_PREFIX%/signup/">Don't have an account yet? Click here to sign up.</a>
+		<a href="%LINK_PREFIX%/signup/">Don't have an account yet? 
+                Click here to sign up.</a>
 	</p>
 	
 </body>
