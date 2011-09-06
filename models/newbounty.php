@@ -25,3 +25,7 @@ if(isset($_SESSION['login']))
     //no POST
   }
 }
+
+$title=$domain.' - '.__(MSG_ADD_NEW_BOUNTY_TITLE);
+$tpl->replace("TITLE",$title);
+$tpl->replace("SHORT_TITLE",$title);

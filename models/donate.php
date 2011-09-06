@@ -18,5 +18,6 @@ if($bounty = $bdb->get_by_id($_GET["id"]))
   }
 }
 
-$tpl->replace("MESSAGE",sprintf($messages[$message_type],$bounty_address,
-$bounty['id']));
+$tpl->replace("MESSAGE",__($message_type,$bounty_address,$bounty['id']));
+$tpl->replace("TITLE",$domain.' - '.__(MSG_DONATE_BOUNTY_X,$bounty['title']));
+$tpl->replace("SHORT_TITLE",$domain.' - '.__(MSG_DONATE_BOUNTY));

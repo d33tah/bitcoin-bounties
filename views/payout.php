@@ -2,19 +2,19 @@
 
 <head>
 
-	%ENCODING%
+	<?php echo $ENCODING ?>
 	<title>
-	%DOMAIN% - bounty payout
+	<?php echo $TITLE ?>
 	</title>
 
-	%CSS%
+	<?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
+	<?php echo $HEADER ?>
+	<br /><?php echo $HOMELINK ?>
 	
-	<p>%MESSAGE%</p>
+	<p><?php echo $MESSAGE ?></p>
 </body>
 </html>

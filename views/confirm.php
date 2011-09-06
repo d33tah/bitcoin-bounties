@@ -2,19 +2,19 @@
 
 <head>
 
-	%ENCODING%
-	<title>
-	%DOMAIN% - sign up
-	</title>
+  <?php echo $ENCODING ?>
+  <title>
+  <?php echo $TITLE ?>
+  </title>
 
-	%CSS%
+  <?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
-	
-	<p>%MESSAGE%</p>
+  <?php echo $HEADER ?>
+  <br /><?php echo $HOMELINK ?>
+  
+  <p><?php echo $MESSAGE ?></p>
 </body>
-</html
+</html>

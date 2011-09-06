@@ -9,3 +9,6 @@ else
 }
 
 $tpl->replace("MESSAGE",$message);
+$title=$domain.' - account confirmation';
+$tpl->replace("TITLE",$title);
+$tpl->replace("SHORT_TITLE",$title);

@@ -11,3 +11,7 @@ if($commit_id=$_GET["id"])
   $bdb->voteup_commit($commit_id,$adb,$udb,$our_uid);
   //TODO header("Refresh")
 }
+
+$title=$domain.' - '.__(MSG_REDIRECTING);
+$tpl->replace("TITLE",$title);
+$tpl->replace("SHORT_TITLE",$title);

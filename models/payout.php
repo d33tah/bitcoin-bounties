@@ -24,7 +24,7 @@ if(isset($_SESSION['login']))
 	if($bounty['state']==0)
 	{
 	  $total=$adb->balance_prefix('bounty_'.$bounty['id']);
-	  $fee=$total*0.01;
+	  $fee=$total*$fee_multiplier;
 	  $payout+=$total-$fee;
 	  $fees+=$fee;
           array_push($paid_out,$bounty);
@@ -40,8 +40,7 @@ if(isset($_SESSION['login']))
       if(ctype_alnum($_POST["address"]) && strlen($_POST['address']<35))
       {
 	$address=$_POST["address"];
-	$fee_address='mghb6K62ZZok1Yq2qwRytWm1GobUETdvrp';
-	$message="The bounty was paid out successfully!";
+	$message=__(MSG_BOUNTY_PAYOUT_SUCCESS);
 	$adb->sendtoaddress($address,$payout);
 	$adb->sendtoaddress($fee_address,$fees);
 	foreach($paid_out as $lock_me)
@@ -51,14 +50,13 @@ if(isset($_SESSION['login']))
       }
       else
       {
-	$message='You typed in an invalid address!';
+	$message=__(MSG_INVALID_ADDRESS_GIVEN);
       }
     }
     else
     {
       $payout_neat=sprintf("%.8f BTC",$payout);
-      $message="You earned $payout_neat. Just type in the address you want
-      it to be transferred to:
+      $message=__(MSG_ENTER_PAYOUT_ADDRESS,$payout_neat)."
       <form method=\"post\">
       <input name=\"address\" />
       <input type=\"submit\" />
@@ -66,9 +64,13 @@ if(isset($_SESSION['login']))
     }
   }
   else
-    $message="No bounty to be paid out.";
+    $message=__(MSG_NO_PAYOUT);
 
 }
 else
-  $message="You have to log in.";
+  $message=__(MSG_NEED_LOGIN);
+
+$title=$domain.' - '.__(MSG_BOUNTY_PAYOUT);
+$tpl->replace("TITLE",$title);
+$tpl->replace("SHORT_TITLE",$title);
 $tpl->replace("MESSAGE",$message);

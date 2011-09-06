@@ -2,22 +2,22 @@
 
 <head>
 
-	%ENCODING%
+	<?php echo $ENCODING ?>
 	<title>
-	%DOMAIN% - redirecting...
+	<?php echo $TITLE ?>
 	</title>
 
 	<meta http-equiv="refresh" content="3; 
-          url=%LINK_PREFIX%/commits/id=%COMMITID%">
-	%CSS%
+          url=<?php echo $LINK_PREFIX ?>/commits/id=<?php echo $COMMITID ?>">
+	<?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
+	<?php echo $HEADER ?>
+	<br /><?php echo $HOMELINK ?>
 	
-	<h1>%DOMAIN% - redirecting...</h1>
-	<p>%MESSAGE%</p>
+	<h1><?php echo $SHORT_TITLE ?></h1>
+	<p><?php echo $MESSAGE ?></p>
 </body>
 </html>

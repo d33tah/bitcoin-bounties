@@ -9,9 +9,12 @@ if($bounty = $bdb->get_by_id($_GET["id"]))
   $collected=sprintf("%.8f BTC", $adb->balance_prefix('bounty_'.$id));
   $submissions=count($bdb->get_submissions($bounty));
 
-$tpl->replace("BOUNTYDESC",$title);
-$tpl->replace("BOUNTYID",$id);
+$tpl->replace("BOUNTY_DESC",$title);
+$tpl->replace("BOUNTY_ID",$id);
 $tpl->replace("DONATED",$collected);
 $tpl->replace("SUBMISSIONS",$submissions);
 $tpl->replace("DESCRIPTION",$description);
 }
+
+$tpl->replace("TITLE",$domain.' - '.__(MSG_VIEWING_X,$title));
+$tpl->replace("SHORT_TITLE",$domain.' - '.__(MSG_VIEW_BOUNTY));

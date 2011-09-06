@@ -2,20 +2,20 @@
 
 <head>
 
-	%ENCODING%
-	<title>
-	%DOMAIN% - donate a bounty '%BOUNTYDESC%'
-	</title>
+  <?php echo $ENCODING ?>
+  <title>
+  <?php echo $TITLE; ?>
+  </title>
 
-	%CSS%
+  <?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
-	
-	<h1>%DOMAIN% - donating a bounty</h1>
-	%MESSAGE%
+  <?php echo $HEADER ?>
+  <br /><?php echo $HOMELINK ?>
+  
+  <h1><?php echo $SHORT_TITLE; ?></h1>
+  <?php echo $MESSAGE ?>
 </body>
 </html>

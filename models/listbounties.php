@@ -21,3 +21,7 @@ else
 {
 //TODO: say there's nothing to show.
 }
+
+$title=$domain.' - '.__(MSG_BOUNTIES_LIST);
+$tpl->replace("TITLE",$title);
+$tpl->replace("SHORT_TITLE",$title);

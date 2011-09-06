@@ -2,50 +2,60 @@
 
 <head>
 
-  %ENCODING%
+  <?php echo $ENCODING ?>
   <title>
-  %DOMAIN% - viewing '%BOUNTYDESC%'
+  <?php echo $TITLE ?>
   </title>
 
-  %CSS%
+  <?php echo $CSS ?>
 </head>
 	
 <body>
 
-  %HEADER%
-  <br />%HOMELINK%
+  <?php echo $HEADER ?>
+  <br /><?php echo $HOMELINK ?>
   
-  <h1>%DOMAIN% - view a bounty</h1>
-  <h2>%BOUNTYDESC%</h2>
+  <h1><?php echo $SHORT_TITLE ?></h1>
+  <h2><?php echo $BOUNTY_DESC ?></h2>
   <table>
     <tr>
       <td>
-	Donations collected:
+	<?php echo __(MSG_DONATIONS_COLLECTED) ?>
       </td>
       <td>
-	%DONATED% <a href="%LINK_PREFIX%/donate/id=%BOUNTYID%">[DONATE]</a>
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-	Submissions to vote:
-      </td>
-      
-      <td>
-	%SUBMISSIONS% 
-        <a href="%LINK_PREFIX%/newcommit/id=%BOUNTYID%">[SUBMIT]</a>
-	<a href="%LINK_PREFIX%/commits/id=%BOUNTYID%">[VIEW]</a>
+	<?php echo $DONATED ?> 
+          <a href="<?php echo $LINK_PREFIX.'/donate/id='.$BOUNTY_ID ?>">
+            [<?php echo __(MSG_DONATE_BUTTON) ?>]
+          </a>
       </td>
     </tr>
     
     <tr>
       <td>
-	      Description:
+	<?php echo __(MSG_SUBMISSIONS_TO_VOTE) ?>
       </td>
       
       <td>
-	      %DESCRIPTION%
+	<?php echo $SUBMISSIONS ?> 
+
+        <a href="<?php echo $LINK_PREFIX.'/newcommit/id='.$BOUNTY_ID ?>">
+          [<?php echo __(MSG_SUBMIT_BUTTON) ?>]
+        </a>
+
+	<a href="<?php echo $LINK_PREFIX.'/commits/id='.$BOUNTY_ID?>">
+          [<?php echo __(MSG_VIEW_BUTTON) ?>]
+        </a>
+
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+	<?php echo __(MSG_DESCRIPTION) ?>
+      </td>
+      
+      <td>
+	<?php echo $DESCRIPTION ?>
       </td>
     </tr>
   </table>

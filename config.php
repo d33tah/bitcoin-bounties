@@ -37,3 +37,6 @@ $bitcoin_password='rpcpass';
 $bitcoin_host='127.0.0.1';
 $bitcoin_port='8332';
 $bitcoin_path='';
+
+$fee_address='mghb6K62ZZok1Yq2qwRytWm1GobUETdvrp';
+$fee_multiplier=0.01;

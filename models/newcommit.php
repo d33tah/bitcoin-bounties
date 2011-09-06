@@ -1,4 +1,5 @@
 <?php
+//TODO: check if a file exists
 require_once(ROOT.'/classes/bountydb.php');
 $bdb=new BountyDB();
 if(isset($_SESSION['login']))
@@ -21,7 +22,7 @@ if(isset($_SESSION['login']))
 	    $bounty_id=$_GET['id'];
 	    $description=$_POST['comments'];
 	    $bdb->add_submission($bounty_id,$our_uid,$description,$filename);
-	    echo "Success";
+	    echo "File submitted successfully!";
 	  }
 	  else
 	    echo 'if(move_uploaded_file($tmpfile,ROOT."uploads/".$filename))';
@@ -29,8 +30,6 @@ if(isset($_SESSION['login']))
 	else
 	  echo 'if(is_uploaded_file($tmpfile))';
       }
-      else
-	echo 'if($_POST)';
     }
     else
       echo 'if($bounty = $bdb->get_by_id($_GET["id"]))';
@@ -39,4 +38,8 @@ if(isset($_SESSION['login']))
     echo "if(isset(\$_GET['id']))";
 }
 else
-  echo "if(isset($_SESSION['login']))"
+  echo "if(isset(\$_SESSION['login']))";
+
+$title=$domain.' - '.__(MSG_ADD_COMMIT_TITLE);
+$tpl->replace("TITLE",$title);
+$tpl->replace("SHORT_TITLE",$title);

@@ -29,7 +29,7 @@ MESSAGE;
 $messages[MSG_EMAIL_REGEX]=<<<MESSAGE
 The e-mail you have entered seems invalid. If you think this is an error, 
 contact the administrator at 
-<a href=\"mailto:${adminemail}\">${adminemail}</a>.
+<a href="mailto:${adminemail}">${adminemail}</a>.
 MESSAGE;
 
 $messages[MSG_EMAIL_TAKEN]=<<<MESSAGE
@@ -48,7 +48,7 @@ $messages[MSG_CONFIRMATION_EMAIL]=<<<MESSAGE
 Hello %s,
 
 Someone with the IP address %s tried to register a username '%1\$s'
-and entered your e-mail address on the website %DOMAIN%. If it wasn't you,
+and entered your e-mail address on the website ${domain}. If it wasn't you,
 please just remove this e-mail and ignore it. Otherwise, please click the 
 below or copy it to your browser's address bar to confirm that your e-mail 
 address is valid:
@@ -305,4 +305,249 @@ MESSAGE;
 
 $messages[MSG_OPERATION_FAILED_REASONS]=<<<MESSAGE
 The operation failed due to the following reasons: 
+MESSAGE;
+
+$messages[MSG_ADDRESSNOTFOUND]=<<<MESSAGE
+Sorry, the address you requested was not found.
+MESSAGE;
+
+$messages[MSG_BOUNTY_SYSTEM_RULES]=<<<MESSAGE
+bounty system rules
+MESSAGE;
+
+$messages[MSG_COMMITS_LIST_FOR]=<<<MESSAGE
+commits list for %s
+MESSAGE;
+
+$messages[MSG_COMMITS_LIST]=<<<MESSAGE
+commits list
+MESSAGE;
+
+$messages[MSG_AUTHOR]=<<<MESSAGE
+Author
+MESSAGE;
+
+$messages[MSG_VOTES]=<<<MESSAGE
+votes
+MESSAGE;
+
+$messages[MSG_VOTE_UP]=<<<MESSAGE
+VOTE UP
+MESSAGE;
+
+$messages[MSG_ADDCOMMIT]=<<<MESSAGE
+Add a new commit!
+MESSAGE;
+
+$messages[MSG_DONATE_BOUNTY_X]=<<<MESSAGE
+donate a bounty '%s'
+MESSAGE;
+
+$messages[MSG_DONATE_BOUNTY]=<<<MESSAGE
+donate a bounty
+MESSAGE;
+
+$messages[MSG_DONATING_A_BOUNTY]=<<<MESSAGE
+donating a bounty
+MESSAGE;
+
+$messages[MSG_BOUNTIES_LIST]=<<<MESSAGE
+bounties list
+MESSAGE;
+
+$messages[MSG_DESCRIPTION]=<<<MESSAGE
+Description
+MESSAGE;
+
+$messages[MSG_COLLECTED]=<<<MESSAGE
+Collected
+MESSAGE;
+
+$messages[MSG_ADD_BOUNTY]=<<<MESSAGE
+Add a new bounty!
+MESSAGE;
+
+$messages[MSG_LOG_IN]=<<<MESSAGE
+log in
+MESSAGE;
+
+$messages[MSG_LOGIN]=<<<MESSAGE
+Login:
+MESSAGE;
+
+$messages[MSG_PASSWORD]=<<<MESSAGE
+Password:
+MESSAGE;
+
+$messages[MSG_REMEMBER_ME]=<<<MESSAGE
+Remember me
+MESSAGE;
+
+$messages[MSG_VERIFICATION_CAPTCHA]=<<<MESSAGE
+Verification CAPTCHA (please repeat the text below):
+MESSAGE;
+
+$messages[MSG_FORGOT_PASSWORD]=<<<MESSAGE
+Forgot the password?
+MESSAGE;
+
+$messages[MSG_HAVE_NO_ACCOUNT_SIGN_UP]=<<<MESSAGE
+Don't have an account yet? Click here to sign up.
+MESSAGE;
+
+$messages[MSG_A_MESSAGE]=<<<MESSAGE
+a message
+MESSAGE;
+
+$messages[MSG_ADD_NEW_BOUNTY_TITLE]=<<<MESSAGE
+add a new bounty
+MESSAGE;
+
+$messages[MSG_TITLE]=<<<MESSAGE
+Title: 
+MESSAGE;
+
+$messages[MSG_DESCRIPTION_COLON]=<<<MESSAGE
+Description:
+MESSAGE;
+
+$messages[MSG_SUBMIT]=<<<MESSAGE
+Submit
+MESSAGE;
+
+$messages[MSG_ADD_COMMIT_TITLE]=<<<MESSAGE
+add a new commit
+MESSAGE;
+
+$messages[MSG_COMMENTS]=<<<MESSAGE
+Comments:
+MESSAGE;
+
+$messages[MSG_BOUNTY_PAYOUT]=<<<MESSAGE
+bounty payout
+MESSAGE;
+
+$messages[MSG_PASSWORD_RECOVERY]=<<<MESSAGE
+password recovery
+MESSAGE;
+
+$messages[MSG_SIGN_UP_TITLE]=<<<MESSAGE
+sign up
+MESSAGE;
+
+$messages[MSG_REPEAT_PASSWORD]=<<<MESSAGE
+Repeat password:
+MESSAGE;
+
+$messages[MSG_EMAIL]=<<<MESSAGE
+E-mail address:
+MESSAGE;
+
+$messages[MSG_VIEWING_X]=<<<MESSAGE
+viewing '%s'
+MESSAGE;
+
+$messages[MSG_VIEW_BOUNTY]=<<<MESSAGE
+view a bounty
+MESSAGE;
+
+$messages[MSG_DONATIONS_COLLECTED]=<<<MESSAGE
+Donations collected:
+MESSAGE;
+
+$messages[MSG_DONATE_BUTTON]=<<<MESSAGE
+DONATE
+MESSAGE;
+
+$messages[MSG_SUBMISSIONS_TO_VOTE]=<<<MESSAGE
+Submissions to vote:
+MESSAGE;
+
+$messages[MSG_SUBMIT_BUTTON]=<<<MESSAGE
+SUBMIT
+MESSAGE;
+
+$messages[MSG_VIEW_BUTTON]=<<<MESSAGE
+VIEW
+MESSAGE;
+
+$messages[MSG_VIEWING_COMMIT_TO_BY]=<<<MESSAGE
+viewing a commmit to '%s' by %s
+MESSAGE;
+
+$messages[MSG_VIEWING_COMMIT_BY]=<<<MESSAGE
+view a commit by %s
+MESSAGE;
+
+$messages[MSG_TO_X]=<<<MESSAGE
+To '%s'
+MESSAGE;
+
+$messages[MSG_FILE_NAME]=<<<MESSAGE
+File name:
+MESSAGE;
+
+$messages[MSG_FILE_SIZE]=<<<MESSAGE
+File size:
+MESSAGE;
+
+$messages[MSG_REDIRECTING]=<<<MESSAGE
+redirecting...
+MESSAGE;
+
+$messages[MSG_LOGGED_IN_AS]=<<<MESSAGE
+Logged in as '%s'
+MESSAGE;
+
+$messages[MSG_LOGOUT_BUTTON]=<<<MESSAGE
+Log out
+MESSAGE;
+
+$messages[MSG_LOGIN_BUTTON]=<<<MESSAGE
+Login
+MESSAGE;
+
+$messages[MSG_SIGN_UP_BUTTON]=<<<MESSAGE
+Sign up
+MESSAGE;
+
+$messages[MSG_BACK_TO_HOMEPAGE]=<<<MESSAGE
+Back to the homepage
+MESSAGE;
+
+$messages[MSG_BOUNTY_PAYOUT_SUCCESS]=<<<MESSAGE
+The bounty was paid out successfully!
+MESSAGE;
+
+$messages[MSG_INVALID_ADDRESS_GIVEN]=<<<MESSAGE
+You typed in an invalid address!
+MESSAGE;
+
+$messages[MSG_ENTER_PAYOUT_ADDRESS]=<<<MESSAGE
+You earned %s. Just type in the address you want it to be 
+transferred to:
+MESSAGE;
+
+$messages[MSG_NO_PAYOUT]=<<<MESSAGE
+No bounty to be paid out.
+MESSAGE;
+
+$messages[MSG_NEED_LOGIN]=<<<MESSAGE
+You have to log in.
+MESSAGE;
+
+$messages[MSG_NO_BOUNTIES_YET]=<<<MESSAGE
+There are no bounties to browse yet! How about adding one using the link 
+below?
+MESSAGE;
+
+$messages[MSG_EMAIL_SENDING_ERROR]=<<<MESSAGE
+There was a problem while sending your confirmation e-mail. Please double
+check your e-mail address, try again after some time, and if everything fails,
+contact the administrator at <a href="mailto:${adminemail}">${adminemail}</a>.
+MESSAGE;
+
+$messages[MSG_NO_COMMITS_YET]=<<<MESSAGE
+There are no commits to browse yet! How about adding one using the link 
+below?
 MESSAGE;

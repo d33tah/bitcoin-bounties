@@ -166,3 +166,7 @@ if(!isset($error_html))
   }
 }
 $tpl->replace("ERROR_MESSAGE",$error_html);
+
+$title = $domain.' - '.__(MSG_PASSWORD_RECOVERY);
+$tpl->replace("TITLE",$title);
+$tpl->replace("SHORT_TITLE",$title);

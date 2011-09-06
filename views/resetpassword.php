@@ -2,24 +2,24 @@
 
 <head>
 
-	%ENCODING%
+	<?php echo $ENCODING ?>
 	<title>
-	%DOMAIN% - password recovery
+	<?php echo $TITLE ?>
 	</title>
 
-	%CSS%
+	<?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
+	<?php echo $HEADER ?>
+	<br /><?php echo $HOMELINK ?>
 
-        %ERROR_MESSAGE%
+        <?php echo $ERROR_MESSAGE ?>
 	
-	<h1>%DOMAIN% - %TITLE%</h1>
-	<form method="post" action="%LINK_PREFIX%/resetpassword/%HASH%">
-                %INPUTS%
+	<h1><?php echo $DOMAIN ?> - <?php echo $TITLE ?></h1>
+	<form method="post" action="<?php echo $LINK_PREFIX ?>/resetpassword/<?php echo $HASH ?>">
+                <?php echo $INPUTS ?>
 		<input type="submit" value="Submit" />
 	</form>
 </body>

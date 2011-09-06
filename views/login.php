@@ -2,46 +2,56 @@
 
 <head>
 
-	%ENCODING%
-	<title>
-	%DOMAIN% - log in
-	</title>
+  <?php echo $ENCODING ?>
+  <title>
+  <?php echo $TITLE ?>
+  </title>
 
-	%CSS%
+  <?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
-	
-        %ERROR_MESSAGE%
+    <?php echo $HEADER ?>
+    <br /><?php echo $HOMELINK ?>
+    
+    <?php echo $ERROR_MESSAGE ?>
 
-	<h1>%DOMAIN% - log in</h1>
-	<form method="post" action="%LINK_PREFIX%/login/">
-		Login: <input type="text" name="login" /> <br />
-		Password: <input type="password" name="password" /> <br />
-                <input type="checkbox" name="remember"> Remember me <br />
-                Verification CAPTCHA (please repeat the text below):
-		<script type="text/javascript">
-		var RecaptchaOptions = {
-		    theme : 'clean'
-		};
-		</script>
-                %RECAPTCHA%
-		<input type="submit" value="Submit" />
-	</form>
-	
-	<p>
-		<a href="%LINK_PREFIX%/resetpassword/">
-	                Forgot the password?
-		</a>
-	</p>
-	
-	<p>
-		<a href="%LINK_PREFIX%/signup/">Don't have an account yet? 
-                Click here to sign up.</a>
-	</p>
+    <h1><?php echo $SHORT_TITLE ?></h1>
+    <form method="post" action="<?php echo $LINK_PREFIX ?>/login/">
+
+      <?php echo __(MSG_LOGIN) ?> 
+	<input type="text" name="login" /> <br />
+
+      <?php echo __(MSG_PASSWORD) ?> 
+	<input type="password" name="password" /> <br />
+
+	<input type="checkbox" name="remember">
+      <?php echo __(MSG_REMEMBER_ME) ?> 
+	<br />
+
+      <?php echo __(MSG_VERIFICATION_CAPTCHA) ?> 
+	<script type="text/javascript">
+	  var RecaptchaOptions = {
+	      theme : 'clean'
+	  };
+	</script>
+      <?php echo $RECAPTCHA ?>
+
+      <input type="submit" value="Submit" />
+    </form>
+    
+    <p>
+      <a href="<?php echo $LINK_PREFIX ?>/resetpassword/">
+	<?php echo __(MSG_FORGOT_PASSWORD) ?> 
+      </a>
+    </p>
+    
+    <p>
+      <a href="<?php echo $LINK_PREFIX ?>/signup/">
+	<?php echo __(MSG_HAVE_NO_ACCOUNT_SIGN_UP) ?> 
+      </a>
+    </p>
 	
 </body>
 </html>

@@ -2,20 +2,20 @@
 
 <head>
 
-	%ENCODING%
-	<title>
-	%DOMAIN% - bounty system rules
-	</title>
+  <?php echo $ENCODING ?>
+  <title>
+    <?php echo $TITLE ?>
+  </title>
 
-	%CSS%
+  <?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
-	
-	<h1>%DOMAIN% - bounty system rules</h1>
-	%MESSAGE%
+  <?php echo $HEADER ?>
+  <br /><?php echo $HOMELINK ?>
+  
+  <h1><?php echo $SHORT_TITLE ?></h1>
+  <?php echo $MESSAGE ?>
 </body>
 </html>

@@ -60,7 +60,7 @@ if($_POST)
   }
   else
   {
-    $error_html=$messages[MSG_LOGIN_FAILED_REASONS] "<ul>";
+    $error_html=$messages[MSG_LOGIN_FAILED_REASONS]."<ul>";
     foreach($errors as $reason)
     {
       $error_html.='<li>'.$reason.'</li>';
@@ -79,3 +79,7 @@ if(isset($captcha_response) && !$captcha_response->is_valid)
 }
 else
   $tpl->replace("RECAPTCHA",recaptcha_get_html($recaptcha_publickey,""));
+
+$title=$domain.' - '.__(MSG_LOG_IN);
+$tpl->replace("TITLE",$title);
+$tpl->replace("SHORT_TITLE",$title);

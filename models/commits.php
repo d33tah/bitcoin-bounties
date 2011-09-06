@@ -5,13 +5,14 @@ if($bounty = $bdb->get_by_id($_GET["id"]))
 {
   $id=htmlentities($bounty["id"]);
   $title=htmlentities($bounty["title"]);
+  
   $description=htmlentities($bounty["description"]);
   $collected=htmlentities($bounty["bitcoins"].
     '.'.sprintf('%08d',$bounty["satoshi"]).' BTC');
   $submissions=($bdb->get_submissions($bounty));
   
-  $tpl->replace("BOUNTYDESC",$title);
-  $tpl->replace("BOUNTYID",$id);
+  $tpl->replace("BOUNTY_DESC",$title);
+  $tpl->replace("BOUNTY_ID",$id);
   $tpl->replace("DONATED",$collected);
   if($submissions)
   {
@@ -23,4 +24,7 @@ if($bounty = $bdb->get_by_id($_GET["id"]))
 	"PERCENT"=>$percent."%", "COMMIT_ID"=>$submission['id']));
     }
   }
+
+  $tpl->replace('TITLE',$domain.' - '.__(MSG_COMMITS_LIST_FOR,$title));
+  $tpl->replace('SHORT_TITLE',$domain.' - '.__(MSG_COMMITS_LIST));
 }

@@ -115,3 +115,13 @@ function size_readable($size, $max = null, $system = 'si',
 
   return sprintf($retstring, $size, $sys['prefix'][$i]);
 }
+
+function __()
+{
+  global $messages;
+  $args = func_get_args();
+  $msg_num = array_shift($args);
+  $format = $messages[$msg_num];
+  
+  return vsprintf($format,$args);
+}

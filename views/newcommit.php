@@ -2,26 +2,29 @@
 
 <head>
 
-	%ENCODING%
-	<title>
-	%DOMAIN% - add a new commit
-	</title>
+  <?php echo $ENCODING ?>
+  <title>
+  <?php echo $TITLE ?>
+  </title>
 
-	%CSS%
+  <?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
-	
-	<h1>%DOMAIN% - add a new commit</h1>
-	<form enctype="multipart/form-data" 
-          method="post"> <!-- action="%LINK_PREFIX%/newcommit/ -->
-		<input type="file" name="uploaded" /> <br />
-		Comments: <br />
-		<textarea name="comments"></textarea><br />
-		<input type="submit" value="Submit" />
-	</form>
+  <?php echo $HEADER ?>
+  <br /><?php echo $HOMELINK ?>
+  
+  <h1><?php echo $SHORT_TITLE ?></h1>
+  <form enctype="multipart/form-data" 
+    method="post"> <!-- action="<?php echo $LINK_PREFIX ?>/newcommit/ -->
+
+      <input type="file" name="uploaded" /> <br />
+
+      <?php echo __(MSG_COMMENTS) ?> <br />
+        <textarea name="comments"></textarea><br />
+
+      <input type="submit" value="<?php echo __(MSG_SUBMIT) ?>" />
+  </form>
 </body>
 </html>

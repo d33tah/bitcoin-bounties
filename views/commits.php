@@ -2,47 +2,64 @@
 
 <head>
 
-	%ENCODING%
-	<title>
-	%DOMAIN% - commits list for '%BOUNTYDESC%'
-	</title>
+  <?php echo $ENCODING ?>
+  <title>
+    <?php echo $TITLE ?>
+  </title>
 
-	%CSS%
+  <?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
+  <?php echo $HEADER ?>
+  
+  <h1><?php echo $SHORT_TITLE ?></h1>
+  <h2><?php echo $BOUNTY_DESC ?></h2>
+
+  <?php if (!isset($SUBMITENTRY)): ?>
+  
+    <?php echo __(MSG_NO_COMMITS_YET) ?>
+
+  <?php else: ?>
+
+  <table>
+    <tr>
+      <td>
+	      <?php echo __(MSG_AUTHOR) ?>
+      </td>
+      
+      <td>
+	      % <?php echo __(MSG_VOTES) ?>
+      </td>
+    </tr>
+    
+    <?php foreach($SUBMITENTRY as $ENTRY): ?>
+      <tr>
+	<td>
+	  <a href="<?php echo $LINK_PREFIX.'/viewcommit/id='
+              .$ENTRY['COMMIT_ID'] ?>">
+	    <?php echo $ENTRY['AUTHOR'] ?>
+	  </a>
+	</td>
 	
-	<h1>%DOMAIN% - commits list</h1>
-	<h2>%BOUNTYDESC%</h2>
-	<table>
-		<tr>
-			<td>
-				Author
-			</td>
-			
-			<td>
-				%% votes
-			</td>
-		</tr>
-		
-		%_BLOCKSTART_SUBMITENTRY%
-		<tr>
-			<td>
-				<a href="%LINK_PREFIX%/viewcommit/id=%_BLOCK_COMMIT_ID%">%_BLOCK_AUTHOR%</a>
-			</td>
-			
-			<td>
-				%_BLOCK_PERCENT% 
-					<a href="%LINK_PREFIX%/votecommit/id=%_BLOCK_COMMIT_ID%">[VOTE UP]</a>
-			</td>
-		</tr>
-		%_BLOCKEND_SUBMITENTRY%
-	</table>
-	
-	<p>
-		<a href="%LINK_PREFIX%/newcommit/%BOUNTYID%">Add a new commit!</a>
-	</p>
-</html>
+	<td>
+	  <?php echo $ENTRY['PERCENT'] ?> 
+	    <a href="<?php echo $LINK_PREFIX.'/votecommit/id='.
+                $ENTRY['COMMIT_ID'] ?>">
+	      [<?php echo __(MSG_VOTE_UP) ?>]
+	    </a>
+	</td>
+      </tr>
+    <?php endforeach ?>
+  </table>
+  
+  <?php endif ?>
+  
+  <p>
+    <a href="<?php echo $LINK_PREFIX.'/newcommit/id='.$BOUNTY_ID ?>">
+      <?php echo __(MSG_ADDCOMMIT) ?>
+    </a>
+  </p>
 </body>
+</html>

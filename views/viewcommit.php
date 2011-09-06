@@ -2,26 +2,25 @@
 
 <head>
 
-	%ENCODING%
+	<?php echo $ENCODING ?>
 	<title>
-	%DOMAIN% - viewing a commmit to '%BOUNTYDESC%' by %COMMIT_AUTHOR%
+	<?php echo $TITLE ?>
 	</title>
 
-	%CSS%
+	<?php echo $CSS ?>
 </head>
 	
 <body>
 
-	%HEADER%
-	<br />%HOMELINK%
+	<?php echo $HEADER ?>
+	<br /><?php echo $HOMELINK ?>
 	
-	<h1>%DOMAIN% - view a commit by %COMMIT_AUTHOR%</h1>
-	<h2>To '%BOUNTYDESC%'</h2>
+	<h1><?php echo $SHORT_TITLE ?></h1>
+	<h2><?php echo __(MSG_TO_X,$BOUNTY_DESC) ?></h2>
 	
-	<p>File name: %COMMIT_FILENAME%</p>
-	<p>File size: %COMMIT_SIZE%</p>
-	
-	<p>Description: %COMMIT_COMMENT%</p>
+	<p><?php echo __(MSG_FILE_NAME).' '.$COMMIT_FILENAME ?></p>
+	<p><?php echo __(MSG_FILE_SIZE).' '.$COMMIT_SIZE ?></p>
+	<p><?php echo __(MSG_DESCRIPTION).' '.$COMMIT_COMMENT ?></p>
 	
 	
 </body>
