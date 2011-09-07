@@ -41,24 +41,6 @@ public function get_submissions($bounty)
   return $ret;
 }
 
-public function add_bounty($title,$desc,$uid,$accounts_db)
-{
-  $title_safe=mysql_real_escape_string($title);
-  $desc_safe=mysql_real_escape_string($desc);
-  $uid_safe=mysql_real_escape_string($uid);
-  $sql = "INSERT INTO `bounties` (`id`,`title`,`user_id`,`description`,
-    `bitcoins`,`satoshi`, `address`, `state`) VALUES 
-      ('','".$title_safe."','".$uid_safe."','".$desc_safe."','0','0','','0')";
-  mysql_query($sql);
-  echo mysql_error();
-  if(mysql_insert_id())
-  {
-    $new_address = $accounts_db->create_address('bounty_'.mysql_insert_id());
-    $sql=mysql_query("UPDATE `bounties` SET `address`='$new_address'");
-    mysql_query($sql);
-  }
-}
-
 public function get_submission($id)
 {
   $ret = array();
@@ -70,19 +52,6 @@ public function get_submission($id)
   return $ret;
 }
 
-public function add_submission($bounty_id,$uid,$desc,$filename)
-{
-  $bountyid_safe=mysql_real_escape_string($bounty_id);
-  $uid_safe=mysql_real_escape_string($uid);
-  $desc_safe=mysql_real_escape_string($desc);
-  $filename_safe=mysql_real_escape_string($filename);
-  $sql = "INSERT INTO `submissions` (`id`,`bounty_id`,`user_id`,`description`,
-    `filename`) VALUES ('','".$bountyid_safe."','".$uid_safe.
-    "','".$desc_safe."','".$filename_safe."')";
-  mysql_query($sql);
-  echo mysql_error();
-  return mysql_insert_id();
-}
 
 
 public function get_address($bounty,$user_id, $accounts_db)
@@ -195,5 +164,189 @@ public function set_locked($bounty)
   $safe_id=mysql_real_escape_string($bounty['id']);
   mysql_query("UPDATE `bounties` SET `state`='1' WHERE `id`='".$safe_id."'");
 }
+
+public $title_too_short;
+public $title_too_long;
+public $title_regex;
+public $title_exists;
+public $desc_too_short;
+public $desc_too_long;
+public $desc_regex;
+public $errors;
+
+private function reset_flags()
+{
+  $this->title_too_short = false;
+  $this->title_too_long = false;
+  $this->title_regex = false;
+  $this->title_exists = false;
+  $this->desc_too_short = false;
+  $this->desc_too_long = false;
+  $this->desc_regex = false;
+  $this->errors = 0;
+}
+
+private function check_title_too_short($title)
+{
+  if (strlen($title)<7)
+  {
+    $this->title_too_short = true;
+    $this->errors++;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+private function check_title_too_long($title)
+{
+  if (strlen($title)>40)
+  {
+    $this->title_too_short = true;
+    $this->errors++;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+private function check_title_regex($title)
+{
+  //TODO: anything besides < and > ? perhaps not even that?
+  if (!preg_match('/^[^<>]*$/',$title))
+  {
+    $this->title_regex = true;
+    $this->errors++;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+private function check_desc_too_short($description)
+{
+  if (strlen($description)<20)
+  {
+    $this->desc_too_short = true;
+    $this->errors++;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+private function check_desc_too_long($description)
+{
+  if (strlen($description)>4096)
+  {
+    $this->desc_too_long = true;
+    $this->errors++;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+private function check_desc_regex($description)
+{
+  //TODO: it's currently just a placeholder.
+  if (false)
+  {
+    $this->desc_regex = true;
+    $this->errors++;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+private function check_title_exists($title_safe)
+{
+  $sql='SELECT * FROM `bounties` WHERE `title`="'.$title_safe.'"';
+  if($res = mysql_query($sql))
+    $error=mysql_num_rows($res)>0;
+  else
+    $error=false;
+  
+  if ($error)
+  {
+    $this->title_exists = true;
+    $this->errors++;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+public function add_bounty($title,$desc,$uid,$accounts_db)
+{
+  $title_safe=mysql_real_escape_string(htmlentities($title));
+  $desc_safe=mysql_real_escape_string(htmlentities($desc));
+  $uid_safe=mysql_real_escape_string($uid);
+
+  $this->reset_flags();
+  $this->check_title_too_short($title);
+  $this->check_title_too_short($title);
+  $this->check_title_regex($title);
+  $this->check_title_exists($title_safe);
+  $this->check_desc_too_short($desc);
+  $this->check_desc_too_long($desc);
+  $this->check_desc_regex($desc);
+
+  if($this->errors>0)
+    return false;
+
+  $sql = "INSERT INTO `bounties` (`id`,`title`,`user_id`,`description`,
+    `bitcoins`,`satoshi`, `address`, `state`) VALUES 
+      ('','".$title_safe."','".$uid_safe."','".$desc_safe."','0','0','','0')";
+  mysql_query($sql);
+  echo mysql_error();
+  if($newid = mysql_insert_id())
+  {
+    $new_address = $accounts_db->create_address('bounty_'.$newid);
+    $sql=mysql_query("UPDATE `bounties` SET `address`='$new_address' WHERE
+      `id`='$newid'");
+    mysql_query($sql);
+    return $newid;
+  }
+}
+
+public function add_submission($bounty_id,$uid,$desc,$filename)
+{
+  $bountyid_safe=mysql_real_escape_string($bounty_id);
+  $uid_safe=mysql_real_escape_string($uid);
+  $desc_safe=mysql_real_escape_string($desc);
+  $filename_safe=mysql_real_escape_string($filename);
+
+  $this->reset_flags();
+  $this->check_desc_too_short($desc);
+  $this->check_desc_too_long($desc);
+  $this->check_desc_regex($desc);
+
+  if($this->errors>0)
+    return false;
+
+  $sql = "INSERT INTO `submissions` (`id`,`bounty_id`,`user_id`,`description`,
+    `filename`) VALUES ('','".$bountyid_safe."','".$uid_safe.
+    "','".$desc_safe."','".$filename_safe."')";
+  mysql_query($sql);
+  echo mysql_error();
+  return mysql_insert_id();
+}
+
 
 }

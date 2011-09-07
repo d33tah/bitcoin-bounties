@@ -7,9 +7,13 @@
 	<?php echo $TITLE ?>
 	</title>
 
+      <?php if(isset($REFRESH)): ?>
 	<meta http-equiv="refresh" content="3; 
-          url=<?php echo $LINK_PREFIX ?>/commits/id=<?php echo $COMMITID ?>">
-	<?php echo $CSS ?>
+          url=<? echo $REFRESH ?>" />
+      <?php endif ?>
+
+      <?php echo $CSS ?>
+
 </head>
 	
 <body>

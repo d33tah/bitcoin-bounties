@@ -16,6 +16,13 @@
 	<br /><?php echo $HOMELINK ?>
 	
 	<h1><?php echo $SHORT_TITLE ?></h1>
+
+	<?php if(isset($FATAL_ERROR)): ?>
+        <?php echo $FATAL_ERROR ?>
+        <?php else: ?>
+
+        <?php echo $ERROR_MESSAGE ?>
+
 	<form method="post" action="<?php echo $LINK_PREFIX ?>/newbounty/">
 
 		<?php echo __(MSG_TITLE) ?>
@@ -26,5 +33,7 @@
 
 		<input type="submit" value="<?php echo __(MSG_SUBMIT) ?>" />
 	</form>
+
+        <? endif //FATAL_ERROR ?>
 </body>
 </html>

@@ -1,3 +1,19 @@
 RewriteEngine On
+
+#TODO: it needs some fixing, atm the whole file assumes we're in /bounty/
+
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-d
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
 RewriteBase /bounty/
 RewriteRule ^(.+?)/(.*)$ index.php?$2&view=$1 [L]
+
+#this regex moves /foo/bar to /foo/bar/ when there's no dot in the URL
+#(so it won't redirect files with extensions).
+
+#you're free to delete it if this functionality somehow doesn't work or
+#irritates you ;)
+
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-d
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+RewriteBase /bounty/
+RewriteRule ^([^.]*)$ ./$1/ [R]

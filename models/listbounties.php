@@ -13,8 +13,8 @@ if($bounties=$bdb->get_bounties())
     $collected=sprintf("%.8f BTC", $adb->balance_prefix('bounty_'.$id));
     $tpl->addentry("BOUNTYENTRY",
       array("DESC"=>
-              '<a href="'.$LINK_PREFIX.'/viewbounty/id='.$id.'">'.$title.'</a>', 
-            "COLLECTED"=>$collected));
+              '<a href="'.$LINK_PREFIX.'/viewbounty/id='.$id.'">'.$title.
+	      '</a>', "COLLECTED"=>$collected));
   }
 }
 else

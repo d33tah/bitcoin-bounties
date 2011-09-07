@@ -79,7 +79,8 @@ MESSAGE;
 
 $messages[MSG_BOUNTY_ADDED]=<<<MESSAGE
 Your bounty was successfully added. 
-You can view it <a href=%s>here</a>.
+You can view it <a href=%s>here</a>. You will be automatically redirected to
+ this page in 5 seconds.
 MESSAGE;
 
 $messages[MSG_DONATE_REGISTERED]=<<<MESSAGE
@@ -125,20 +126,7 @@ $messages[MSG_DONATE_UNREGISTERED]=<<<MESSAGE
   it, sign in below:
 </p>
 
-<form method="post" action="${LINK_PREFIX}/login/redirect=/donate/%s">
-  Login: <input type="text" name="login" /> <br />
-  Password: <input type="password" name="password" /> <br />
-  <input type="submit" value="Submit" />
-</form>
-
-<p>
-  <a href="${LINK_PREFIX}/resetpassword/">Forgot the password?</a>
-</p>
-
-<p>
-  <a href="${LINK_PREFIX}/signup">Don't have an account yet? 
-  Click here to sign up.</a>
-</p>
+%s
 MESSAGE;
 
 $messages[MSG_VOTEUP_SUCCESS]=<<<MESSAGE
@@ -162,7 +150,7 @@ ${domain} team
 MESSAGE;
 
 $messages[MSG_BOUNTY_GATHERED_TITLE]=<<<MESSAGE
-Your commit was accepted and ready to be paid out!
+Your commit was accepted and is ready to be paid out!
 MESSAGE;
 
 $messages[MSG_CONFIRATION_LINK_INVALID]=<<<MESSAGE
@@ -533,7 +521,14 @@ No bounty to be paid out.
 MESSAGE;
 
 $messages[MSG_NEED_LOGIN]=<<<MESSAGE
-You have to log in.
+This function is restricted to the users that are already logged in. 
+You have to log in to access it. Please enter your log in data below:
+MESSAGE;
+
+$messages[MSG_NEED_LOGOUT]=<<<MESSAGE
+This function is restricted to the users that are already logged out. 
+If you wish to access it, please click the 'logout' button on the top of the
+screen.
 MESSAGE;
 
 $messages[MSG_NO_BOUNTIES_YET]=<<<MESSAGE
@@ -550,4 +545,99 @@ MESSAGE;
 $messages[MSG_NO_COMMITS_YET]=<<<MESSAGE
 There are no commits to browse yet! How about adding one using the link 
 below?
+MESSAGE;
+
+$messages[MSG_COMMIT_NOT_FOUND]=<<<MESSAGE
+The specified commit was not found.
+MESSAGE;
+
+$messages[MSG_BOUNTY_NOT_FOUND]=<<<MESSAGE
+The specified bounty was not found.
+MESSAGE;
+
+$messages[MSG_NO_COMMIT_GIVEN]=<<<MESSAGE
+No commit ID was given in the website URL. Please check if the address is not
+corrupt.
+MESSAGE;
+
+$messages[MSG_NO_BOUNTY_GIVEN]=<<<MESSAGE
+No bounty ID was given in the website URL. Please check if the address is not
+corrupt.
+MESSAGE;
+
+$messages[MSG_LOGIN_NEEDED]=<<<MESSAGE
+login needed
+MESSAGE;
+
+$messages[MSG_ERROR]=<<<MESSAGE
+error
+MESSAGE;
+
+$messages[MSG_FILE_UPLOAD_ERROR]=<<<MESSAGE
+There was an error while uploading your file. Try again, making sure it is
+not too big or contains illegal data.
+MESSAGE;
+
+$messages[MSG_TITLE_TOO_SHORT]=<<<MESSAGE
+The title you have entered is too short. Please choose a different one.
+MESSAGE;
+
+$messages[MSG_TITLE_TOO_LONG]=<<<MESSAGE
+The title you have entered is too long. Please choose a different one.
+MESSAGE;
+
+$messages[MSG_TITLE_REGEX]=<<<MESSAGE
+The title you have entered contains illegal characters. 
+Please choose  a different one.
+MESSAGE;
+
+$messages[MSG_DESCRIPTION_TOO_SHORT]=<<<MESSAGE
+The description you have entered is too short. Please choose a different one.
+MESSAGE;
+
+$messages[MSG_DESCRIPTION_TOO_LONG]=<<<MESSAGE
+The description you have entered is too long. Please choose a different one.
+MESSAGE;
+
+$messages[MSG_DESCRIPTION_REGEX]=<<<MESSAGE
+The description you have entered contains illegal characters. 
+Please choose  a different one.
+MESSAGE;
+
+$messages[MSG_BOUNTY_ADDING_FAILED_LIST]=<<<MESSAGE
+The bounty submission failed due to the following reasons: 
+MESSAGE;
+
+$messages[MSG_BOUNTY_TITLE_EXISTS]=<<<MESSAGE
+A bounty with the same title already exist.
+MESSAGE;
+
+
+$messages[MSG_COMMIT_ADDED]=<<<MESSAGE
+Your commit was successfully added. 
+You can view it <a href=%s>here</a>. You will be automatically redirected to
+ this page in 5 seconds.
+MESSAGE;
+
+$messages[MSG_COMMIT_ADDING_FAILED_LIST]=<<<MESSAGE
+The commit submission failed due to the following reasons: 
+MESSAGE;
+
+$messages[MSG_ILLEGAL_FILENAME]=<<<MESSAGE
+The name of the file you have uploaded is illegal. Please change it and
+try again. Uploading PHP files is not allowed due to the security policy.
+MESSAGE;
+
+$messages[MSG_FILENAME_EXISTS]=<<<MESSAGE
+The name of the file you have uploaded conflicts with an already uploaded
+file. Please change it and try again.
+MESSAGE;
+
+$messages[MSG_FILE_EMPTY]=<<<MESSAGE
+The file you have tried to upload is empty. Please try again with a correct
+file.
+MESSAGE;
+
+$messages[MSG_DELETED_USER]=<<<MESSAGE
+(deleted user)
 MESSAGE;

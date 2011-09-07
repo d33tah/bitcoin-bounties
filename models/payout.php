@@ -1,10 +1,11 @@
 <?php
 require_once(ROOT.'/classes/bountydb.php');
+require_once(ROOT.'classes/recaptchalib.php');
+
 $bdb=new BountyDB();
 
-if(isset($_SESSION['login']))
+if($our_user = $udb->get_logged_in())
 {
-  $our_user=$udb->get_by_login($_SESSION['login']);
   $our_uid=$our_user['id'];
   $sql="SELECT * FROM `submissions` WHERE `user_id`='".$our_uid."'";
   $payout=0;
@@ -68,7 +69,11 @@ if(isset($_SESSION['login']))
 
 }
 else
-  $message=__(MSG_NEED_LOGIN);
+{
+  $recaptcha=recaptcha_get_html($recaptcha_publickey,"");
+  $url=$server_directory.'/newbounty';
+  $message=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
+}
 
 $title=$domain.' - '.__(MSG_BOUNTY_PAYOUT);
 $tpl->replace("TITLE",$title);

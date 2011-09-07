@@ -8,7 +8,6 @@ It's supposed to check for the view to load and load it.
 */
 
 ob_start();
-error_reporting(E_ALL & E_NOTICE);
 session_start();
 define('ROOT',dirname($_SERVER['SCRIPT_FILENAME']).'/');
 require_once("../config.php"); //put it here so I don't push it accidentally
@@ -39,7 +38,12 @@ $adb=new AccountDB($bitcoin_login,$bitcoin_password,
 $udb->try_from_cookie();
 require_once(ROOT.viewfile("header"));
 
-$tpl=new Template(viewfile($view));
+if(file_exists(viewfile($view)))
+  $tpl=new Template(viewfile($view));
+else
+  do_404();
+
+
 //TODO: catch an exception and do_404();
 
 $tpl->replace("ENCODING","");

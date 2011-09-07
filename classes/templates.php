@@ -24,7 +24,7 @@ public function addentry($entry,$array)
 public function print_body()
 {
   extract($this->tags);
-  require($this->filename);
+  include($this->filename);
 }
 
 }

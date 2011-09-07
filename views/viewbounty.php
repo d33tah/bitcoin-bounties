@@ -16,6 +16,11 @@
   <br /><?php echo $HOMELINK ?>
   
   <h1><?php echo $SHORT_TITLE ?></h1>
+
+  <?php if(isset($FATAL_ERROR)): ?>
+  <?php echo $FATAL_ERROR ?>
+  <?php else: ?>
+
   <h2><?php echo $BOUNTY_DESC ?></h2>
   <table>
     <tr>
@@ -59,5 +64,8 @@
       </td>
     </tr>
   </table>
+
+  <? endif ?>
+
 </body>
 </html>

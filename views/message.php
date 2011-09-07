@@ -7,6 +7,11 @@
   <?php echo $TITLE; ?>
   </title>
 
+  <?php if(isset($REFRESH)): ?>
+    <meta http-equiv="refresh" content="3; 
+      url=<? echo $REFRESH ?>" />
+  <?php endif ?>
+
   <?php echo $CSS ?>
 </head>
 	

@@ -1,10 +1,11 @@
 <?php
 $errors=array();
+$logged_in = $udb->get_logged_in()
 if($_POST)
 {
-  if(isset($_SESSION["login"]))
+  if($logged_in)
   {
-    $login = $_SESSION["login"];
+    $login = $logged_in["login"];
 
     if(isset($_POST["oldpass"]) && isset($_POST["pass1"]) 
       && isset($_POST["pass2"]))
@@ -128,7 +129,7 @@ else
       $tpl->replace("TITLE",$messages[MSG_PASSWORD_RECOVERY_TITLE]);
       $tpl->replace("INPUTS",$messages[MSG_NEW_PASSWORD_INPUTS]);
   }
-  else if(isset($_SESSION["login"]))
+  else if($logged_in)
   {
     $tpl->replace("HASH",'');
     $tpl->replace("TITLE",$messages[MSG_CHANGE_PASSWORD_TITLE]);

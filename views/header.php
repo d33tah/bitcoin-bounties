@@ -1,10 +1,10 @@
 <?php
 //index controller
 $blockcount=$adb->conn->getblocknumber();
-if(array_key_exists('login',$_SESSION))
+if($user = $udb->get_logged_in())
 {
   $header_html="Block no. $blockcount<br />".
-    __(MSG_LOGGED_IN_AS,$_SESSION['login']).
+    __(MSG_LOGGED_IN_AS,$user['login']).
     ' <a href="'.$LINK_PREFIX.'/login/mode=logout">['.
     __(MSG_LOGOUT_BUTTON).']</a>';
 }

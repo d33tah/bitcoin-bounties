@@ -1,6 +1,6 @@
 <?php
 $domain="";
-$server_directory="/"
+$server_directory="/";
 $adminemail='';
 
 $db_host='';
@@ -8,7 +8,7 @@ $db_login='';
 $db_pass='';
 $db_name='';
 define('SALT','');
-define('LINK_PREFIX','');
+$LINK_PREFIX='';
 
 function mail_setup()
 {

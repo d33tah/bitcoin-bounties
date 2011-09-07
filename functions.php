@@ -16,12 +16,6 @@ function assume_index()
     throw new Exception("assume_index(): $basename");
 }
 
-function assume_loggedin()
-{
-  if($_SESSION['login'])
-    return true;
-}
-
 function assume_database()
 {
   if(!defined('DB_CONNECTED'))
@@ -59,7 +53,7 @@ function modelfile($modelname)
 
 function do_404()
 {
-	require(viewfile(404));
+  require(viewfile(404));
 }
 
 //taken from http://www.justin-cook.com
@@ -81,11 +75,15 @@ function redirect($url)
   header("Location: $url");
 }
 
-function message($msg)
+function message($msg,$refresh_url='')
 {
   global $LINK_PREFIX;
   $_SESSION['message']=$msg;
-  redirect($LINK_PREFIX."/message/ ");
+  if($refresh_url)
+    $refresh='refresh='.$refresh_url;
+  else
+    $refresh='';
+  redirect($LINK_PREFIX."/message/$refresh");
 }
 
 //taken from: http://aidanlister.com/2004/04/human-readable-file-sizes/
@@ -124,4 +122,65 @@ function __()
   $format = $messages[$msg_num];
   
   return vsprintf($format,$args);
+}
+
+function validate_filename($filename)
+{
+  //return true;
+  return substr($filename,-4)!='.php';
+}
+
+function login_form($RECAPTCHA,$redirect_url='')
+{
+  global $LINK_PREFIX;
+
+  if($redirect_url)
+    $redirect='redirect=${server_directory}/donate/id=%s';
+  else
+    $redirect='';
+  
+  $MSG_LOGIN=__(MSG_LOGIN);
+  $MSG_PASSWORD=__(MSG_PASSWORD);
+  $MSG_REMEMBER_ME=__(MSG_REMEMBER_ME);
+  $MSG_VERIFICATION_CAPTCHA=__(MSG_VERIFICATION_CAPTCHA);
+  $MSG_FORGOT_PASSWORD=__(MSG_FORGOT_PASSWORD);
+  $MSG_HAVE_NO_ACCOUNT_SIGN_UP=__(MSG_HAVE_NO_ACCOUNT_SIGN_UP);
+
+  $ret =<<<HEREDOC
+    <form method="post" action="$LINK_PREFIX/login/$redirect">
+      $MSG_LOGIN
+	<input type="text" name="login" /> <br />
+
+      $MSG_PASSWORD
+	<input type="password" name="password" /> <br />
+
+	<input type="checkbox" name="remember">
+      $MSG_REMEMBER_ME
+	<br />
+
+      $MSG_VERIFICATION_CAPTCHA
+	<script type="text/javascript">
+	  var RecaptchaOptions = {
+	      theme : 'clean'
+	  };
+	</script>
+      $RECAPTCHA
+
+      <input type="submit" value="Submit" />
+    </form>
+    
+    <p>
+      <a href="$LINK_PREFIX/resetpassword/">
+	$MSG_FORGOT_PASSWORD
+      </a>
+    </p>
+    
+    <p>
+      <a href="$LINK_PREFIX/signup/">
+	$MSG_HAVE_NO_ACCOUNT_SIGN_UP
+      </a>
+    </p>
+HEREDOC;
+
+  return $ret;
 }
