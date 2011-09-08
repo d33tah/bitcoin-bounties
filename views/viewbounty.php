@@ -1,17 +1,26 @@
 <?php include('header.php'); if(@!$FATAL_ERROR): ?>
 
-  <h2><?php echo $BOUNTY_DESC ?></h2>
+  <h2><?php echo __(MSG_BOUNTY_X,$BOUNTY_DESC) ?></h2>
+  <?php if($LOCKED): ?>
+  <p><?php echo __(MSG_BOUNTY_LOCKED) ?></p>
+  <?php endif ?>
   <table>
     <tr>
       <td>
 	<?php echo __(MSG_DONATIONS_COLLECTED) ?>
       </td>
+
+
       <td>
 	<?php echo $DONATED ?> 
+          <?php if(!$LOCKED): ?>
           <a href="<?php echo $LINK_PREFIX.'/donate/id='.$BOUNTY_ID ?>">
             [<?php echo __(MSG_DONATE_BUTTON) ?>]
+	  <?php endif ?>
           </a>
       </td>
+
+
     </tr>
     
     <tr>
@@ -22,9 +31,12 @@
       <td>
 	<?php echo $SUBMISSIONS ?> 
 
+        <?php if(!$LOCKED): ?>
         <a href="<?php echo $LINK_PREFIX.'/newcommit/id='.$BOUNTY_ID ?>">
           [<?php echo __(MSG_SUBMIT_BUTTON) ?>]
         </a>
+        <?php endif ?>
+
 
 	<a href="<?php echo $LINK_PREFIX.'/commits/id='.$BOUNTY_ID?>">
           [<?php echo __(MSG_VIEW_BUTTON) ?>]

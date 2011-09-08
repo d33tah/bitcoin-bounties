@@ -17,14 +17,15 @@
     </td>
     </tr>
     
-    <?php foreach($BOUNTYENTRY as $ENTRY): ?>
+    <?php foreach($BOUNTYENTRY as $ENTRY): extract($ENTRY) ?>
     <tr>
-      <td>
-	<?php echo $ENTRY['DESC'] ?>
+      <td<?php if($LOCKED) echo ' class="locked"' ?>>
+        <?php if($LOCKED) echo ' &#10003; ' ?>
+	<?php echo $DESC ?>
       </td>
       
       <td>
-	<?php echo $ENTRY['COLLECTED'] ?>
+	<?php echo $COLLECTED ?>
       </td>
     </tr>
     <?php endforeach ?>

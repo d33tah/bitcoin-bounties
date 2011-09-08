@@ -645,3 +645,44 @@ MESSAGE;
 $messages[MSG_DELETED_USER]=<<<MESSAGE
 (deleted user)
 MESSAGE;
+
+$messages[MSG_UNDO_VOTE]=<<<MESSAGE
+UNDO VOTE
+MESSAGE;
+
+$messages[MSG_BOUNTY_LOCKED]=<<<MESSAGE
+<strong>NOTE:</strong> This is a locked bounty. You cannot edit it, it is here
+for archival purposes only.
+MESSAGE;
+
+$messages[MSG_BOUNTY_X]=<<<MESSAGE
+Bounty '%s'
+MESSAGE;
+
+$messages[MSG_VOTEDOWN_SUCCESS]=<<<MESSAGE
+You have just voted down a submission. We will redirect you back to the
+submissions' list now. If it doesn't happen, click 
+<a href="${LINK_PREFIX}/commits/id=%s">here</a>.
+MESSAGE;
+
+$messages[MSG_BOUNTY_WAS_LOCKED]=<<<MESSAGE
+Failed to vote - the bounty has already ended!
+MESSAGE;
+
+$messages[MSG_ALREADY_VOTED]=<<<MESSAGE
+You cannot vote on more than one commit! Please undo your current vote and 
+vote again if you changed your mind.
+MESSAGE;
+
+$messages[MSG_CANT_DONATE_LOCKED]=<<<MESSAGE
+This bounty has already ended and cannot be donated now. How about donating
+another bounty?
+MESSAGE;
+
+$messages[MSG_BOUNTY_WAS_LOCKED_CANT_COMMIT]=<<<MESSAGE
+Failed to add the commit - the bounty has already ended!
+MESSAGE;
+
+$messages[MSG_BOUNTY_WAS_LOCKED_CANT_ADD_COMMIT]=<<<MESSAGE
+Cannot add a commit - the bounty has already ended!
+MESSAGE;

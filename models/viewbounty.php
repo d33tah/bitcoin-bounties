@@ -16,6 +16,7 @@ if(isset($_GET["id"]))
     $tpl->DONATED=$collected;
     $tpl->SUBMISSIONS=$submissions;
     $tpl->DESCRIPTION=$description;
+    $tpl->LOCKED=$bounty['state'] & 1;
     $title=$domain.' - '.__(MSG_VIEWING_X,$bounty_title);
     $short_title=$domain.' - '.__(MSG_VIEW_BOUNTY);
   }

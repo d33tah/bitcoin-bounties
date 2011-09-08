@@ -19,20 +19,27 @@
       </td>
     </tr>
     
-    <?php foreach($SUBMITENTRY as $ENTRY): ?>
+    <?php foreach($SUBMITENTRY as $ENTRY): extract($ENTRY) ?>
       <tr>
 	<td>
-	  <a href="<?php echo $LINK_PREFIX.'/viewcommit/id='
-              .$ENTRY['COMMIT_ID'] ?>">
-	    <?php echo $ENTRY['AUTHOR'] ?>
+	  <a href="<?php echo $LINK_PREFIX.'/viewcommit/id='.$COMMIT_ID ?>">
+	    <?php echo $AUTHOR ?>
 	  </a>
 	</td>
 	
 	<td>
-	  <?php echo $ENTRY['PERCENT'] ?> 
-	    <a href="<?php echo $LINK_PREFIX.'/votecommit/id='.
-                $ENTRY['COMMIT_ID'] ?>">
+	  <?php echo $PERCENT ?>
+            <?php if($CAN_VOTE): ?> 
+	    <a href="<?php echo $LINK_PREFIX.'/votecommit/id='.$COMMIT_ID ?>">
 	      [<?php echo __(MSG_VOTE_UP) ?>]
+            <?php endif ?>
+
+            <?php if($CAN_UNDO): ?> 
+	    <a href="<?php echo $LINK_PREFIX.'/votecommit/id='.$COMMIT_ID.
+                "&mode=undo" ?>">
+	      [<?php echo __(MSG_UNDO_VOTE) ?>]
+            <?php endif ?>
+
 	    </a>
 	</td>
       </tr>
@@ -40,11 +47,14 @@
   </table>
   
   <?php endif ?>
-  
+
+<?php if(!$LOCKED): ?>
   <p>
     <a href="<?php echo $LINK_PREFIX.'/newcommit/id='.$BOUNTY_ID ?>">
       <?php echo __(MSG_ADDCOMMIT) ?>
     </a>
   </p>
+<?php endif ?>
+
 
 <?php endif; include('footer.php') ?>

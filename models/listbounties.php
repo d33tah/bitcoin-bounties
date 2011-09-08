@@ -14,10 +14,11 @@ if($bounties=$bdb->get_bounties())
     $tpl->addentry("BOUNTYENTRY",
       array("DESC"=>
               '<a href="'.$LINK_PREFIX.'/viewbounty/id='.$id.'">'.$title.
-	      '</a>', "COLLECTED"=>$collected
+	      '</a>', 
+            "COLLECTED"=>$collected,
+            "LOCKED"=>$bounty['state'] & 1 //TODO: magic number
             ));
   }
 }
 
 $tpl->TITLE=$domain.' - '.__(MSG_BOUNTIES_LIST);
-$tpl->SHORT_TITLE=$title;

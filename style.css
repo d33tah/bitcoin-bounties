@@ -2,3 +2,4 @@ a { text-decoration:none; }
 table { border-collapse: collapse; }
 td { border: 1px solid; }
 .donate_address { text-align: center; }
+.locked a { color: green; text-decoration:line-through; }

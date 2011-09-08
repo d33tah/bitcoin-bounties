@@ -47,6 +47,8 @@ $udb->try_from_cookie();
 $tpl->BLOCKCOUNT=$adb->conn->getblocknumber();
 if($our_user = $udb->get_logged_in())
   $tpl->USERNAME=$our_user['login'];
+else
+  $tpl->USERNAME=false;
 $tpl->VIEWNAME=$view;
 
 

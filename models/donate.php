@@ -10,7 +10,13 @@ if(isset($_GET["id"]))
     $tpl->addentry("BREADCRUMBS",array(
       "URL"=>$LINK_PREFIX."/viewbounty/id={$bounty['id']}",
       "NAME"=>$bounty['title']));
+    $locked=$bounty['state'] & 1;
 
+    if($locked)
+    {
+      $message_type=MSG_CANT_DONATE_LOCKED;
+    }
+    else
     if($our_user = $udb->get_logged_in())
     {
       $message_type=MSG_DONATE_REGISTERED;

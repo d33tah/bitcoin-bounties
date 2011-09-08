@@ -159,10 +159,41 @@ public function voteup_commit($commit_id,$accounts_db,$user_db,$user_id)
   return true;
 }
 
+public function votedown_commit($commit_id,$user_id)
+{
+  $commitid_safe=mysql_real_escape_string($commit_id);
+  $uid_safe=mysql_real_escape_string($user_id);
+  $sql = "DELETE FROM `votes` WHERE `commit_id`='".$commitid_safe."' AND 
+    `user_id`='".$uid_safe."'";
+  $res=mysql_query($sql);
+  return true;
+}
+
 public function set_locked($bounty)
 {
   $safe_id=mysql_real_escape_string($bounty['id']);
   mysql_query("UPDATE `bounties` SET `state`='1' WHERE `id`='".$safe_id."'");
+}
+
+private function check_locked($bountyid_safe)
+{
+  $sql='SELECT * FROM `bounties` WHERE `id`="'.$bountyid_safe.'" 
+    AND `state` & "1"';
+  if($res = mysql_query($sql))
+    $error=mysql_num_rows($res)>0;
+  else
+    $error=false;
+  
+  if ($error)
+  {
+    $this->bounty_locked = true;
+    $this->errors++;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
 public $title_too_short;
@@ -173,6 +204,7 @@ public $desc_too_short;
 public $desc_too_long;
 public $desc_regex;
 public $errors;
+public $bounty_locked;
 
 private function reset_flags()
 {
@@ -183,6 +215,7 @@ private function reset_flags()
   $this->desc_too_short = false;
   $this->desc_too_long = false;
   $this->desc_regex = false;
+  $this->bounty_locked = false;
   $this->errors = 0;
 }
 
@@ -292,6 +325,25 @@ private function check_title_exists($title_safe)
   }
 }
 
+public function get_commit_user_voted($bounty_id,$user_id)
+{
+  $bountyid_safe=mysql_real_escape_string($bounty_id);
+  $uid_safe=mysql_real_escape_string($user_id);
+  $sql = "SELECT * FROM `submissions`,`votes` WHERE   `votes`.`user_id`=
+    `submissions`.`user_id` AND  `votes`.`user_id`='".$uid_safe.
+    "' AND `bounty_id`='".$bountyid_safe."'";
+  $res = mysql_query($sql);
+  if($res)
+  {
+    $row = mysql_fetch_assoc($res);
+    if($row)
+    {
+      return $row['commit_id'];
+    }
+  }
+  return 0;
+}
+
 public function add_bounty($title,$desc,$uid,$accounts_db)
 {
   $title_safe=mysql_real_escape_string(htmlentities($title));
@@ -336,6 +388,7 @@ public function add_submission($bounty_id,$uid,$desc,$filename)
   $this->check_desc_too_short($desc);
   $this->check_desc_too_long($desc);
   $this->check_desc_regex($desc);
+  $this->check_locked($bountyid_safe);
 
   if($this->errors>0)
     return false;
