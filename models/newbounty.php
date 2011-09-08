@@ -13,7 +13,7 @@ if($our_user = $udb->get_logged_in())
     $desc=$_POST["desc"];
     if($newid = $bdb->add_bounty($title,$desc,$our_uid,$adb))
     {
-      $tpl->replace("ERROR_MESSAGE",'');
+      $tpl->ERROR_MESSAGE='';
       $bountylink='/viewbounty/id='.$newid;
       message(__(MSG_BOUNTY_ADDED,$LINK_PREFIX.$bountylink),
         $server_directory.$bountylink);
@@ -61,7 +61,7 @@ if($our_user = $udb->get_logged_in())
 	$error_html.="</ul>";
       }
 
-      $tpl->replace("ERROR_MESSAGE",'<p>'.$error_html.'</p>');
+      $tpl->ERROR_MESSAGE='<p>'.$error_html.'</p>';
 
 
       //errors
@@ -69,7 +69,7 @@ if($our_user = $udb->get_logged_in())
   }
   else
   {
-    $tpl->replace("ERROR_MESSAGE",'');
+    $tpl->ERROR_MESSAGE='';
     $title=$domain.' - '.__(MSG_ADD_NEW_BOUNTY_TITLE);
     //no POST
   }
@@ -79,8 +79,8 @@ else
   $title=$domain.' - '.__(MSG_LOGIN_NEEDED);
   $recaptcha=recaptcha_get_html($recaptcha_publickey,"");
   $url=$server_directory.'/newbounty';
-  $tpl->replace("FATAL_ERROR",__(MSG_NEED_LOGIN).login_form($recaptcha,$url));
+  $tpl->FATAL_ERROR=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
 }
 
-$tpl->replace("TITLE",$title);
-$tpl->replace("SHORT_TITLE",$title);
+$tpl->TITLE=$title;
+$tpl->SHORT_TITLE=$title;

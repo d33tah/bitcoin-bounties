@@ -16,30 +16,38 @@ if(isset($_GET["id"]))
       $filename_link="<a href=\"$LINK_PREFIX/uploads/$filename\">
 	$filename</a>";
       $file_size=size_readable(filesize(ROOT."uploads/".$filename));
-      $tpl->replace('COMMIT_AUTHOR',$username);
-      $tpl->replace('BOUNTY_DESC',$bounty['title']);
-      $tpl->replace('COMMIT_FILENAME',$filename_link);
-      $tpl->replace('COMMIT_SIZE',$file_size);
-      $tpl->replace('COMMIT_COMMENT',$submission['description']);
+      $tpl->COMMIT_AUTHOR=$username;
+      $tpl->BOUNTY_DESC=$bounty['title'];
+      $tpl->COMMIT_FILENAME=$filename_link;
+      $tpl->COMMIT_SIZE=$file_size;
+      $tpl->COMMIT_COMMENT=$submission['description'];
 
       $title = $domain.' - '.__(MSG_VIEWING_COMMIT_TO_BY,  
         $bounty['title'],$username);
 
       $short_title = $domain.' - '.__(MSG_VIEWING_COMMIT_BY,$username);
-  
+
+      $tpl->addentry("BREADCRUMBS",array(
+	"URL"=>$LINK_PREFIX."/viewbounty/id={$bounty['id']}",
+	"NAME"=>$bounty['title']));
+
+      $tpl->addentry("BREADCRUMBS",array(
+	"URL"=>$LINK_PREFIX."/commits/id={$bounty['id']}",
+	"NAME"=>__(MSG_COMMITS_LIST_CAPITAL)));
+
     }
   }
   else
   {
     $title=$short_title=$domain.' - '.__(MSG_ERROR);
-    $tpl->replace("FATAL_ERROR",__(MSG_COMMIT_NOT_FOUND));
+    $tpl->FATAL_ERROR=__(MSG_COMMIT_NOT_FOUND);
   }
 }
 else
 {
-  $tpl->replace("FATAL_ERROR",__(MSG_NO_COMMIT_GIVEN));
+  $tpl->FATAL_ERROR=__(MSG_NO_COMMIT_GIVEN);
   $title=$short_title=$domain.' - '.__(MSG_ERROR);
 }
 
-$tpl->replace("TITLE", $title);
-$tpl->replace("SHORT_TITLE", $short_title);
+$tpl->TITLE= $title;
+$tpl->SHORT_TITLE= $short_title;

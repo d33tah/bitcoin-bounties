@@ -311,6 +311,10 @@ $messages[MSG_COMMITS_LIST]=<<<MESSAGE
 commits list
 MESSAGE;
 
+$messages[MSG_COMMITS_LIST_CAPITAL]=<<<MESSAGE
+Commits list
+MESSAGE;
+
 $messages[MSG_AUTHOR]=<<<MESSAGE
 Author
 MESSAGE;

@@ -1,20 +1,5 @@
-<html>
+<?php include('header.php'); if(@!$FATAL_ERROR): ?>
 
-<head>
-
-  <?php echo $ENCODING ?>
-  <title>
-    <?php echo $TITLE ?>
-  </title>
-
-  <?php echo $CSS ?>
-</head>
-	
-<body>
-
-  <?php echo $HEADER ?>
-  
-  <h1><?php echo $SHORT_TITLE ?></h1>
   <h2><?php echo $BOUNTY_DESC ?></h2>
 
   <?php if (!isset($SUBMITENTRY)): ?>
@@ -61,5 +46,5 @@
       <?php echo __(MSG_ADDCOMMIT) ?>
     </a>
   </p>
-</body>
-</html>
+
+<?php endif; include('footer.php') ?>

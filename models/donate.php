@@ -6,6 +6,11 @@ if(isset($_GET["id"]))
 {
   if($bounty = $bdb->get_by_id($_GET["id"]))
   {
+
+    $tpl->addentry("BREADCRUMBS",array(
+      "URL"=>$LINK_PREFIX."/viewbounty/id={$bounty['id']}",
+      "NAME"=>$bounty['title']));
+
     if($our_user = $udb->get_logged_in())
     {
       $message_type=MSG_DONATE_REGISTERED;
@@ -38,6 +43,6 @@ else
   $message=__(MSG_NO_BOUNTY_GIVEN);
 }
 
-$tpl->replace("TITLE",$title);
-$tpl->replace("SHORT_TITLE",$short_title);
-$tpl->replace("MESSAGE",$message);
+$tpl->TITLE=$title;
+$tpl->SHORT_TITLE=$short_title;
+$tpl->MESSAGE=$message;

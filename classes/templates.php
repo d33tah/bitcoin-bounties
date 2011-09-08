@@ -9,7 +9,7 @@ public function __construct($filename) {
   $this->filename = $filename;
 }
 
-public function replace($tag,$with)
+public function __set($tag,$with)
 {
   $this->tags[$tag]=$with;
 }

@@ -130,6 +130,18 @@ function validate_filename($filename)
   return substr($filename,-4)!='.php';
 }
 
+function execution_timer()
+{
+  global $start_time;
+  list($usec, $sec) = explode(" ", microtime());
+  $tmp=((float)$usec + (float)$sec);
+
+  if(isset($start_time))
+    return $tmp-$start_time;
+  else
+    $start_time=$tmp;
+}
+
 function login_form($RECAPTCHA,$redirect_url='')
 {
   global $LINK_PREFIX;

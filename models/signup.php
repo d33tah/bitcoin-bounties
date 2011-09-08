@@ -75,7 +75,7 @@ if(!$udb->get_logged_in())
   
     if(count($errors)<=0)
     {
-      $tpl->replace("ERROR_MESSAGE",'');
+      $tpl->ERROR_MESSAGE='';
       message($messages[MSG_CONFIRMATION_EMAIL_SENT]);
     }
     else
@@ -93,26 +93,26 @@ if(!$udb->get_logged_in())
 	}
 	$error_html.="</ul>";
       }
-      $tpl->replace("ERROR_MESSAGE",'<p>'.$error_html.'</p>');
+      $tpl->ERROR_MESSAGE='<p>'.$error_html.'</p>';
     }
   
   }
   else
-    $tpl->replace("ERROR_MESSAGE",'');
+    $tpl->ERROR_MESSAGE='';
   
   if(isset($captcha_response) && !$captcha_response->is_valid)
   {
     $error = $captcha_response->error;
-    $tpl->replace("RECAPTCHA",recaptcha_get_html($recaptcha_publickey, $error));
+    $tpl->RECAPTCHA=recaptcha_get_html($recaptcha_publickey, $error);
   }
   else
-    $tpl->replace("RECAPTCHA",recaptcha_get_html($recaptcha_publickey,""));
+    $tpl->RECAPTCHA=recaptcha_get_html($recaptcha_publickey,"");
 }
 else
 {
   $title=$domain.' - '.__(MSG_ERROR);
-  $tpl->replace("FATAL_ERROR",__(MSG_NEED_LOGOUT));
+  $tpl->FATAL_ERROR=__(MSG_NEED_LOGOUT);
 }
 
-$tpl->replace("TITLE",$title);
-$tpl->replace("SHORT_TITLE",$title);
+$tpl->TITLE=$title;
+$tpl->SHORT_TITLE=$title;

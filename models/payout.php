@@ -76,6 +76,6 @@ else
 }
 
 $title=$domain.' - '.__(MSG_BOUNTY_PAYOUT);
-$tpl->replace("TITLE",$title);
-$tpl->replace("SHORT_TITLE",$title);
-$tpl->replace("MESSAGE",$message);
+$tpl->TITLE=$title;
+$tpl->SHORT_TITLE=$title;
+$tpl->MESSAGE=$message;

@@ -1,20 +1,4 @@
-<html>
-
-<head>
-
-  <?php echo $ENCODING ?>
-  <title>
-  <?php echo $TITLE ?>
-  </title>
-
-  <?php echo $CSS ?>
-</head>
-	
-<body>
-
-  <?php echo $HEADER ?>
-  
-  <h1><?php echo $SHORT_TITLE ?></h1>
+<?php include('header.php'); if(@!$FATAL_ERROR): ?>
 
   <?php if (!isset($BOUNTYENTRY)): ?>
   
@@ -53,5 +37,5 @@
       <?php echo __(MSG_ADD_BOUNTY) ?>
     </a>
   </p>
-</html>
-</body>
+
+<?php endif; include('footer.php') ?>

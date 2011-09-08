@@ -32,7 +32,7 @@ if($our_user = $udb->get_logged_in())
 		    $description,$filename))
 		  {
                     $title=$domain.' - '.__(MSG_ADD_COMMIT_TITLE);
-		    $tpl->replace("ERROR_MESSAGE",'');
+		    $tpl->ERROR_MESSAGE='';
 		    $commitlink='/viewcommit/id='.$newid;
 		    message(__(MSG_COMMIT_ADDED,$LINK_PREFIX.$commitlink),
 		    $server_directory.$commitlink);
@@ -69,54 +69,54 @@ if($our_user = $udb->get_logged_in())
 		      $error_html.="</ul>";
 		    }
 	      
-		    $tpl->replace("ERROR_MESSAGE",'<p>'.$error_html.'</p>');
+		    $tpl->ERROR_MESSAGE='<p>'.$error_html.'</p>';
 		  }
                 }
 		else
 		{
-		  $tpl->replace("ERROR_MESSAGE",__(MSG_FILE_UPLOAD_ERROR));
+		  $tpl->ERROR_MESSAGE=__(MSG_FILE_UPLOAD_ERROR);
 		  $title=$domain.' - '.__(MSG_ERROR);
                 }
 	      }
               else
 	      {
-		$tpl->replace("ERROR_MESSAGE",__(MSG_ILLEGAL_FILENAME));
+		$tpl->ERROR_MESSAGE=__(MSG_ILLEGAL_FILENAME);
 		$title=$domain.' - '.__(MSG_ERROR);
 	      }
             }
 	    else
 	    {
-	      $tpl->replace("ERROR_MESSAGE",__(MSG_FILENAME_EXISTS));
+	      $tpl->ERROR_MESSAGE=__(MSG_FILENAME_EXISTS);
 	      $title=$domain.' - '.__(MSG_ERROR);
 	    }
           }
 	  else
 	  {
-	    $tpl->replace("ERROR_MESSAGE",__(MSG_FILE_EMPTY));
+	    $tpl->ERROR_MESSAGE=__(MSG_FILE_EMPTY);
 	    $title=$domain.' - '.__(MSG_ERROR);
 	  }
 	}
 	else
         {
-	  $tpl->replace("ERROR_MESSAGE",__(MSG_FILE_UPLOAD_ERROR));
+	  $tpl->ERROR_MESSAGE=__(MSG_FILE_UPLOAD_ERROR);
 	  $title=$domain.' - '.__(MSG_ERROR);
         }
       }
       else
       {
 	$title=$domain.' - '.__(MSG_ADD_COMMIT_TITLE);
-        $tpl->replace("ERROR_MESSAGE",'');
+        $tpl->ERROR_MESSAGE='';
       }
     }
     else
     {
-      $tpl->replace("FATAL_ERROR",__(MSG_BOUNTY_NOT_FOUND));
+      $tpl->FATAL_ERROR=__(MSG_BOUNTY_NOT_FOUND);
       $title=$domain.' - '.__(MSG_ERROR);
     }
   }
   else
   {
-    $tpl->replace("FATAL_ERROR",__(MSG_NO_BOUNTY_GIVEN));
+    $tpl->FATAL_ERROR=__(MSG_NO_BOUNTY_GIVEN);
     $title=$domain.' - '.__(MSG_ERROR);
   }
 }
@@ -125,8 +125,8 @@ else
   $title=$domain.' - '.__(MSG_LOGIN_NEEDED);
   $recaptcha=recaptcha_get_html($recaptcha_publickey,"");
   $url=$server_directory.'/newbounty';
-  $tpl->replace("FATAL_ERROR",__(MSG_NEED_LOGIN).login_form($recaptcha,$url));
+  $tpl->FATAL_ERROR=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
 }
 
-$tpl->replace("TITLE",$title);
-$tpl->replace("SHORT_TITLE",$title);
+$tpl->TITLE=$title;
+$tpl->SHORT_TITLE=$title;

@@ -8,21 +8,31 @@ if($our_user = $udb->get_logged_in())
   {
     if($commit=$bdb->get_submission($commit_id))
     {
+        $bounty = $bdb->get_by_id($commit["bounty_id"]);
 	$our_uid=$our_user['id'];
 	$bdb->voteup_commit($commit_id,$adb,$udb,$our_uid);
-	$tpl->replace("MESSAGE",__(MSG_VOTEUP_SUCCESS,$commit_id));
-	$tpl->replace("REFRESH",$server_directory.'/commits/id='.$commit_id);
+	$tpl->MESSAGE=__(MSG_VOTEUP_SUCCESS,$commit_id);
+	$tpl->REFRESH=$server_directory.'/commits/id='.$commit_id;
         $title=$domain.' - '.__(MSG_REDIRECTING);
+    
+	$tpl->addentry("BREADCRUMBS",array(
+	  "URL"=>$LINK_PREFIX."/viewbounty/id={$bounty['id']}",
+	  "NAME"=>$bounty['title']));
+    
+	$tpl->addentry("BREADCRUMBS",array(
+	  "URL"=>$LINK_PREFIX."/commits/id={$bounty['id']}",
+	  "NAME"=>__(MSG_COMMITS_LIST_CAPITAL)));
+
     }
     else
     {
-      $tpl->replace("MESSAGE",__(MSG_COMMIT_NOT_FOUND));
+      $tpl->MESSAGE=__(MSG_COMMIT_NOT_FOUND);
       $title=$domain.' - '.__(MSG_ERROR);
     }
   }
   else
   {
-    $tpl->replace("MESSAGE",__(MSG_NO_COMMIT_GIVEN));
+    $tpl->MESSAGE=__(MSG_NO_COMMIT_GIVEN);
     $title=$domain.' - '.__(MSG_ERROR);
   }
 }
@@ -30,9 +40,9 @@ else
 {
   $recaptcha=recaptcha_get_html($recaptcha_publickey,"");
   $url=$server_directory.'/newbounty';
-  $tpl->replace("MESSAGE",__(MSG_NEED_LOGIN).login_form($recaptcha,$url));
+  $tpl->MESSAGE=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
   $title=$domain.' - '.__(MSG_LOGIN_NEEDED);
 }
 
-$tpl->replace("TITLE",$title);
-$tpl->replace("SHORT_TITLE",$title);
+$tpl->TITLE=$title;
+$tpl->SHORT_TITLE=$title;

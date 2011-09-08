@@ -8,7 +8,7 @@ else
   $message = $messages[MSG_CONFIRATION_LINK_INVALID];
 }
 
-$tpl->replace("MESSAGE",$message);
+$tpl->MESSAGE=$message;
 $title=$domain.' - account confirmation';
-$tpl->replace("TITLE",$title);
-$tpl->replace("SHORT_TITLE",$title);
+$tpl->TITLE=$title;
+$tpl->SHORT_TITLE=$title;

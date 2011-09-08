@@ -125,21 +125,21 @@ else
 {
   if(isset($_GET["hash"]))
   {
-      $tpl->replace("HASH","hash=".$_GET["hash"]);
-      $tpl->replace("TITLE",$messages[MSG_PASSWORD_RECOVERY_TITLE]);
-      $tpl->replace("INPUTS",$messages[MSG_NEW_PASSWORD_INPUTS]);
+      $tpl->HASH="hash=".$_GET["hash"];
+      $tpl->TITLE=$messages[MSG_PASSWORD_RECOVERY_TITLE];
+      $tpl->INPUTS=$messages[MSG_NEW_PASSWORD_INPUTS];
   }
   else if($logged_in)
   {
-    $tpl->replace("HASH",'');
-    $tpl->replace("TITLE",$messages[MSG_CHANGE_PASSWORD_TITLE]);
-    $tpl->replace("INPUTS",$messages[MSG_OLD_NEW_PASSWORD_INPUTS]);
+    $tpl->HASH='';
+    $tpl->TITLE=$messages[MSG_CHANGE_PASSWORD_TITLE];
+    $tpl->INPUTS=$messages[MSG_OLD_NEW_PASSWORD_INPUTS];
   }
   else
   {
-    $tpl->replace("HASH",'');
-    $tpl->replace("TITLE",$messages[MSG_PASSWORD_RECOVERY_TITLE]);
-    $tpl->replace("INPUTS",$messages[MSG_LOGIN_EMAIL_INPUTS]);
+    $tpl->HASH='';
+    $tpl->TITLE=$messages[MSG_PASSWORD_RECOVERY_TITLE];
+    $tpl->INPUTS=$messages[MSG_LOGIN_EMAIL_INPUTS];
   }
 }
 
@@ -166,8 +166,8 @@ if(!isset($error_html))
   
   }
 }
-$tpl->replace("ERROR_MESSAGE",$error_html);
+$tpl->ERROR_MESSAGE=$error_html;
 
 $title = $domain.' - '.__(MSG_PASSWORD_RECOVERY);
-$tpl->replace("TITLE",$title);
-$tpl->replace("SHORT_TITLE",$title);
+$tpl->TITLE=$title;
+$tpl->SHORT_TITLE=$title;
