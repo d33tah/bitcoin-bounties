@@ -3,6 +3,7 @@
 					COPYRIGHT
 
 Copyright 2007 Sergio Vaccaro <sergio@inservibile.org>
+Modified 2011 John Maguire for cURL support <johnmaguire2013@gmail.com>
 
 This file is part of JSON-RPC PHP.
 
@@ -123,22 +124,23 @@ class jsonRPCClient {
 		$this->debug && $this->debug.='***** Request *****'."\n".$request."\n".'***** End Of request *****'."\n\n";
 		
 		// performs the HTTP POST
-		$opts = array ('http' => array (
-							'method'  => 'POST',
-							'header'  => 'Content-type: application/json',
-							'content' => $request
-							));
-		$context  = stream_context_create($opts);
-		if ($fp = fopen($this->url, 'r', false, $context)) {
-			$response = '';
-			while($row = fgets($fp)) {
-				$response.= trim($row)."\n";
-			}
-			$this->debug && $this->debug.='***** Server response *****'."\n".$response.'***** End of server response *****'."\n";
-			$response = json_decode($response,true);
-		} else {
+        $ch = curl_init();
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => $this->url,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $request,
+            CURLOPT_HTTPHEADER => array('Content-type: application/json'),
+            CURLOPT_RETURNTRANSFER => true,
+        ));
+        
+        $response = curl_exec($ch);
+        if($response === false)
+        {
 			throw new Exception('Unable to connect to '.$this->url);
 		}
+        
+        $this->debug && $this->debug.='***** Server response *****'."\n".$response.'***** End of server response *****'."\n";
+        $response = json_decode($response,true);
 		
 		// debug output
 		if ($this->debug) {
@@ -152,7 +154,7 @@ class jsonRPCClient {
 				throw new Exception('Incorrect response id (request id: '.$currentId.', response id: '.$response['id'].')');
 			}
 			if (!is_null($response['error'])) {
-				throw new Exception('Request error: '.$response['error']);
+				throw new Exception('Request error: '.$response['error']['message']);
 			}
 			
 			return $response['result'];
@@ -162,4 +164,3 @@ class jsonRPCClient {
 		}
 	}
 }
-?>
