@@ -19,23 +19,23 @@ if(isset($_GET["id"]))
     else
     if($our_user = $udb->get_logged_in())
     {
-      $message_type=MSG_DONATE_REGISTERED;
       $our_uid=$our_user['id'];
       $bounty_address=$bdb->get_address($bounty,$our_uid,$adb);
       $recaptcha_html='';
+      $message=__(MSG_DONATE_REGISTERED,$bounty_address);
     }
     else
     {
-      $message_type=MSG_DONATE_UNREGISTERED;
       $bounty_address=$bounty['address'];
       $recaptcha_html=__(MSG_VERIFICATION_CAPTCHA).
 	recaptcha_get_html($recaptcha_publickey,"");
+      $message=__(MSG_DONATE_UNREGISTERED,$bounty_address,
+        login_form($recaptcha_html,'/donate/'.$bounty['id']));
     }
   $title=$domain.' - '.__(MSG_DONATE_BOUNTY_X,
     $bounty['title']);
   $short_title=$domain.' - '.__(MSG_DONATE_BOUNTY);
-  $message=__($message_type,$bounty_address,
-  $bounty['id'],$recaptcha_html);
+  
   }
   else
   {

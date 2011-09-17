@@ -147,7 +147,7 @@ function login_form($RECAPTCHA,$redirect_url='')
   global $LINK_PREFIX;
 
   if($redirect_url)
-    $redirect='redirect=${server_directory}/donate/id=%s';
+    $redirect="redirect=${server_directory}/${redirect_url}";
   else
     $redirect='';
   
