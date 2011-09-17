@@ -14,7 +14,7 @@ if(isset($_GET["id"]))
 
     if($locked)
     {
-      $message_type=MSG_CANT_DONATE_LOCKED;
+      $message=__(MSG_CANT_DONATE_LOCKED);
     }
     else
     if($our_user = $udb->get_logged_in())
