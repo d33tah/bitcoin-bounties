@@ -1,6 +1,6 @@
 <?php
 $errors=array();
-$logged_in = $udb->get_logged_in()
+$logged_in = $udb->get_logged_in();
 if($_POST)
 {
   if($logged_in)
