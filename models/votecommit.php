@@ -70,7 +70,7 @@ if($our_user = $udb->get_logged_in())
 else
 {
   $recaptcha=recaptcha_get_html($recaptcha_publickey,"");
-  $url=$server_directory.'/newbounty';
+  $url=$server_directory.'/votecommit/id='.$_GET["id"];
   $tpl->MESSAGE=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
   $tpl->TITLE=$domain.' - '.__(MSG_LOGIN_NEEDED);
 }
