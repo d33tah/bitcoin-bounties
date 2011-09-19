@@ -6,6 +6,7 @@ function hashdata($data,$salt)
   $ret = crypt($data,$salt);
   $ret = substr($ret,strrpos($ret,'$')+1,strlen($ret));
   $ret = str_replace('/','',$ret);
+  $ret = str_replace('.','',$ret);
   return $ret;
 }
 
