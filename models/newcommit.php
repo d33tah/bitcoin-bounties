@@ -118,7 +118,7 @@ if(isset($_GET['id']))
       
 	$title=$domain.' - '.__(MSG_LOGIN_NEEDED);
 	$recaptcha=recaptcha_get_html($recaptcha_publickey,"");
-	$url=$server_directory.'/newbounty';
+	$url=$server_directory.'/newcommit/';
 	$tpl->FATAL_ERROR=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
       }
     }
