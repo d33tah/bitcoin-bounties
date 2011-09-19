@@ -42,6 +42,8 @@ if(isset($_GET['id']))
 		    }
 		    else
 		    {
+                      unlink($destination);
+
 		      $title=$domain.' - '.__(MSG_ERROR);
     
 		      $errors = array();

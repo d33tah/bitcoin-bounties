@@ -99,7 +99,7 @@ $messages[MSG_DONATE_REGISTERED]=<<<MESSAGE
 <p>
   This particular address is for your transactions only. Should you 
   decide to withdraw your donation, all the transactions from this address
-  will be reverted.
+  will be reverted. [TODO]
   Note that the number of votes is proportional to the amount of money 
   you donate - the more you donate, the more influence on the bounty you
   have!
