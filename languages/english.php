@@ -120,8 +120,8 @@ $messages[MSG_DONATE_UNREGISTERED]=<<<MESSAGE
 
 <p>
   This is a public address created for this bounty only. The donation
-  you send will be returned to you after a year if there will send his
-  solutions to this bounty. Also, the system will automatically vote in
+  you send will be returned to you after a year if no solutions are
+  submitted to this bounty. Also, the system will automatically vote in
   your name in favour of any solutions sent. Should you want to change 
   it, sign in below:
 </p>
