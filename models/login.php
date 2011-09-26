@@ -25,7 +25,7 @@ if(!$udb->get_logged_in())
     
     if(!$captcha_response->is_valid)
     {
-      array_push($errors,$messages[MSG_CAPTCHA_INVALID]);
+      array_push($errors,$messages[MSG_INVALID_CAPTCHA]);
     }
     else
     {

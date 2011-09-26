@@ -58,7 +58,7 @@ if(isset($_GET['id']))
 			$messages[MSG_DESCRIPTION_REGEX]);
     
 		      $bdb->bounty_locked && array_push($errors,
-			$messages[MSG_BOUNTY_WAS_LOCKED_CANT_SOLUTION]);
+			$messages[MSG_BOUNTY_WAS_LOCKED_CANT_ADD_SOLUTION]);
     
 		      $error_html='';
 		      if(count($errors)==1)

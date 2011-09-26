@@ -11,7 +11,7 @@ MESSAGE;
 
 $messages[MSG_LOGIN_REGEX]=<<<MESSAGE
 The login you have entered contains illegal characters. 
-Please choose  a different one.
+Please choose a different one.
 MESSAGE;
 
 $messages[MSG_PASS_TOO_SHORT]=<<<MESSAGE
@@ -41,7 +41,7 @@ The login you entered already belongs to another user.
 MESSAGE;
 
 $messages[MSG_INVALID_CAPTCHA]=<<<MESSAGE
-The verification CAPTCHA was not repeated correctly.
+The verification CAPTCHA was not entered correctly.
 MESSAGE;
 
 $messages[MSG_CONFIRMATION_EMAIL]=<<<MESSAGE
@@ -49,13 +49,12 @@ Hello %s,
 
 Someone with the IP address %s tried to register a username '%1\$s'
 and entered your e-mail address on the website ${domain}. If it wasn't you,
-please just remove this e-mail and ignore it. Otherwise, please click the 
-below or copy it to your browser's address bar to confirm that your e-mail 
-address is valid:
+please just ignore the e-mail. Otherwise, please click the link below or copy 
+it to your browser's address bar to confirm that your e-mail address is valid:
 
 ${LINK_PREFIX}/confirm/hash=%s
 
-The following link will expire within 24 hours.
+The link will expire within 24 hours.
 
 Please note this is an automatically generated message. Please do not reply to
 it. Should you have any questions, please contact the server admin at
@@ -66,7 +65,7 @@ ${domain} admin
 MESSAGE;
 
 $messages[MSG_CONFIRMATION_EMAIL_TITLE]=<<<MESSAGE
-Cofirm your registration at
+Confirm your registration at
 MESSAGE;
 
 $messages[MSG_CONFIRMATION_EMAIL_SENT]=<<<MESSAGE
@@ -100,7 +99,7 @@ $messages[MSG_DONATE_REGISTERED]=<<<MESSAGE
   This particular address is for your transactions only. Should you 
   decide to withdraw your donation, all the transactions from this address
   will be reverted. [TODO]
-  Note that the number of votes is proportional to the amount of money 
+  Note that the weight of your vote is proportional to the amount of money 
   you donate - the more you donate, the more influence on the bounty you
   have!
 </p>
@@ -131,14 +130,14 @@ MESSAGE;
 
 $messages[MSG_VOTEUP_SUCCESS]=<<<MESSAGE
 You have just voted up a solution. We will redirect you back to the
-solutions' list now. If it doesn't happen, click 
+solutions list now. If it doesn't happen, click 
 <a href="${LINK_PREFIX}/solutions/id=%s">here</a>.
 MESSAGE;
 
 $messages[MSG_BOUNTY_GATHERED]=<<<MESSAGE
 Hello %s,
 
-Your contribution to the bounty number %s on ${domain} has met enough
+Your contribution to bounty number %s on ${domain} has met enough
 approval for sending a bounty worth %s BTC to a Bitcoin address you 
 choose. To receive your reward, please visit the following link and enter
 the Bitcoin address the reward will be transfered to:
@@ -159,31 +158,26 @@ There was an error with the confirmation link. Make sure your
 account isn't already confirmed, the link is not outdated or damaged.<br />
 </p>
 <p>
-Keep in mind that a single confirmation link is valid only for the 24 hours
-since generation time. After that time it expries and the account gets 
+Keep in mind that a single confirmation link is valid only for the 24 hours.
+since generation time. After that time it expires and the account gets 
 deleted.
 </p>
 MESSAGE;
 
 $messages[MSG_ACCOUNT_CONFIRMED]=<<<MESSAGE
-Your account is now confirmed. You may log in using it to freely
-access the website.
+Your account has been confirmed. You may now use it to log in and have a full 
+access to the site.
 MESSAGE;
 
 $messages[MSG_ACCOUNT_NOT_CONFIRMED_YET]=<<<MESSAGE
 Your account is not confirmed yet. Please
 confirm your account by clicking the confirmation link we
-sent you to your e-mail address. If you can't find it, check
+sent to your e-mail address. If you can't find it, check
 your SPAM folder. To rule out a mistake, you can retry signing
 up again with another username or wait 24 hours for the 
 confirmation link to expire. If you still haven't received
 the e-mail, please contact the site administrator at
 <a href=\"mailto:${adminemail}\">${adminemail}</a>.
-MESSAGE;
-
-$messages[MSG_CAPTCHA_INVALID]=<<<MESSAGE
-The verification CAPTCHA was not repeated correctly.
-
 MESSAGE;
 
 $messages[MSG_LOGIN_DATA_INVALID]=<<<MESSAGE
@@ -200,8 +194,8 @@ Your password has been changed.
 MESSAGE;
 
 $messages[MSG_NO_REAL_PASSWORD_CHANGE]=<<<MESSAGE
-The password you entered as new is identical to the old one. Please choose 
-another one.
+The new password you entered is identical to the old one. Please choose a 
+different one.
 MESSAGE;
 
 $messages[MSG_NEW_PASSWORD_TOO_LONG]=<<<MESSAGE
@@ -228,9 +222,8 @@ $messages[MSG_RESETPASSWORD_MAIL]=<<<MESSAGE
 Hello %s,
 
 Someone with the IP address %s tried to recover your password
-on the website ${domain}. If it wasn't you, please just remove this e-mail and
-ignore it. Otherwise, please click the below or copy it to your browser's 
-address bar:
+on the website ${domain}. If it wasn't you, please ignore this e-mail.
+Otherwise, please click the below or copy it to your browser's address bar:
 
 ${LINK_PREFIX}/resetpassword/hash=%s
 
@@ -464,7 +457,7 @@ VIEW
 MESSAGE;
 
 $messages[MSG_VIEWING_SOLUTION_TO_BY]=<<<MESSAGE
-viewing a commmit to '%s' by %s
+viewing a solution to '%s' by %s
 MESSAGE;
 
 $messages[MSG_VIEWING_SOLUTION_BY]=<<<MESSAGE
@@ -525,12 +518,12 @@ No bounty to be paid out.
 MESSAGE;
 
 $messages[MSG_NEED_LOGIN]=<<<MESSAGE
-This function is restricted to the users that are already logged in. 
-You have to log in to access it. Please enter your log in data below:
+This function is restricted to users that are logged in. 
+If you wish to access it, please enter your login details below:
 MESSAGE;
 
 $messages[MSG_NEED_LOGOUT]=<<<MESSAGE
-This function is restricted to the users that are already logged out. 
+This function is restricted to users that are logged out."
 If you wish to access it, please click the 'logout' button on the top of the
 screen.
 MESSAGE;
@@ -541,7 +534,7 @@ below?
 MESSAGE;
 
 $messages[MSG_EMAIL_SENDING_ERROR]=<<<MESSAGE
-There was a problem while sending your confirmation e-mail. Please double
+There was a problem while sending your confirmation e-mail. Please double-
 check your e-mail address, try again after some time, and if everything fails,
 contact the administrator at <a href="mailto:${adminemail}">${adminemail}</a>.
 MESSAGE;
@@ -578,29 +571,29 @@ error
 MESSAGE;
 
 $messages[MSG_FILE_UPLOAD_ERROR]=<<<MESSAGE
-There was an error while uploading your file. Try again, making sure it is
+There was an error uploading your file. Try again, making sure it is
 not too big or contains illegal data.
 MESSAGE;
 
 $messages[MSG_TITLE_TOO_SHORT]=<<<MESSAGE
-The title you have entered is too short. Please choose a different one.
+The title you have entered is too short. Please choose a longer one.
 MESSAGE;
 
 $messages[MSG_TITLE_TOO_LONG]=<<<MESSAGE
-The title you have entered is too long. Please choose a different one.
+The title you have entered is too long. Please choose a shorter one.
 MESSAGE;
 
 $messages[MSG_TITLE_REGEX]=<<<MESSAGE
 The title you have entered contains illegal characters. 
-Please choose  a different one.
+Please choose a different one.
 MESSAGE;
 
 $messages[MSG_DESCRIPTION_TOO_SHORT]=<<<MESSAGE
-The description you have entered is too short. Please choose a different one.
+The description you have entered is too short. Please choose a longer one.
 MESSAGE;
 
 $messages[MSG_DESCRIPTION_TOO_LONG]=<<<MESSAGE
-The description you have entered is too long. Please choose a different one.
+The description you have entered is too long. Please choose a shorter one.
 MESSAGE;
 
 $messages[MSG_DESCRIPTION_REGEX]=<<<MESSAGE
@@ -613,7 +606,7 @@ The bounty solution failed due to the following reasons:
 MESSAGE;
 
 $messages[MSG_BOUNTY_TITLE_EXISTS]=<<<MESSAGE
-A bounty with the same title already exist.
+A bounty with the same title already exists.
 MESSAGE;
 
 
@@ -624,7 +617,7 @@ You can view it <a href=%s>here</a>. You will be automatically redirected to
 MESSAGE;
 
 $messages[MSG_SOLUTION_ADDING_FAILED_LIST]=<<<MESSAGE
-The solution solution failed due to the following reasons: 
+The solution adding failed due to the following reasons: 
 MESSAGE;
 
 $messages[MSG_ILLEGAL_FILENAME]=<<<MESSAGE
@@ -651,7 +644,7 @@ UNDO VOTE
 MESSAGE;
 
 $messages[MSG_BOUNTY_LOCKED]=<<<MESSAGE
-<strong>NOTE:</strong> This is a locked bounty. You cannot edit it, it is here
+<strong>NOTE:</strong> This is a locked bounty. You cannot edit it; it is here
 for archival purposes only.
 MESSAGE;
 
@@ -661,7 +654,7 @@ MESSAGE;
 
 $messages[MSG_VOTEDOWN_SUCCESS]=<<<MESSAGE
 You have just voted down a solution. We will redirect you back to the
-solutions' list now. If it doesn't happen, click 
+solutions list now. If it doesn't happen, click 
 <a href="${LINK_PREFIX}/solutions/id=%s">here</a>.
 MESSAGE;
 
@@ -675,12 +668,8 @@ vote again if you changed your mind.
 MESSAGE;
 
 $messages[MSG_CANT_DONATE_LOCKED]=<<<MESSAGE
-This bounty has already ended and cannot be donated now. How about donating
-another bounty?
-MESSAGE;
-
-$messages[MSG_BOUNTY_WAS_LOCKED_CANT_SOLUTION]=<<<MESSAGE
-Failed to add the solution - the bounty has already ended!
+This bounty has already ended and cannot be donated to now. How about donating
+to another bounty?
 MESSAGE;
 
 $messages[MSG_BOUNTY_WAS_LOCKED_CANT_ADD_SOLUTION]=<<<MESSAGE
