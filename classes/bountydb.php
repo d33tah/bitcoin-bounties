@@ -29,11 +29,11 @@ public function get_by_id($id)
   return $ret;
 }
 
-public function get_submissions($bounty)
+public function get_solutions($bounty)
 {
   $ret = array();
   $id_safe = mysql_real_escape_string($bounty["id"]);
-  $sql = "SELECT * FROM `submissions` WHERE `bounty_id`='".$id_safe."'";
+  $sql = "SELECT * FROM `solutions` WHERE `bounty_id`='".$id_safe."'";
   $res = mysql_query($sql);
   if($res)
     while($row=mysql_fetch_assoc($res))
@@ -41,11 +41,11 @@ public function get_submissions($bounty)
   return $ret;
 }
 
-public function get_submission($id)
+public function get_solution($id)
 {
   $ret = array();
   $id_safe=mysql_real_escape_string($id);
-  $sql = "SELECT * FROM `submissions` WHERE `id`='".$id_safe."'";
+  $sql = "SELECT * FROM `solutions` WHERE `id`='".$id_safe."'";
   $res = mysql_query($sql);
   if($res)
     $ret=mysql_fetch_assoc($res);
@@ -78,18 +78,18 @@ public function get_address($bounty,$user_id, $accounts_db)
   return $new_address;
 }
 
-public function getvotes_commit($commit_id,$accounts_db)
+public function getvotes_solution($solution_id,$accounts_db)
 {
-  $commitid_safe=mysql_real_escape_string($commit_id);
-  $submission=$this->get_submission($commitid_safe);
-  $bounty=$this->get_by_id($submission['bounty_id']);
+  $solutionid_safe=mysql_real_escape_string($solution_id);
+  $solution=$this->get_solution($solutionid_safe);
+  $bounty=$this->get_by_id($solution['bounty_id']);
   $total=$accounts_db->balance_prefix('bounty_'.$bounty['id']);
   $total_anonymous=$accounts_db->balance_address($bounty['address']);
   $total_by_registered=$total-$total_anonymous;
   $total_voted=0;
   if($total_by_registered)
   {
-    $sql = "SELECT * FROM `votes` WHERE `commit_id`='".$commitid_safe."'";
+    $sql = "SELECT * FROM `votes` WHERE `solution_id`='".$solutionid_safe."'";
     $res = mysql_query($sql);
     if($res)
     {
@@ -111,15 +111,15 @@ public function getvotes_commit($commit_id,$accounts_db)
     return 0;
 }
 
-public function voteup_commit($commit_id,$accounts_db,$user_db,$user_id)
+public function voteup_solution($solution_id,$accounts_db,$user_db,$user_id)
 {
   global $messages, $LINK_PREFIX, $domain, $mail;
 
-  $commitid_safe=mysql_real_escape_string($commit_id);
+  $solutionid_safe=mysql_real_escape_string($solution_id);
   $uid_safe=mysql_real_escape_string($user_id);
-  $submission=$this->get_submission($commitid_safe);
-  $bounty=$this->get_by_id($submission['bounty_id']);
-  $sql = "SELECT * FROM `votes` WHERE `commit_id`='".$commitid_safe."' AND 
+  $solution=$this->get_solution($solutionid_safe);
+  $bounty=$this->get_by_id($solution['bounty_id']);
+  $sql = "SELECT * FROM `votes` WHERE `solution_id`='".$solutionid_safe."' AND 
     `user_id`='".$uid_safe."'";
   $res=mysql_query($sql);
   echo mysql_error();
@@ -132,17 +132,17 @@ public function voteup_commit($commit_id,$accounts_db,$user_db,$user_id)
     }
   }
 
-  $sql = "INSERT INTO `votes` (`id`,`commit_id`,`user_id`,`vote_time`) VALUES
-    ('','".$commitid_safe."','".$uid_safe."','".time()."')";
+  $sql = "INSERT INTO `votes` (`id`,`solution_id`,`user_id`,`vote_time`) VALUES
+    ('','".$solutionid_safe."','".$uid_safe."','".time()."')";
   mysql_query($sql);
 
-  if($this->getvotes_commit($commitid_safe,$accounts_db)>30)
+  if($this->getvotes_solution($solutionid_safe,$accounts_db)>30)
   {
     $total=$accounts_db->balance_prefix('bounty_'.$bounty['id']);
     $fee=$total*0.01;
     
-    $commit=$this->get_submission($commitid_safe);
-    $receiving_user=$user_db->get_by_id($commit['user_id']);
+    $solution=$this->get_solution($solutionid_safe);
+    $receiving_user=$user_db->get_by_id($solution['user_id']);
 
     $value = sprintf("%.8f",$total-$fee);
     $bounty_gathered_mail=sprintf($messages[MSG_BOUNTY_GATHERED],
@@ -159,11 +159,11 @@ public function voteup_commit($commit_id,$accounts_db,$user_db,$user_id)
   return true;
 }
 
-public function votedown_commit($commit_id,$user_id)
+public function votedown_solution($solution_id,$user_id)
 {
-  $commitid_safe=mysql_real_escape_string($commit_id);
+  $solutionid_safe=mysql_real_escape_string($solution_id);
   $uid_safe=mysql_real_escape_string($user_id);
-  $sql = "DELETE FROM `votes` WHERE `commit_id`='".$commitid_safe."' AND 
+  $sql = "DELETE FROM `votes` WHERE `solution_id`='".$solutionid_safe."' AND 
     `user_id`='".$uid_safe."'";
   $res=mysql_query($sql);
   return true;
@@ -325,12 +325,12 @@ private function check_title_exists($title_safe)
   }
 }
 
-public function get_commit_user_voted($bounty_id,$user_id)
+public function get_solution_user_voted($bounty_id,$user_id)
 {
   $bountyid_safe=mysql_real_escape_string($bounty_id);
   $uid_safe=mysql_real_escape_string($user_id);
-  $sql = "SELECT * FROM `submissions`,`votes` WHERE   `votes`.`user_id`=
-    `submissions`.`user_id` AND  `votes`.`user_id`='".$uid_safe.
+  $sql = "SELECT * FROM `solutions`,`votes` WHERE   `votes`.`user_id`=
+    `solutions`.`user_id` AND  `votes`.`user_id`='".$uid_safe.
     "' AND `bounty_id`='".$bountyid_safe."'";
   $res = mysql_query($sql);
   if($res)
@@ -338,7 +338,7 @@ public function get_commit_user_voted($bounty_id,$user_id)
     $row = mysql_fetch_assoc($res);
     if($row)
     {
-      return $row['commit_id'];
+      return $row['solution_id'];
     }
   }
   return 0;
@@ -377,7 +377,7 @@ public function add_bounty($title,$desc,$uid,$accounts_db)
   }
 }
 
-public function add_submission($bounty_id,$uid,$desc,$filename)
+public function add_solution($bounty_id,$uid,$desc,$filename)
 {
   $bountyid_safe=mysql_real_escape_string($bounty_id);
   $uid_safe=mysql_real_escape_string($uid);
@@ -393,7 +393,7 @@ public function add_submission($bounty_id,$uid,$desc,$filename)
   if($this->errors>0)
     return false;
 
-  $sql = "INSERT INTO `submissions` (`id`,`bounty_id`,`user_id`,`description`,
+  $sql = "INSERT INTO `solutions` (`id`,`bounty_id`,`user_id`,`description`,
     `filename`) VALUES ('','".$bountyid_safe."','".$uid_safe.
     "','".$desc_safe."','".$filename_safe."')";
   mysql_query($sql);

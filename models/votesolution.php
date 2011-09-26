@@ -5,11 +5,11 @@ require_once(ROOT.'classes/recaptchalib.php');
 $bdb=new BountyDB();
 if($our_user = $udb->get_logged_in())
 {
-  if($commit_id=$_GET["id"])
+  if($solution_id=$_GET["id"])
   {
-    if($commit=$bdb->get_submission($commit_id))
+    if($solution=$bdb->get_solution($solution_id))
     {
-        $bounty = $bdb->get_by_id($commit["bounty_id"]);
+        $bounty = $bdb->get_by_id($solution["bounty_id"]);
         $bounty_locked = $bounty['state'] & 1;
 	$our_uid=$our_user['id'];
 
@@ -18,30 +18,30 @@ if($our_user = $udb->get_logged_in())
 	  "NAME"=>$bounty['title']));
     
 	$tpl->addentry("BREADCRUMBS",array(
-	  "URL"=>$LINK_PREFIX."/commits/id={$bounty['id']}",
-	  "NAME"=>__(MSG_COMMITS_LIST_CAPITAL)));
+	  "URL"=>$LINK_PREFIX."/solutions/id={$bounty['id']}",
+	  "NAME"=>__(MSG_SOLUTIONS_LIST_CAPITAL)));
 
         //TODO: ugly!
 
         if(!$bounty_locked && 
-          $bdb->voteup_commit($commit_id,$adb,$udb,$our_uid))
+          $bdb->voteup_solution($solution_id,$adb,$udb,$our_uid))
 	{
-	  $tpl->MESSAGE=__(MSG_VOTEUP_SUCCESS,$commit_id);
-	  $tpl->REFRESH=$server_directory.'/commits/id='.$commit_id;
+	  $tpl->MESSAGE=__(MSG_VOTEUP_SUCCESS,$solution_id);
+	  $tpl->REFRESH=$server_directory.'/solutions/id='.$solution_id;
 	  $tpl->TITLE=$domain.' - '.__(MSG_REDIRECTING);
         }
         else
         {
 	  if(isset($_GET['mode']) && !$bounty_locked &&
-	      $bdb->get_commit_user_voted($bounty['id'],$our_user['id'])
-	      == $commit_id
+	      $bdb->get_solution_user_voted($bounty['id'],$our_user['id'])
+	      == $solution_id
 	      )
 	  {
 	    if($_GET['mode']=='undo')
 	    {
-	      $bdb->votedown_commit($commit_id,$our_uid);
-	      $tpl->MESSAGE=__(MSG_VOTEDOWN_SUCCESS,$commit_id);
-	      $tpl->REFRESH=$server_directory.'/commits/id='.$commit_id;
+	      $bdb->votedown_solution($solution_id,$our_uid);
+	      $tpl->MESSAGE=__(MSG_VOTEDOWN_SUCCESS,$solution_id);
+	      $tpl->REFRESH=$server_directory.'/solutions/id='.$solution_id;
 	      $tpl->TITLE=$domain.' - '.__(MSG_REDIRECTING);
 	    }
 	  }
@@ -57,20 +57,20 @@ if($our_user = $udb->get_logged_in())
     }
     else
     {
-      $tpl->MESSAGE=__(MSG_COMMIT_NOT_FOUND);
+      $tpl->MESSAGE=__(MSG_SOLUTION_NOT_FOUND);
       $tpl->TITLE=$domain.' - '.__(MSG_ERROR);
     }
   }
   else
   {
-    $tpl->MESSAGE=__(MSG_NO_COMMIT_GIVEN);
+    $tpl->MESSAGE=__(MSG_NO_SOLUTION_GIVEN);
     $tpl->TITLE=$domain.' - '.__(MSG_ERROR);
   }
 }
 else
 {
   $recaptcha=recaptcha_get_html($recaptcha_publickey,"");
-  $url=$server_directory.'/votecommit/id='.$_GET["id"];
+  $url=$server_directory.'/votesolution/id='.$_GET["id"];
   $tpl->MESSAGE=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
   $tpl->TITLE=$domain.' - '.__(MSG_LOGIN_NEEDED);
 }

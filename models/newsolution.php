@@ -31,14 +31,14 @@ if(isset($_GET['id']))
 		    $our_uid=$our_user['id'];
 		    $bounty_id=$_GET['id'];
 		    $description=$_POST['comments'];
-		    if($newid = $bdb->add_submission($bounty_id,$our_uid,
+		    if($newid = $bdb->add_solution($bounty_id,$our_uid,
 		      $description,$filename))
 		    {
-		      $title=$domain.' - '.__(MSG_ADD_COMMIT_TITLE);
+		      $title=$domain.' - '.__(MSG_ADD_SOLUTION_TITLE);
 		      $tpl->ERROR_MESSAGE='';
-		      $commitlink='/viewcommit/id='.$newid;
-		      message(__(MSG_COMMIT_ADDED,$LINK_PREFIX.$commitlink),
-		      $server_directory.$commitlink);
+		      $solutionlink='/viewsolution/id='.$newid;
+		      message(__(MSG_SOLUTION_ADDED,$LINK_PREFIX.$solutionlink),
+		      $server_directory.$solutionlink);
 		    }
 		    else
 		    {
@@ -58,7 +58,7 @@ if(isset($_GET['id']))
 			$messages[MSG_DESCRIPTION_REGEX]);
     
 		      $bdb->bounty_locked && array_push($errors,
-			$messages[MSG_BOUNTY_WAS_LOCKED_CANT_COMMIT]);
+			$messages[MSG_BOUNTY_WAS_LOCKED_CANT_SOLUTION]);
     
 		      $error_html='';
 		      if(count($errors)==1)
@@ -67,7 +67,7 @@ if(isset($_GET['id']))
 		      }
 		      else
 		      {
-			$error_html=$messages[MSG_COMMIT_ADDING_FAILED_LIST].
+			$error_html=$messages[MSG_SOLUTION_ADDING_FAILED_LIST].
 			  '<ul>';
 			foreach($errors as $reason)
 			{
@@ -111,7 +111,7 @@ if(isset($_GET['id']))
 	}
 	else
 	{
-	  $title=$domain.' - '.__(MSG_ADD_COMMIT_TITLE);
+	  $title=$domain.' - '.__(MSG_ADD_SOLUTION_TITLE);
 	  $tpl->ERROR_MESSAGE='';
 	}
       }
@@ -120,13 +120,13 @@ if(isset($_GET['id']))
       
 	$title=$domain.' - '.__(MSG_LOGIN_NEEDED);
 	$recaptcha=recaptcha_get_html($recaptcha_publickey,"");
-	$url=$server_directory.'/newcommit/';
+	$url=$server_directory.'/newsolution/';
 	$tpl->FATAL_ERROR=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
       }
     }
     else
     {
-      $tpl->FATAL_ERROR=__(MSG_BOUNTY_WAS_LOCKED_CANT_ADD_COMMIT);
+      $tpl->FATAL_ERROR=__(MSG_BOUNTY_WAS_LOCKED_CANT_ADD_SOLUTION);
       $title=$domain.' - '.__(MSG_ERROR);
     }
   }

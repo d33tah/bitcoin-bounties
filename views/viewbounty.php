@@ -25,20 +25,20 @@
     
     <tr>
       <td>
-	<?php echo __(MSG_SUBMISSIONS_TO_VOTE) ?>
+	<?php echo __(MSG_SOLUTIONS_TO_VOTE) ?>
       </td>
       
       <td>
-	<?php echo $SUBMISSIONS ?> 
+	<?php echo $SOLUTIONS ?> 
 
         <?php if(!$LOCKED): ?>
-        <a href="<?php echo $LINK_PREFIX.'/newcommit/id='.$BOUNTY_ID ?>">
+        <a href="<?php echo $LINK_PREFIX.'/newsolution/id='.$BOUNTY_ID ?>">
           [<?php echo __(MSG_SUBMIT_BUTTON) ?>]
         </a>
         <?php endif ?>
 
 
-	<a href="<?php echo $LINK_PREFIX.'/commits/id='.$BOUNTY_ID?>">
+	<a href="<?php echo $LINK_PREFIX.'/solutions/id='.$BOUNTY_ID?>">
           [<?php echo __(MSG_VIEW_BUTTON) ?>]
         </a>
 

@@ -4,7 +4,7 @@
 
   <?php if (!isset($SUBMITENTRY)): ?>
   
-    <?php echo __(MSG_NO_COMMITS_YET) ?>
+    <?php echo __(MSG_NO_SOLUTIONS_YET) ?>
 
   <?php else: ?>
 
@@ -22,7 +22,7 @@
     <?php foreach($SUBMITENTRY as $ENTRY): extract($ENTRY) ?>
       <tr>
 	<td>
-	  <a href="<?php echo $LINK_PREFIX.'/viewcommit/id='.$COMMIT_ID ?>">
+	  <a href="<?php echo $LINK_PREFIX.'/viewsolution/id='.$SOLUTION_ID ?>">
 	    <?php echo $AUTHOR ?>
 	  </a>
 	</td>
@@ -30,12 +30,12 @@
 	<td>
 	  <?php echo $PERCENT ?>
             <?php if($CAN_VOTE): ?> 
-	    <a href="<?php echo $LINK_PREFIX.'/votecommit/id='.$COMMIT_ID ?>">
+	    <a href="<?php echo $LINK_PREFIX.'/votesolution/id='.$SOLUTION_ID ?>">
 	      [<?php echo __(MSG_VOTE_UP) ?>]
             <?php endif ?>
 
             <?php if($CAN_UNDO): ?> 
-	    <a href="<?php echo $LINK_PREFIX.'/votecommit/id='.$COMMIT_ID.
+	    <a href="<?php echo $LINK_PREFIX.'/votesolution/id='.$SOLUTION_ID.
                 "&mode=undo" ?>">
 	      [<?php echo __(MSG_UNDO_VOTE) ?>]
             <?php endif ?>
@@ -50,8 +50,8 @@
 
 <?php if(!$LOCKED): ?>
   <p>
-    <a href="<?php echo $LINK_PREFIX.'/newcommit/id='.$BOUNTY_ID ?>">
-      <?php echo __(MSG_ADDCOMMIT) ?>
+    <a href="<?php echo $LINK_PREFIX.'/newsolution/id='.$BOUNTY_ID ?>">
+      <?php echo __(MSG_ADDSOLUTION) ?>
     </a>
   </p>
 <?php endif ?>

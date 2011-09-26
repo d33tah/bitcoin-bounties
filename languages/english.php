@@ -109,7 +109,7 @@ MESSAGE;
 $messages[MSG_DONATE_UNREGISTERED]=<<<MESSAGE
 <p>
     You are about to donate a bounty as an <strong>unregistered</strong> 
-    user. This gives you no rights to vote on bounty submissions; you can 
+    user. This gives you no rights to vote on bounty solutions; you can 
     read about the rules <a href="${LINK_PREFIX}/about/">here</a>. 
     If you agree, please send the donation to the following bitcoin address:
 </p>
@@ -121,8 +121,8 @@ $messages[MSG_DONATE_UNREGISTERED]=<<<MESSAGE
 <p>
   This is a public address created for this bounty only. The donation
   you send will be returned to you after a year if there will send his
-  submissions to this bounty. Also, the system will automatically vote in
-  your name in favour of any submissions sent. Should you want to change 
+  solutions to this bounty. Also, the system will automatically vote in
+  your name in favour of any solutions sent. Should you want to change 
   it, sign in below:
 </p>
 
@@ -130,9 +130,9 @@ $messages[MSG_DONATE_UNREGISTERED]=<<<MESSAGE
 MESSAGE;
 
 $messages[MSG_VOTEUP_SUCCESS]=<<<MESSAGE
-You have just voted up a submission. We will redirect you back to the
-submissions' list now. If it doesn't happen, click 
-<a href="${LINK_PREFIX}/commits/id=%s">here</a>.
+You have just voted up a solution. We will redirect you back to the
+solutions' list now. If it doesn't happen, click 
+<a href="${LINK_PREFIX}/solutions/id=%s">here</a>.
 MESSAGE;
 
 $messages[MSG_BOUNTY_GATHERED]=<<<MESSAGE
@@ -150,7 +150,7 @@ ${domain} team
 MESSAGE;
 
 $messages[MSG_BOUNTY_GATHERED_TITLE]=<<<MESSAGE
-Your commit was accepted and is ready to be paid out!
+Your solution was accepted and is ready to be paid out!
 MESSAGE;
 
 $messages[MSG_CONFIRATION_LINK_INVALID]=<<<MESSAGE
@@ -303,16 +303,16 @@ $messages[MSG_BOUNTY_SYSTEM_RULES]=<<<MESSAGE
 bounty system rules
 MESSAGE;
 
-$messages[MSG_COMMITS_LIST_FOR]=<<<MESSAGE
-commits list for %s
+$messages[MSG_SOLUTIONS_LIST_FOR]=<<<MESSAGE
+solutions list for %s
 MESSAGE;
 
-$messages[MSG_COMMITS_LIST]=<<<MESSAGE
-commits list
+$messages[MSG_SOLUTIONS_LIST]=<<<MESSAGE
+solutions list
 MESSAGE;
 
-$messages[MSG_COMMITS_LIST_CAPITAL]=<<<MESSAGE
-Commits list
+$messages[MSG_SOLUTIONS_LIST_CAPITAL]=<<<MESSAGE
+Solutions list
 MESSAGE;
 
 $messages[MSG_AUTHOR]=<<<MESSAGE
@@ -327,8 +327,8 @@ $messages[MSG_VOTE_UP]=<<<MESSAGE
 VOTE UP
 MESSAGE;
 
-$messages[MSG_ADDCOMMIT]=<<<MESSAGE
-Add a new commit!
+$messages[MSG_ADDSOLUTION]=<<<MESSAGE
+Add a new solution!
 MESSAGE;
 
 $messages[MSG_DONATE_BOUNTY_X]=<<<MESSAGE
@@ -407,8 +407,8 @@ $messages[MSG_SUBMIT]=<<<MESSAGE
 Submit
 MESSAGE;
 
-$messages[MSG_ADD_COMMIT_TITLE]=<<<MESSAGE
-add a new commit
+$messages[MSG_ADD_SOLUTION_TITLE]=<<<MESSAGE
+add a new solution
 MESSAGE;
 
 $messages[MSG_COMMENTS]=<<<MESSAGE
@@ -451,8 +451,8 @@ $messages[MSG_DONATE_BUTTON]=<<<MESSAGE
 DONATE
 MESSAGE;
 
-$messages[MSG_SUBMISSIONS_TO_VOTE]=<<<MESSAGE
-Submissions to vote:
+$messages[MSG_SOLUTIONS_TO_VOTE]=<<<MESSAGE
+Solutions to vote:
 MESSAGE;
 
 $messages[MSG_SUBMIT_BUTTON]=<<<MESSAGE
@@ -463,12 +463,12 @@ $messages[MSG_VIEW_BUTTON]=<<<MESSAGE
 VIEW
 MESSAGE;
 
-$messages[MSG_VIEWING_COMMIT_TO_BY]=<<<MESSAGE
+$messages[MSG_VIEWING_SOLUTION_TO_BY]=<<<MESSAGE
 viewing a commmit to '%s' by %s
 MESSAGE;
 
-$messages[MSG_VIEWING_COMMIT_BY]=<<<MESSAGE
-view a commit by %s
+$messages[MSG_VIEWING_SOLUTION_BY]=<<<MESSAGE
+view a solution by %s
 MESSAGE;
 
 $messages[MSG_TO_X]=<<<MESSAGE
@@ -546,21 +546,21 @@ check your e-mail address, try again after some time, and if everything fails,
 contact the administrator at <a href="mailto:${adminemail}">${adminemail}</a>.
 MESSAGE;
 
-$messages[MSG_NO_COMMITS_YET]=<<<MESSAGE
-There are no commits to browse yet! How about adding one using the link 
+$messages[MSG_NO_SOLUTIONS_YET]=<<<MESSAGE
+There are no solutions to browse yet! How about adding one using the link 
 below?
 MESSAGE;
 
-$messages[MSG_COMMIT_NOT_FOUND]=<<<MESSAGE
-The specified commit was not found.
+$messages[MSG_SOLUTION_NOT_FOUND]=<<<MESSAGE
+The specified solution was not found.
 MESSAGE;
 
 $messages[MSG_BOUNTY_NOT_FOUND]=<<<MESSAGE
 The specified bounty was not found.
 MESSAGE;
 
-$messages[MSG_NO_COMMIT_GIVEN]=<<<MESSAGE
-No commit ID was given in the website URL. Please check if the address is not
+$messages[MSG_NO_SOLUTION_GIVEN]=<<<MESSAGE
+No solution ID was given in the website URL. Please check if the address is not
 corrupt.
 MESSAGE;
 
@@ -609,7 +609,7 @@ Please choose  a different one.
 MESSAGE;
 
 $messages[MSG_BOUNTY_ADDING_FAILED_LIST]=<<<MESSAGE
-The bounty submission failed due to the following reasons: 
+The bounty solution failed due to the following reasons: 
 MESSAGE;
 
 $messages[MSG_BOUNTY_TITLE_EXISTS]=<<<MESSAGE
@@ -617,14 +617,14 @@ A bounty with the same title already exist.
 MESSAGE;
 
 
-$messages[MSG_COMMIT_ADDED]=<<<MESSAGE
-Your commit was successfully added. 
+$messages[MSG_SOLUTION_ADDED]=<<<MESSAGE
+Your solution was successfully added. 
 You can view it <a href=%s>here</a>. You will be automatically redirected to
  this page in 5 seconds.
 MESSAGE;
 
-$messages[MSG_COMMIT_ADDING_FAILED_LIST]=<<<MESSAGE
-The commit submission failed due to the following reasons: 
+$messages[MSG_SOLUTION_ADDING_FAILED_LIST]=<<<MESSAGE
+The solution solution failed due to the following reasons: 
 MESSAGE;
 
 $messages[MSG_ILLEGAL_FILENAME]=<<<MESSAGE
@@ -660,9 +660,9 @@ Bounty '%s'
 MESSAGE;
 
 $messages[MSG_VOTEDOWN_SUCCESS]=<<<MESSAGE
-You have just voted down a submission. We will redirect you back to the
-submissions' list now. If it doesn't happen, click 
-<a href="${LINK_PREFIX}/commits/id=%s">here</a>.
+You have just voted down a solution. We will redirect you back to the
+solutions' list now. If it doesn't happen, click 
+<a href="${LINK_PREFIX}/solutions/id=%s">here</a>.
 MESSAGE;
 
 $messages[MSG_BOUNTY_WAS_LOCKED]=<<<MESSAGE
@@ -670,7 +670,7 @@ Failed to vote - the bounty has already ended!
 MESSAGE;
 
 $messages[MSG_ALREADY_VOTED]=<<<MESSAGE
-You cannot vote on more than one commit! Please undo your current vote and 
+You cannot vote on more than one solution! Please undo your current vote and 
 vote again if you changed your mind.
 MESSAGE;
 
@@ -679,10 +679,10 @@ This bounty has already ended and cannot be donated now. How about donating
 another bounty?
 MESSAGE;
 
-$messages[MSG_BOUNTY_WAS_LOCKED_CANT_COMMIT]=<<<MESSAGE
-Failed to add the commit - the bounty has already ended!
+$messages[MSG_BOUNTY_WAS_LOCKED_CANT_SOLUTION]=<<<MESSAGE
+Failed to add the solution - the bounty has already ended!
 MESSAGE;
 
-$messages[MSG_BOUNTY_WAS_LOCKED_CANT_ADD_COMMIT]=<<<MESSAGE
-Cannot add a commit - the bounty has already ended!
+$messages[MSG_BOUNTY_WAS_LOCKED_CANT_ADD_SOLUTION]=<<<MESSAGE
+Cannot add a solution - the bounty has already ended!
 MESSAGE;

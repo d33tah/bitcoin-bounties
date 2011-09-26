@@ -25,7 +25,7 @@ mysql_query('CREATE TABLE `bounties` (
 `state` INT NOT NULL
 )');
 
-mysql_query('CREATE TABLE `submissions` (
+mysql_query('CREATE TABLE `solutions` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `bounty_id` INT NOT NULL ,
 `user_id` INT NOT NULL ,
@@ -41,7 +41,7 @@ mysql_query('CREATE TABLE `accounts` (
 
 mysql_query('CREATE TABLE `votes` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-`commit_id` INT NOT NULL ,
+`solution_id` INT NOT NULL ,
 `user_id` INT NOT NULL ,
 `vote_time` INT NOT NULL
 ) ');

@@ -1,7 +1,7 @@
 <?php include('header.php'); if(@!$FATAL_ERROR): ?>
 
   <form enctype="multipart/form-data" 
-    method="post"> <!-- action="<?php echo $LINK_PREFIX ?>/newcommit/ -->
+    method="post"> <!-- action="<?php echo $LINK_PREFIX ?>/newsolution/ -->
 
       <input type="file" name="uploaded" /> <br />
 

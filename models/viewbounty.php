@@ -9,12 +9,12 @@ if(isset($_GET["id"]))
     $bounty_title=htmlentities($bounty["title"]);
     $description=htmlentities($bounty["description"]);
     $collected=sprintf("%.8f BTC", $adb->balance_prefix('bounty_'.$id));
-    $submissions=count($bdb->get_submissions($bounty));
+    $solutions=count($bdb->get_solutions($bounty));
   
     $tpl->BOUNTY_DESC=$bounty_title;
     $tpl->BOUNTY_ID=$id;
     $tpl->DONATED=$collected;
-    $tpl->SUBMISSIONS=$submissions;
+    $tpl->SOLUTIONS=$solutions;
     $tpl->DESCRIPTION=$description;
     $tpl->LOCKED=$bounty['state'] & 1;
     $title=$domain.' - '.__(MSG_VIEWING_X,$bounty_title);

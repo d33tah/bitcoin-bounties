@@ -12,7 +12,7 @@ ob_start();
 
 session_start();
 define('ROOT',dirname($_SERVER['SCRIPT_FILENAME']).'/');
-require_once("../config.php"); //put it here so I don't push it accidentally
+require_once("config.php"); //put it here so I don't push it accidentally
 require_once("functions.php");
   execution_timer();
 require_once(ROOT."constants.php");

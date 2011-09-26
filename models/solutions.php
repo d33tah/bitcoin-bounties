@@ -16,10 +16,10 @@ if(isset($_GET["id"]))
     $locked = $bounty['state'] & 1;
     $collected=htmlentities($bounty["bitcoins"].
       '.'.sprintf('%08d',$bounty["satoshi"]).' BTC');
-    $submissions=($bdb->get_submissions($bounty));
+    $solutions=($bdb->get_solutions($bounty));
 
     if($our_user)
-      $voted = $bdb->get_commit_user_voted($id, $our_user['id']);
+      $voted = $bdb->get_solution_user_voted($id, $our_user['id']);
     else
       $voted = 0;
     
@@ -27,24 +27,24 @@ if(isset($_GET["id"]))
     $tpl->BOUNTY_ID=$id;
     $tpl->DONATED=$collected;
     $tpl->LOCKED=$locked;
-    if($submissions)
+    if($solutions)
     {
-      foreach($submissions as $submission)
+      foreach($solutions as $solution)
       {
-	$user=$udb->get_by_id($submission["user_id"]);
-	$percent=$bdb->getvotes_commit($submission['id'],$adb);
+	$user=$udb->get_by_id($solution["user_id"]);
+	$percent=$bdb->getvotes_solution($solution['id'],$adb);
 	$tpl->addentry("SUBMITENTRY", array(
           "AUTHOR"=>$user['login'],
 	  "PERCENT"=>$percent."%", 
-          "COMMIT_ID"=>$submission['id'],
+          "SOLUTION_ID"=>$solution['id'],
           "CAN_VOTE"=>!( $locked || $voted ),
-          "CAN_UNDO"=>(!$locked && $voted == $submission['id'])
+          "CAN_UNDO"=>(!$locked && $voted == $solution['id'])
         ));
       }
     }
   
-    $tpl->TITLE=$domain.' - '.__(MSG_COMMITS_LIST_FOR,$title);
-    $tpl->SHORT_TITLE=$domain.' - '.__(MSG_COMMITS_LIST);
+    $tpl->TITLE=$domain.' - '.__(MSG_SOLUTIONS_LIST_FOR,$title);
+    $tpl->SHORT_TITLE=$domain.' - '.__(MSG_SOLUTIONS_LIST);
   }
   else
   {

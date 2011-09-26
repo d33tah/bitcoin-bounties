@@ -7,7 +7,7 @@ $bdb=new BountyDB();
 if($our_user = $udb->get_logged_in())
 {
   $our_uid=$our_user['id'];
-  $sql="SELECT * FROM `submissions` WHERE `user_id`='".$our_uid."'";
+  $sql="SELECT * FROM `solutions` WHERE `user_id`='".$our_uid."'";
   $payout=0;
   $fees=0;
   
@@ -19,7 +19,7 @@ if($our_user = $udb->get_logged_in())
     $paid_out = array();
     while($row=mysql_fetch_assoc($res))
     {
-      if($bdb->getvotes_commit($row['id'],$adb)>30)
+      if($bdb->getvotes_solution($row['id'],$adb)>30)
       {
 	$bounty=$bdb->get_by_id($row['bounty_id']);
 	if($bounty['state']==0)
