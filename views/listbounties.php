@@ -6,7 +6,7 @@
 
   <?php else: ?>
 
-  <table>
+  <table width="650">
     <tr>
     <td>
       <?php echo __(MSG_DESCRIPTION) ?>
@@ -33,10 +33,9 @@
 
   <?php endif ?>
   
-  <p>
-    <a href="<?php echo $LINK_PREFIX ?>/newbounty/">
-      <?php echo __(MSG_ADD_BOUNTY) ?>
-    </a>
-  </p>
+<div id="featured">
+       <a href="<?php echo $LINK_PREFIX ?>/newbounty/" class="join-today"><strong><?php echo __(MSG_ADD_BOUNTY) ?></strong><span><?php echo __(MSG_SUB_ADD_BOUNTY) ?></span></a>
+</div>
+
 
 <?php endif; include('footer.php') ?>

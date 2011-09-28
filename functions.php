@@ -160,39 +160,43 @@ function login_form($RECAPTCHA,$redirect_url='')
   $MSG_HAVE_NO_ACCOUNT_SIGN_UP=__(MSG_HAVE_NO_ACCOUNT_SIGN_UP);
 
   $ret =<<<HEREDOC
-    <form method="post" action="$LINK_PREFIX/login/$redirect">
-      $MSG_LOGIN
-	<input type="text" name="login" /> <br />
+<div id="loginform">
+  <form method="post" action="$LINK_PREFIX/login/$redirect">
+    $MSG_LOGIN <br />
+      <input type="text" name="login" /> <br />
 
-      $MSG_PASSWORD
-	<input type="password" name="password" /> <br />
+    $MSG_PASSWORD <br />
+      <input type="password" name="password" /> <br />
 
-	<input type="checkbox" name="remember">
-      $MSG_REMEMBER_ME
-	<br />
+      <input type="checkbox" name="remember">
+    $MSG_REMEMBER_ME
+      <br /><br />
 
-      $MSG_VERIFICATION_CAPTCHA
-	<script type="text/javascript">
-	  var RecaptchaOptions = {
-	      theme : 'clean'
-	  };
-	</script>
-      $RECAPTCHA
+    $MSG_VERIFICATION_CAPTCHA
+      <script type="text/javascript">
+	var RecaptchaOptions = {
+	    theme : 'clean'
+	};
+      </script>
+    $RECAPTCHA
 
-      <input type="submit" value="Submit" />
-    </form>
-    
-    <p>
-      <a href="$LINK_PREFIX/resetpassword/">
-	$MSG_FORGOT_PASSWORD
-      </a>
-    </p>
-    
-    <p>
-      <a href="$LINK_PREFIX/signup/">
-	$MSG_HAVE_NO_ACCOUNT_SIGN_UP
-      </a>
-    </p>
+    <br />
+    <input type="submit" value="Submit" />
+  </form>
+
+  <br />
+  <p>
+    <a href="$LINK_PREFIX/resetpassword/">
+      $MSG_FORGOT_PASSWORD
+    </a>
+  </p>
+  
+  <p>
+    <a href="$LINK_PREFIX/signup/">
+      $MSG_HAVE_NO_ACCOUNT_SIGN_UP
+    </a>
+  </p>
+</div>
 HEREDOC;
 
   return $ret;
