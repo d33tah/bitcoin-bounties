@@ -36,7 +36,15 @@ public function valid_login($login,$hash)
 public function do_login($login,$cookie)
 {
   if($cookie)
-    setcookie('hash',$row["hash"],time()+60*60*24*365*10,'/');
+    {
+      $sql='SELECT * FROM `users` WHERE `login`="'.$login.'"';
+      $res=mysql_query($sql);
+      if($res)
+      {
+	    $row=mysql_fetch_assoc($res);
+	    setcookie('hash',$row["hash"],time()+60*60*24*365*10,'/');
+      }
+    }
   $_SESSION['login']=$login;
   return true;
 }
