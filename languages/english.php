@@ -65,11 +65,12 @@ ${domain} admin
 MESSAGE;
 
 $messages[MSG_CONFIRMATION_EMAIL_TITLE]=<<<MESSAGE
-Confirm your registration at
+Confirm your registration at ${domain}
 MESSAGE;
 
 $messages[MSG_CONFIRMATION_EMAIL_SENT]=<<<MESSAGE
-We sent you a confirmation link.
+We have e-mailed you a confirmation link. Please visit it to confirm that your 
+e-mail is valid and complete the registration process.
 MESSAGE;
 
 $messages[MSG_REGISTRATION_FAILED_LIST]=<<<MESSAGE
@@ -84,11 +85,10 @@ MESSAGE;
 
 $messages[MSG_DONATE_REGISTERED]=<<<MESSAGE
 <p>
-  You are about to donate a bounty as a <strong>registered</strong> user.
-  This gives you the rights to vote on whether you accept or not
-  particular solutions to the bounty you chose. You can read about the 
-  rules <a href="${LINK_PREFIX}/about/">here</a>. Please send the donation 
-  to the following bitcoin address:
+  You are about to donate to a bounty as a <strong>registered</strong> user.
+  This gives you the ability to vote on which solution to the bounty is 
+  accepted. You can read about the rules <a href="${LINK_PREFIX}/about/">here
+  </a>. Please send the donation to the following bitcoin address:
 </p>
 
 <pre class="donate_address">
@@ -97,7 +97,7 @@ $messages[MSG_DONATE_REGISTERED]=<<<MESSAGE
 
 <p>
   This particular address is for your transactions only. Should you 
-  decide to withdraw your donation, all the transactions from this address
+  decide to withdraw your donation, all the transactions to this address
   will be reverted. [TODO]
   Note that the weight of your vote is proportional to the amount of money 
   you donate - the more you donate, the more influence on the bounty you
@@ -108,8 +108,8 @@ MESSAGE;
 $messages[MSG_DONATE_UNREGISTERED]=<<<MESSAGE
 <p>
     You are about to donate a bounty as an <strong>unregistered</strong> 
-    user. This gives you no rights to vote on bounty solutions; you can 
-    read about the rules <a href="${LINK_PREFIX}/about/">here</a>. 
+    user. You will not have the ability to vote on the accepted solution; you 
+    can read about the rules <a href="${LINK_PREFIX}/about/">here</a>. 
     If you agree, please send the donation to the following bitcoin address:
 </p>
 
@@ -120,8 +120,8 @@ $messages[MSG_DONATE_UNREGISTERED]=<<<MESSAGE
 <p>
   This is a public address created for this bounty only. The donation
   you send will be returned to you after a year if no solutions are
-  submitted to this bounty. Also, the system will automatically vote in
-  your name in favour of any solutions sent. Should you want to change 
+  accepted for it in that time. If you want to be able to vote, or to 
+  withdraw your donation sooner, sign in below: 
   it, sign in below:
 </p>
 
@@ -325,7 +325,7 @@ Add a new solution!
 MESSAGE;
 
 $messages[MSG_DONATE_BOUNTY_X]=<<<MESSAGE
-donate a bounty '%s'
+donate to a bounty '%s'
 MESSAGE;
 
 $messages[MSG_DONATE_BOUNTY]=<<<MESSAGE
@@ -337,7 +337,7 @@ donating a bounty
 MESSAGE;
 
 $messages[MSG_BOUNTIES_LIST]=<<<MESSAGE
-bounties list
+bounty list
 MESSAGE;
 
 $messages[MSG_DESCRIPTION]=<<<MESSAGE
@@ -349,7 +349,7 @@ Collected
 MESSAGE;
 
 $messages[MSG_ADD_BOUNTY]=<<<MESSAGE
-Add a new bounty!
+Add a bounty!
 MESSAGE;
 
 $messages[MSG_LOG_IN]=<<<MESSAGE
@@ -553,8 +553,8 @@ The specified bounty was not found.
 MESSAGE;
 
 $messages[MSG_NO_SOLUTION_GIVEN]=<<<MESSAGE
-No solution ID was given in the website URL. Please check if the address is not
-corrupt.
+No solution ID was given in the website URL. Please check if the address is 
+not corrupt.
 MESSAGE;
 
 $messages[MSG_NO_BOUNTY_GIVEN]=<<<MESSAGE
@@ -675,3 +675,17 @@ MESSAGE;
 $messages[MSG_BOUNTY_WAS_LOCKED_CANT_ADD_SOLUTION]=<<<MESSAGE
 Cannot add a solution - the bounty has already ended!
 MESSAGE;
+
+//meant to be added in psy's theme
+$messages[MSG_SUB_ADD_BOUNTY]=<<<MESSAGE
+submit a new bounty
+MESSAGE;
+
+$messages[MSG_BLOCK_NUM]=<<<MESSAGE
+Block #
+MESSAGE;
+
+$messages[MSG_EXEC_TIME]=<<<MESSAGE
+Exec. time
+MESSAGE;
+

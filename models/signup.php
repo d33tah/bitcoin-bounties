@@ -57,7 +57,7 @@ if(!$udb->get_logged_in())
   
       $mail->Body = $confirmation_email;
       $mail->Subject = $messages[
-	MSG_CONFIRMATION_EMAIL_TITLE].' '.$domain;
+	MSG_CONFIRMATION_EMAIL_TITLE];
       $mail->AddAddress($email,$login);
   
       $result = $mail->Send();

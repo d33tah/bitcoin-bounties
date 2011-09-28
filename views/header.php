@@ -18,8 +18,6 @@
 	
 <body>
 
-  Block no. <?echo $BLOCKCOUNT ?> <br />
-
   <?php if($USERNAME): ?>
   
     <?php echo __(MSG_LOGGED_IN_AS,$USERNAME) ?>
