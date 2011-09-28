@@ -137,7 +137,7 @@ public function check_pass_too_long($password)
 
 public function check_pass_regex()
 {
-  return false;
+  return false; //passwords needs any regex?
 }
 
 public function check_email_regex($email) //TODO: up/lowercase? fixes?

@@ -33,7 +33,7 @@ if(isset($_GET["id"]))
       {
 	$user=$udb->get_by_id($solution["user_id"]);
 	$percent=$bdb->getvotes_solution($solution['id'],$adb);
-	$tpl->addentry("SUBMITENTRY", array(
+	$tpl->addentry("SOLUTIONS", array(
           "AUTHOR"=>$user['login'],
 	  "PERCENT"=>$percent."%", 
           "SOLUTION_ID"=>$solution['id'],

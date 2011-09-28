@@ -2,7 +2,7 @@
 
   <h2><?php echo $BOUNTY_DESC ?></h2>
 
-  <?php if (!isset($SUBMITENTRY)): ?>
+  <?php if (!isset($SOLUTIONS)): ?>
   
     <?php echo __(MSG_NO_SOLUTIONS_YET) ?>
 
@@ -19,7 +19,7 @@
       </td>
     </tr>
     
-    <?php foreach($SUBMITENTRY as $ENTRY): extract($ENTRY) ?>
+    <?php foreach($SOLUTIONS as $ENTRY): extract($ENTRY) ?>
       <tr>
 	<td>
 	  <a href="<?php echo $LINK_PREFIX.'/viewsolution/id='.$SOLUTION_ID ?>">

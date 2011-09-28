@@ -10,6 +10,9 @@ $db_name='';
 define('SALT','');
 $LINK_PREFIX='';
 
+$default_view='listbounties';
+$debug=true;
+
 function mail_setup()
 {
 
