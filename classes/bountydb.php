@@ -113,7 +113,7 @@ public function getvotes_solution($solution_id,$accounts_db)
 
 public function voteup_solution($solution_id,$accounts_db,$user_db,$user_id)
 {
-  global $messages, $LINK_PREFIX, $domain, $mail;
+  global $LINK_PREFIX, $domain, $mail;
 
   $solutionid_safe=mysql_real_escape_string($solution_id);
   $uid_safe=mysql_real_escape_string($user_id);
@@ -145,10 +145,10 @@ public function voteup_solution($solution_id,$accounts_db,$user_db,$user_id)
     $receiving_user=$user_db->get_by_id($solution['user_id']);
 
     $value = sprintf("%.8f",$total-$fee);
-    $bounty_gathered_mail=sprintf($messages[MSG_BOUNTY_GATHERED],
+    $bounty_gathered_mail=__(MSG_BOUNTY_GATHERED,
       $receiving_user['login'],$bounty['id'],$value);
     $mail->Body = $bounty_gathered_mail;
-    $mail->Subject = $messages[MSG_BOUNTY_GATHERED_TITLE];
+    $mail->Subject = __(MSG_BOUNTY_GATHERED_TITLE);
     $mail->AddAddress($receiving_user['mail'],$receiving_user['login']);
 
     $result = $mail->Send();
@@ -221,7 +221,9 @@ private function reset_flags()
 
 private function check_title_too_short($title)
 {
-  if (strlen($title)<7)
+  global $title_min_length;
+
+  if (strlen($title)<$title_min_length)
   {
     $this->title_too_short = true;
     $this->errors++;
@@ -235,7 +237,9 @@ private function check_title_too_short($title)
 
 private function check_title_too_long($title)
 {
-  if (strlen($title)>40)
+  global $title_max_length;
+
+  if (strlen($title)>$title_max_length)
   {
     $this->title_too_short = true;
     $this->errors++;
@@ -264,7 +268,9 @@ private function check_title_regex($title)
 
 private function check_desc_too_short($description)
 {
-  if (strlen($description)<20)
+  global $desc_min_length;
+
+  if (strlen($description)<$desc_min_length)
   {
     $this->desc_too_short = true;
     $this->errors++;
@@ -278,7 +284,9 @@ private function check_desc_too_short($description)
 
 private function check_desc_too_long($description)
 {
-  if (strlen($description)>4096)
+  global $desc_max_length;
+
+  if (strlen($description)>$desc_max_length)
   {
     $this->desc_too_long = true;
     $this->errors++;

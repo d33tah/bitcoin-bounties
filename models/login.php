@@ -3,12 +3,13 @@
 require_once(ROOT.'classes/recaptchalib.php');
 if(array_key_exists('mode',$_GET) && $_GET['mode']=='logout')
 {
+  $tpl->TITLE=__(MSG_REDIRECTING);
   $udb->logout();
 }
 else
 if(!$udb->get_logged_in())
 {
-  $title=$domain.' - '.__(MSG_LOG_IN);
+  $tpl->TITLE=$domain.' - '.__(MSG_LOG_IN);
   if($_POST)
   {
     $login=$_POST['login'];
@@ -25,7 +26,7 @@ if(!$udb->get_logged_in())
     
     if(!$captcha_response->is_valid)
     {
-      array_push($errors,$messages[MSG_INVALID_CAPTCHA]);
+      array_push($errors,__(MSG_INVALID_CAPTCHA));
     }
     else
     {
@@ -33,11 +34,11 @@ if(!$udb->get_logged_in())
       if($valid)
       {
 	if(!$udb->user_confirmed($login))
-	      array_push($errors,$messages[MSG_ACCOUNT_NOT_CONFIRMED_YET]);
+	      array_push($errors,__(MSG_ACCOUNT_NOT_CONFIRMED_YET));
       }
       else
       {
-	array_push($errors,$messages[MSG_LOGIN_DATA_INVALID]);
+	array_push($errors,__(MSG_LOGIN_DATA_INVALID));
       }
     }
   
@@ -46,9 +47,15 @@ if(!$udb->get_logged_in())
       $udb->do_login($login,$cookie);
       $tpl->ERROR_MESSAGE='';
       if(isset($_GET['redirect']))
+      {
 	redirect($_GET['redirect']);
+        $tpl->REFRESH=$_GET['redirect'];
+      }
       else
+      {
 	redirect($LINK_PREFIX);
+        $tpl->REFRESH=$_GET['redirect'];
+      }
       
     }
     else
@@ -58,7 +65,7 @@ if(!$udb->get_logged_in())
     }
     else
     {
-      $error_html=$messages[MSG_LOGIN_FAILED_REASONS]."<ul>";
+      $error_html=__(MSG_LOGIN_FAILED_REASONS)."<ul>";
       foreach($errors as $reason)
       {
 	$error_html.='<li>'.$reason.'</li>';
@@ -82,9 +89,7 @@ if(!$udb->get_logged_in())
 }
 else
 {
-  $title=$domain.' - '.__(MSG_ERROR);
+  $tpl->TITLE=$domain.' - '.__(MSG_ERROR);
   $tpl->FATAL_ERROR=__(MSG_NEED_LOGOUT);
 }
 
-$tpl->TITLE=$title;
-$tpl->SHORT_TITLE=$title;

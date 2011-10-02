@@ -71,7 +71,7 @@ if($our_user = $udb->get_logged_in())
 else
 {
   $recaptcha=recaptcha_get_html($recaptcha_publickey,"");
-  $url=$server_directory.'/payout/';
+  $url='/payout/';
   $message=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
 }
 

@@ -148,7 +148,7 @@ function login_form($RECAPTCHA,$redirect_url='')
   global $LINK_PREFIX,$server_directory;
 
   if($redirect_url)
-    $redirect="redirect=${server_directory}/${redirect_url}";
+    $redirect="redirect=/${server_directory}/${redirect_url}";
   else
     $redirect='';
   

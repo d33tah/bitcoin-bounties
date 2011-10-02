@@ -112,27 +112,31 @@ public function user_confirmed($login)
 
 public function check_login_too_short($login)
 {
-  return strlen($login)<4;
+  global $login_min_length;
+  return strlen($login)<$login_min_length;
 }
 
 public function check_login_too_long($login)
 {
-  return strlen($login)>30;
+  global $login_min_length;
+  return strlen($login)>$login_min_length;
 }
 
 public function check_login_regex($login)
 {
-return preg_match("/^[0-9A-Za-z]*$/",$login)==0;
+  return preg_match("/^[0-9A-Za-z]*$/",$login)==0;
 }
 
 public function check_pass_too_short($password)
 {
-  return strlen($password)<9;
+  global $pass_min_length;
+  return strlen($password)<$pass_min_length;
 }
 
 public function check_pass_too_long($password)
 {
-  return strlen($password)>199;
+  global $pass_min_length;
+  return strlen($password)>$pass_min_length;
 }
 
 public function check_pass_regex()

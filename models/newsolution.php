@@ -49,16 +49,18 @@ if(isset($_GET['id']))
 		      $errors = array();
     
 		      $bdb->desc_too_short && array_push($errors,
-			$messages[MSG_DESCRIPTION_TOO_SHORT]);
+			__(MSG_DESCRIPTION_TOO_SHORT,
+                          $desc_min_length,$desc_max_length));
     
 		      $bdb->desc_too_long && array_push($errors,
-			$messages[MSG_DESCRIPTION_TOO_LONG]);
+			__(MSG_DESCRIPTION_TOO_LONG,
+                          $desc_min_length,$desc_max_length));
     
 		      $bdb->desc_regex && array_push($errors,
-			$messages[MSG_DESCRIPTION_REGEX]);
+			__(MSG_DESCRIPTION_REGEX));
     
 		      $bdb->bounty_locked && array_push($errors,
-			$messages[MSG_BOUNTY_WAS_LOCKED_CANT_ADD_SOLUTION]);
+			__(MSG_BOUNTY_WAS_LOCKED_CANT_ADD_SOLUTION));
     
 		      $error_html='';
 		      if(count($errors)==1)
@@ -67,7 +69,7 @@ if(isset($_GET['id']))
 		      }
 		      else
 		      {
-			$error_html=$messages[MSG_SOLUTION_ADDING_FAILED_LIST].
+			$error_html=__(MSG_SOLUTION_ADDING_FAILED_LIST).
 			  '<ul>';
 			foreach($errors as $reason)
 			{
@@ -120,7 +122,7 @@ if(isset($_GET['id']))
       
 	$title=$domain.' - '.__(MSG_LOGIN_NEEDED);
 	$recaptcha=recaptcha_get_html($recaptcha_publickey,"");
-	$url=$server_directory.'/newsolution/';
+	$url='/newsolution/';
 	$tpl->FATAL_ERROR=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
       }
     }

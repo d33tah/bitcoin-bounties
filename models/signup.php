@@ -16,19 +16,23 @@ if(!$udb->get_logged_in())
     $remoteip=$_SERVER['REMOTE_ADDR'];
   
     $udb->check_login_too_short($login) && 
-      array_push($errors, $messages[MSG_LOGIN_TOO_SHORT]);
+      array_push($errors, 
+        __(MSG_LOGIN_TOO_SHORT,$login_min_length,$login_max_length));
     $udb->check_login_too_long($login) && 
-      array_push($errors, $messages[MSG_LOGIN_TOO_LONG]);
+      array_push($errors, 
+        __(MSG_LOGIN_TOO_LONG,$login_min_length,$login_max_length));
     $udb->check_login_regex($login) && 
-      array_push($errors, $messages[MSG_LOGIN_REGEX]);
+      array_push($errors, __(MSG_LOGIN_REGEX));
     $udb->check_pass_too_short($password) && 
-      array_push($errors, $messages[MSG_PASS_TOO_SHORT]);
+      array_push($errors, 
+        __(MSG_PASS_TOO_SHORT,$pass_min_length,$pass_max_length));
     $udb->check_pass_too_long($password) && 
-      array_push($errors, $messages[MSG_PASS_TOO_LONG]);
+      array_push($errors,
+         __(MSG_PASS_TOO_LONG,$pass_min_length,$pass_max_length));
     $udb->check_email_regex($email) && 
-      array_push($errors, $messages[MSG_EMAIL_REGEX]);
+      array_push($errors, __(MSG_EMAIL_REGEX));
     $udb->get_by_email($email) && 
-      array_push($errors, $messages[MSG_EMAIL_TAKEN]);
+      array_push($errors, __(MSG_EMAIL_TAKEN));
   
     if($password!=$password2) array_push($errors, 
       $messages[MSG_PASS_DONT_MATCH]);

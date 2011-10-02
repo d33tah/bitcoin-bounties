@@ -2,11 +2,13 @@
 assume_index();
 require_once(ROOT."constants.php");
 $messages[MSG_LOGIN_TOO_SHORT]=<<<MESSAGE
-The login you have entered is too short. Please choose a different one.
+The login you have entered is too short (it has to be between %s and %s 
+characters). Please choose a different one.
 MESSAGE;
 
 $messages[MSG_LOGIN_TOO_LONG]=<<<MESSAGE
-The login you have entered is too long. Please choose a different one.
+The login you have entered is too long (it has to be between %s and %s 
+characters). Please choose a different one.
 MESSAGE;
 
 $messages[MSG_LOGIN_REGEX]=<<<MESSAGE
@@ -15,11 +17,13 @@ Please choose a different one.
 MESSAGE;
 
 $messages[MSG_PASS_TOO_SHORT]=<<<MESSAGE
-The password you have entered is too short. Please choose a different one.
+The password you have entered is too short (it has to be between %s and %s 
+characters). Please choose a different one.
 MESSAGE;
 
 $messages[MSG_PASS_TOO_LONG]=<<<MESSAGE
-The password you have entered is too long. Please choose a different one.
+The password you have entered is too long (it has to be between %s and %s 
+characters). Please choose a different one.
 MESSAGE;
 
 $messages[MSG_PASS_DONT_MATCH]=<<<MESSAGE
@@ -199,11 +203,13 @@ different one.
 MESSAGE;
 
 $messages[MSG_NEW_PASSWORD_TOO_LONG]=<<<MESSAGE
-The new password you entered is too long. Please choose a shorter one.
+The new password you entered is too long (it has to be between %s and %s 
+characters). Please choose a shorter one.
 MESSAGE;
 
 $messages[MSG_NEW_PASSWORD_TOO_SHORT]=<<<MESSAGE
-The new password you entered is too short. Please choose a longer one.
+The new password you entered is too short (it has to be between %s and %s 
+characters). Please choose a longer one.
 MESSAGE;
 
 $messages[MSG_NEW_PASSWORDS_DIFFER]=<<<MESSAGE
@@ -576,11 +582,13 @@ not too big or contains illegal data.
 MESSAGE;
 
 $messages[MSG_TITLE_TOO_SHORT]=<<<MESSAGE
-The title you have entered is too short. Please choose a longer one.
+The title you have entered is too short (it has to be between %s and %s 
+characters). Please choose a longer one.
 MESSAGE;
 
 $messages[MSG_TITLE_TOO_LONG]=<<<MESSAGE
-The title you have entered is too long. Please choose a shorter one.
+The title you have entered is too long (it has to be between %s and %s 
+characters). Please choose a shorter one.
 MESSAGE;
 
 $messages[MSG_TITLE_REGEX]=<<<MESSAGE
@@ -589,11 +597,13 @@ Please choose a different one.
 MESSAGE;
 
 $messages[MSG_DESCRIPTION_TOO_SHORT]=<<<MESSAGE
-The description you have entered is too short. Please choose a longer one.
+The description you have entered is too short (it has to be between %s and %s 
+characters). Please choose a longer one.
 MESSAGE;
 
 $messages[MSG_DESCRIPTION_TOO_LONG]=<<<MESSAGE
-The description you have entered is too long. Please choose a shorter one.
+The description you have entered is too long (it has to be between %s and %s 
+characters). Please choose a shorter one.
 MESSAGE;
 
 $messages[MSG_DESCRIPTION_REGEX]=<<<MESSAGE

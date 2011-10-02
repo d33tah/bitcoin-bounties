@@ -25,25 +25,25 @@ if($our_user = $udb->get_logged_in())
       $errors = array();
 
       $bdb->title_too_short && array_push($errors,
-        $messages[MSG_TITLE_TOO_SHORT]);
+        __(MSG_TITLE_TOO_SHORT,$title_min_length,$title_max_length));
 
       $bdb->title_too_long && array_push($errors,
-        $messages[MSG_TITLE_TOO_LONG]);
+        __(MSG_TITLE_TOO_LONG,$title_min_length,$title_max_length));
 
       $bdb->title_regex && array_push($errors,
-        $messages[MSG_TITLE_REGEX]);
+        __(MSG_TITLE_REGEX));
 
       $bdb->title_exists && array_push($errors,
-        $messages[MSG_BOUNTY_TITLE_EXISTS]);
+        __(MSG_BOUNTY_TITLE_EXISTS));
 
       $bdb->desc_too_short && array_push($errors,
-        $messages[MSG_DESCRIPTION_TOO_SHORT]);
+        __(MSG_DESCRIPTION_TOO_SHORT,$desc_min_length,$desc_max_length));
 
       $bdb->desc_too_long && array_push($errors,
-        $messages[MSG_DESCRIPTION_TOO_LONG]);
+        __(MSG_DESCRIPTION_TOO_LONG,$desc_min_length,$desc_max_length));
 
       $bdb->desc_regex && array_push($errors,
-        $messages[MSG_DESCRIPTION_REGEX]);
+        __(MSG_DESCRIPTION_REGEX));
 
 
       $error_html='';
@@ -53,32 +53,27 @@ if($our_user = $udb->get_logged_in())
       }
       else
       {
-	$error_html=$messages[MSG_BOUNTY_ADDING_FAILED_LIST].'<ul>';
+	$error_html=__(MSG_BOUNTY_ADDING_FAILED_LIST).'<ul>';
 	foreach($errors as $reason)
 	{
 	  $error_html.='<li>'.$reason.'</li>';
 	}
 	$error_html.="</ul>";
       }
-
       $tpl->ERROR_MESSAGE='<p>'.$error_html.'</p>';
-
-
-      //errors
     }
   }
   else
   {
     $tpl->ERROR_MESSAGE='';
     $title=$domain.' - '.__(MSG_ADD_NEW_BOUNTY_TITLE);
-    //no POST
   }
 }
 else
 {
   $title=$domain.' - '.__(MSG_LOGIN_NEEDED);
   $recaptcha=recaptcha_get_html($recaptcha_publickey,"");
-  $url=$server_directory.'/newbounty/';
+  $url='/newbounty/';
   $tpl->FATAL_ERROR=__(MSG_NEED_LOGIN).login_form($recaptcha,$url);
 }
 

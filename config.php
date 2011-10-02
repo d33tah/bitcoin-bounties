@@ -13,6 +13,15 @@ $LINK_PREFIX='';
 $default_view='listbounties';
 $debug=true;
 
+$login_min_length =  4;
+$login_max_length = 30;
+$pass_min_length = 9;
+$pass_max_length = 199;
+$title_min_length = 7;
+$title_max_length = 40;
+$desc_min_length = 20;
+$desc_max_length = 4096;
+
 function mail_setup()
 {
 

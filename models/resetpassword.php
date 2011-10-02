@@ -25,30 +25,32 @@ if($_POST)
               if($pass1!=$oldpass)
 	      {
 		$udb->change_password($login,$newpass);
-		  $_SESSION['message']=$messages[MSG_PASSWORD_CHANGED];
+		  $_SESSION['message']=__(MSG_PASSWORD_CHANGED);
 		  redirect($LINK_PREFIX."/message/ ");
 	      }
               else
               {
-		array_push($errors,$messages[MSG_NO_REAL_PASSWORD_CHANGE]);
+		array_push($errors,__(MSG_NO_REAL_PASSWORD_CHANGE));
               }
             }
 	    else
             {
-	      array_push($errors,$messages[MSG_NEW_PASSWORD_TOO_LONG]);
+	      array_push($errors,__(MSG_NEW_PASSWORD_TOO_LONG,
+                $pass_min_length,$pass_max_length));
             }
           }
           else
-            array_push($errors,$messages[MSG_NEW_PASSWORD_TOO_SHORT]);
+            array_push($errors,__(MSG_NEW_PASSWORD_TOO_SHORT,
+              $pass_min_length,$pass_max_length));
 	}
         else
-	 array_push($errors,$messages[MSG_NEW_PASSWORDS_DIFFER]);
+	 array_push($errors,__(MSG_NEW_PASSWORDS_DIFFER));
       }
       else
-          array_push($errors,$messages[MSG_INVALID_OLD_PASSWORD]); 
+          array_push($errors,__(MSG_INVALID_OLD_PASSWORD)); 
     }
     else
-      array_push($errors,$messages[MSG_FILL_REQUIRED_FIELDS]);
+      array_push($errors,__(MSG_FILL_REQUIRED_FIELDS));
   }
   else
   {
@@ -64,24 +66,23 @@ if($_POST)
 	  $hash2 = $udb->get_hash($login);
 	  $remoteip=$_SERVER['REMOTE_ADDR'];
     
-	  $mail->Body = sprintf($messages[MSG_RESETPASSWORD_MAIL], 
-            $login, $remoteip, $hash2);
-	  $mail->Subject = $messages[MSG_RESETPASSWORD_MAIL_TITLE];
+	  $mail->Body = __(MSG_RESETPASSWORD_MAIL, $login, $remoteip, $hash2);
+	  $mail->Subject = __(MSG_RESETPASSWORD_MAIL_TITLE);
 	  $mail->AddAddress($email,$login);
       
 	  $result = $mail->Send();
 	  $mail->ClearAddresses();
 	  $mail->ClearAttachments();
       
-	  $_SESSION['message']=$messages[MSG_RESETPASSWORD_MAIL_SENT];
+	  $_SESSION['message']=__(MSG_RESETPASSWORD_MAIL_SENT);
 	  redirect($LINK_PREFIX."/message/ ");
         }
         else
-	  array_push($errors,$messages[MSG_ACCOUNT_NOT_CONFIRMED_YET]);
+	  array_push($errors,__(MSG_ACCOUNT_NOT_CONFIRMED_YET));
 
       }
       else
-        array_push($errors,$messages[MSG_LOGIN_OR_EMAIL_INVALID]);
+        array_push($errors,__(MSG_LOGIN_OR_EMAIL_INVALID));
     }
     else
       if(isset($_GET["hash"]) && isset($_POST["pass1"]) && 
@@ -100,25 +101,27 @@ if($_POST)
 		if(!$udb->check_pass_too_long($newpass))
 		{
                   $udb->change_password($login,$newpass);
-                    $_SESSION['message']=$messages[MSG_PASSWORD_CHANGED];
+                    $_SESSION['message']=__(MSG_PASSWORD_CHANGED);
 		    redirect($LINK_PREFIX."/message/ ");
                 }
 		else
-		  array_push($errors,$messages[MSG_NEW_PASSWORD_TOO_LONG]);
+		  array_push($errors,__(MSG_NEW_PASSWORD_TOO_LONG,
+                    $pass_min_length,$pass_max_length));
 	      else
-		array_push($errors,$messages[MSG_NEW_PASSWORD_TOO_SHORT]);
+		array_push($errors,__(MSG_NEW_PASSWORD_TOO_SHORT,
+                  $pass_min_length,$pass_max_length));
 	    }
 	    else
-	      array_push($errors,$messages[MSG_NEW_PASSWORDS_DIFFER]);
+	      array_push($errors,__(MSG_NEW_PASSWORDS_DIFFER));
           }
           else
-            array_push($errors,$messages[MSG_ACCOUNT_NOT_CONFIRMED_YET]);
+            array_push($errors,__(MSG_ACCOUNT_NOT_CONFIRMED_YET));
         }
         else
-          array_push($errors,$messages[MSG_INVALID_HASH]);
+          array_push($errors,__(MSG_INVALID_HASH));
       }
       else
-        array_push($errors,$messages[MSG_FILL_REQUIRED_FIELDS]);
+        array_push($errors,__(MSG_FILL_REQUIRED_FIELDS));
   }
 }
 else
@@ -126,20 +129,20 @@ else
   if(isset($_GET["hash"]))
   {
       $tpl->HASH="hash=".$_GET["hash"];
-      $tpl->TITLE=$messages[MSG_PASSWORD_RECOVERY_TITLE];
-      $tpl->INPUTS=$messages[MSG_NEW_PASSWORD_INPUTS];
+      $tpl->TITLE=__(MSG_PASSWORD_RECOVERY_TITLE);
+      $tpl->INPUTS=__(MSG_NEW_PASSWORD_INPUTS);
   }
   else if($logged_in)
   {
     $tpl->HASH='';
-    $tpl->TITLE=$messages[MSG_CHANGE_PASSWORD_TITLE];
-    $tpl->INPUTS=$messages[MSG_OLD_NEW_PASSWORD_INPUTS];
+    $tpl->TITLE=__(MSG_CHANGE_PASSWORD_TITLE);
+    $tpl->INPUTS=__(MSG_OLD_NEW_PASSWORD_INPUTS);
   }
   else
   {
     $tpl->HASH='';
-    $tpl->TITLE=$messages[MSG_PASSWORD_RECOVERY_TITLE];
-    $tpl->INPUTS=$messages[MSG_LOGIN_EMAIL_INPUTS];
+    $tpl->TITLE=__(MSG_PASSWORD_RECOVERY_TITLE);
+    $tpl->INPUTS=__(MSG_LOGIN_EMAIL_INPUTS);
   }
 }
 
@@ -157,7 +160,7 @@ if(!isset($error_html))
   else
   {
     print count($errors);
-    $error_html="<p>".$messages[MSG_OPERATION_FAILED_REASONS]."<ul>";
+    $error_html="<p>".__(MSG_OPERATION_FAILED_REASONS)."<ul>";
     foreach($errors as $reason)
     {
       $error_html.='<li>'.$reason.'</li>';

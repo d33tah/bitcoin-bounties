@@ -1,12 +1,21 @@
 <?php
-if ($udb->try_confirm($_GET["hash"]))
+
+if(isset($_GET["hash"]))
 {
-  $message = $messages[MSG_ACCOUNT_CONFIRMED];
+  if ($udb->try_confirm($_GET["hash"]))
+  {
+    $message = __(MSG_ACCOUNT_CONFIRMED);
+  }
+  else
+  {
+    $message = __(MSG_CONFIRATION_LINK_INVALID);
+  }
 }
 else
 {
-  $message = $messages[MSG_CONFIRATION_LINK_INVALID];
+  $message = __(MSG_CONFIRATION_LINK_INVALID);
 }
+
 
 $tpl->MESSAGE=$message;
 $title=$domain.' - account confirmation';
