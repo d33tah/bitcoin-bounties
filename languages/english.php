@@ -692,30 +692,62 @@ MESSAGE;
 $messages[MSG_ABOUT]=<<<MESSAGE
 <h2>What is bitcoinbounties.org?</h2>
 
-<p>BitcoinBounties.org is a bounty system dedicated to Bitcoin-related projects that uses Bitcoin as its currency. Users can submit a request (called a "bounty") for a solution of a particular problem (like, for example, fixing a bug or implementing a feature) and organize a fund-raising. All users are allowed to make monetary contributions ("donations") that would be used to reward a person that passes the bounty claiming process.</p>
+<p>BitcoinBounties.org is a bounty system dedicated to Bitcoin-related 
+projects that uses Bitcoin as its currency. Users can submit a request (called
+ a "bounty") for a solution of a particular problem (like, for example, fixing
+ a bug or implementing a feature) and organize a fund-raising. All users are 
+allowed to make monetary contributions ("donations") that would be used to 
+reward a person that passes the bounty claiming process.</p>
 
 <h2>What do I do to get the reward?</h2>
 
-<p>In order to get the reward raised for the bounty, one has to register and upload a file (“solution”)  that would solve the bounty. Then, donors are free to vote on whether to accept the solution or not. The vote strength is proportional to the amount of money the user has donated. The bounty is ready to be paid out if any of the send solutions gets accepted by 30%% of total votes. [obviously, this should be yet to tuned; this is alpha only]</p>
+<p>In order to get the reward raised for the bounty, one has to register and 
+upload a file (“solution”)  that would solve the bounty. Then, donors are free
+ to vote on whether to accept the solution or not. The vote strength is 
+proportional to the amount of money the user has donated. The bounty is ready 
+to be paid out if any of the send solutions gets accepted by 30%% of total 
+votes. [obviously, this should be yet to tuned; this is alpha only]</p>
 
 <h2>Why should I register?</h2>
 
-<p>For identification purposes, the unregistered users are not allowed to submit bounties or bounty solutions and have few site features to explore. The registration is free and guarantees you will be able freely explore the site's resources and take advantage of its useful features, such as donation returning. [yet to be implemented] The password you choose is hashed with a random salt and the e-mail is planned to be used for notifications only. [unless the site gets hacked]</p>
+<p>For identification purposes, the unregistered users are not allowed to 
+submit bounties or bounty solutions and have few site features to explore. The
+ registration is free and guarantees you will be able freely explore the 
+site's resources and take advantage of its useful features, such as donation 
+returning. [yet to be implemented] The password you choose is hashed with a 
+random salt and the e-mail is planned to be used for notifications only. 
+[unless the site gets hacked]</p>
 
 <h2>What are the bitcoinbounties.org rules?</h2>
 
-</p>The site is in its alpha stage and every single tester is welcome, the only request is to do your best not to abuse the system. Abuse means spamming, excessive automated access (running bots etc.). Should you find a bug (CSS/SQL injections-alike bugs are very likely; I have little experience in PHP coding), send d33tah an e-mail.</p>
+</p>The site is in its alpha stage and every single tester is welcome, the 
+only request is to do your best not to abuse the system. Abuse means spamming,
+ excessive automated access (running bots etc.). Should you find a bug 
+(CSS/SQL injections-alike bugs are very likely; I have little experience in 
+PHP coding), send d33tah an e-mail.</p>
 
 <h2>Is it safe?</h2>
 
-<p>Definitely not yet. The code was not audited, there is a lot of data verification missing and many adjustments have to be made. This is rather a proof of concept of the bounty system and its further development depends on the discussion in this thread.</p>
+<p>Definitely not yet. The code was not audited, there is a lot of data 
+verification missing and many adjustments have to be made. This is rather a 
+proof of concept of the bounty system and its further development depends on 
+the discussion in this thread.</p>
 
-<p>The system is currently configured  to work in testnet Bitcoin blockchain. This means you have to run your Bitcoin client in 'testnet' mode, a few tips on that can be found <a href="https://en.bitcoin.it/wiki/Testnet">HERE</a> (if that's not enough information, contact d33tah). Free testnet coins can be found <a href="http://testnet.freebitcoins.appspot.com/">HERE</a>.</p>
+<p>The system is currently configured  to work in testnet Bitcoin blockchain. 
+This means you have to run your Bitcoin client in 'testnet' mode, a few tips 
+on that can be found <a href="https://en.bitcoin.it/wiki/Testnet">HERE</a> (if
+ that's not enough information, contact d33tah). Free testnet coins can be 
+found <a href="http://testnet.freebitcoins.appspot.com/">HERE</a>.</p>
 
-<p>If you are a PHP programmer or just want to run this system on your own server, see the link below:<br/>
-<a href="https://github.com/d33tah/bitcoin-bounties">https://github.com/d33tah/bitcoin-bounties</a></p>
+<p>If you are a PHP programmer or just want to run this system on your own 
+server, see the link below:<br/>
+<a href="https://github.com/d33tah/bitcoin-bounties">
+https://github.com/d33tah/bitcoin-bounties</a></p>
 
-<p>Thanks for your interest and testing. Once you're done, please <a href="https://bitcointalk.org/index.php?topic=42284.0">post here</a> whether you like the system or not (and why!). Any thoughts on it are welcome! ;)</p>
+<p>Thanks for your interest and testing. Once you're done, please 
+<a href="https://bitcointalk.org/index.php?topic=42284.0">post here</a> 
+whether you like the system or not (and why!). Any thoughts on it are
+ welcome! ;)</p>
 
 MESSAGE;
 
