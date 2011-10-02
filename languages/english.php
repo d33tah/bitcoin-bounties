@@ -702,7 +702,7 @@ reward a person that passes the bounty claiming process.</p>
 <h2>What do I do to get the reward?</h2>
 
 <p>In order to get the reward raised for the bounty, one has to register and 
-upload a file (“solution”)  that would solve the bounty. Then, donors are free
+upload a file ("solution")  that would solve the bounty. Then, donors are free
  to vote on whether to accept the solution or not. The vote strength is 
 proportional to the amount of money the user has donated. The bounty is ready 
 to be paid out if any of the send solutions gets accepted by 30%% of total 
@@ -748,6 +748,5 @@ https://github.com/d33tah/bitcoin-bounties</a></p>
 <a href="https://bitcointalk.org/index.php?topic=42284.0">post here</a> 
 whether you like the system or not (and why!). Any thoughts on it are
  welcome! ;)</p>
-
 MESSAGE;
 

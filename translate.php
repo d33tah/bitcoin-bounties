@@ -21,7 +21,7 @@ foreach (preg_split("[\n|\r]", $consts_list) as $value)
   if($_POST)
   {
     echo '$messages['.$value."]=<<<MESSAGE\n";
-    echo $_POST[$curr];
+    echo str_replace("\nMESSAGE;",'',$_POST[$curr]);
     echo "\nMESSAGE;\n\n";
   }
   else
