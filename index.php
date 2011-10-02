@@ -69,7 +69,9 @@ try
 catch(Exception $e)
 {
   if($debug)
-    die($e->getMessage());
+    die(str_replace($bitcoin_password,'***',
+        str_replace($recaptcha_privatekey,'***',
+        (str_replace($db_pass,'***',$e->getMessage())))));
   do_404();
 }
 
