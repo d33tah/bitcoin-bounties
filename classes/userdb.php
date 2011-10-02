@@ -242,4 +242,12 @@ public function logout()
     redirect($_SERVER['HTTP_REFERER']);
 }
 
+public function get_users_registered()
+{
+  $sql = 'SELECT COUNT(*) FROM `users';
+  $res = mysql_query($sql);
+  $row = mysql_fetch_row($res);
+  return $row[0];
+}
+
 }

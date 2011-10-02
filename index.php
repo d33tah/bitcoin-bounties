@@ -57,6 +57,7 @@ try
     $tpl->DOMAIN=$domain			;
     $tpl->LINK_PREFIX=$LINK_PREFIX;
     $tpl->BLOCKCOUNT=$adb->conn->getblocknumber();
+    $tpl->USERS_REGISTERED=$udb->get_users_registered();
   }
 
   if($view->modelfile_exists())

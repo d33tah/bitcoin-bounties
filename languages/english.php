@@ -750,3 +750,7 @@ whether you like the system or not (and why!). Any thoughts on it are
  welcome! ;)</p>
 MESSAGE;
 
+$messages[MSG_USERS_REGISTERED]=<<<MESSAGE
+%d users registered
+MESSAGE;
+
