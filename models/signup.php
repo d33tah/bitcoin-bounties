@@ -73,14 +73,9 @@ if(!$udb->get_logged_in())
 	$udb->do_register($login,$hash1,$hash2,$email);
       else
 	array_push($errors, $messages[MSG_EMAIL_SENDING_ERROR]);
+       $tpl->ERROR_MESSAGE='';
+      message($messages[MSG_CONFIRMATION_EMAIL_SENT]); 
   
-  
-    }
-  
-    if(count($errors)<=0)
-    {
-      $tpl->ERROR_MESSAGE='';
-      message($messages[MSG_CONFIRMATION_EMAIL_SENT]);
     }
     else
     {
